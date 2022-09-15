@@ -18,7 +18,7 @@ public class TeleOp extends OpMode {
     }
 
     //allows driver to indicate that the IMU should not be reset
-    //used when starting TeleOp after auto or if program crashes in the middle of match
+    //used when starting TeleOp after auto or when program crashes in the middle of match
     //relevant because of field-centric controls
     public void init_loop() {
         if (gamepad1.y) {
