@@ -11,6 +11,8 @@ public class DriveController {
     DriveModule moduleLeft;
     DriveModule moduleRight;
 
+    int ROTATION_POWER = 1;
+
     //used for straight line distance tracking
     double robotDistanceTraveled = 0;
     double previousRobotDistanceTraveled = 0;
@@ -81,7 +83,7 @@ public class DriveController {
         double absHeadingDiff = robot.getRobotHeading().getDifference(targetAngle);
         while (absHeadingDiff > ALLOWED_MODULE_ROT_ERROR && linearOpMode.opModeIsActive() && iterations < MAX_ITERATIONS_ROBOT_ROTATE /*&& System.currentTimeMillis() - startTime < ROTATE_ROBOT_TIMEOUT*/) {
             absHeadingDiff = robot.getRobotHeading().getDifference(targetAngle);
-            double rotMag = RobotUtil.scaleVal(absHeadingDiff, 0, 25, 0, power); //was max power 1 - WAS 0.4 max power
+            double rotMag = RobotUtil.scaleVal(absHeadingDiff, 0, 25, 0, ROTATION_POWER); //was max power 1 - WAS 0.4 max power
 
             if (robot.getRobotHeading().directionTo(targetAngle) == Angle.Direction.CLOCKWISE) {
                 update(Vector2d.ZERO, -rotMag);
