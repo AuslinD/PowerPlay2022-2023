@@ -54,7 +54,8 @@ public class SkystoneDeterminationExample extends LinearOpMode
          * NOTE: Many comments have been omitted from this sample for the
          * sake of conciseness. If you're just starting out with EasyOpenCv,
          * you should take a look at {@link InternalCamera1Example} or its
-         * webcam counterpart, {@link WebcamExample} first.
+         * webcam counterpart, {@link WebcamExample} first. I was here :)
+         * YES!!!
          */
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
