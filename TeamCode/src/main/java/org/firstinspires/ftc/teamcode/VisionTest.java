@@ -1,32 +1,13 @@
-/*
- * Copyright (c) 2020 OpenFTC Team
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -39,45 +20,81 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
+
 /*
- * This sample demonstrates a basic (but battle-tested and essentially
- * 100% accurate) method of detecting the skystone when lined up with
+ * This sample demonstrates a basic  method of
+ * detecting the team marker when lined up with
  * the sample regions over the first 3 stones.
  */
-@TeleOp
-public class SkystoneDeterminationExample extends LinearOpMode
+@TeleOp(name = "visionTest", group = "test")
+public class VisionTest extends LinearOpMode
 {
+    private FtcDashboard dashboard;
+    private OpenCvCamera webcam;
+
     OpenCvInternalCamera phoneCam;
-    SkystoneDeterminationPipeline pipeline;
-    FtcDashboard dashboard;
+    DeterminationPipeline pipeline;
+
+    // Adjust these numbers to suit your robot.
+    final double DESIRED_DISTANCE = 8.0; //  this is how close the camera should get to the target (inches)
+    //  The GAIN constants set the relationship between the measured position error,
+    //  and how much power is applied to the drive motors.  Drive = Error * Gain
+    //  Make these values smaller for smoother control.
+    final double SPEED_GAIN =   0.02 ;   //  Speed Control "Gain". eg: Ramp up to 50% power at a 25 inch error.   (0.50 / 25.0)
+    final double TURN_GAIN  =   0.01 ;   //  Turn Control "Gain".  eg: Ramp up to 25% power at a 25 degree error. (0.25 / 25.0)
+
+    final double MM_PER_INCH = 25.40 ;   //  Metric conversion
+
+    private static final String VUFORIA_KEY =
+            "AZSiMOH/////AAABmfP3UCfG4Un7sktEdqGC6b+IVXn+DiesrPGg6m3/fLyrjUX2QbKSdkc9yF2VsOrnhnd0twYsjqzw7g0Pugx75h3Jb8AF51d/90Y/byTitZyMIkTcxZyYtwZHogR7POp0c8lzep26+fKuQLMYK+fGUGduWvO/191isCSBh4zuH6zaKnzPXdMWc0r0q8vH403mREftEG2Zl/rpFX/mkqe3p98GIEVApXuc5kVSRO1Weer5mCr8kuDg68bLuPOa/3gBXfAQwFe3mIngZdHmscqQiWgOe80sjCzy1Pe7cVLEmiGnadzvZn8ONTwCzSMLNOT8i208CYCQHhy7USrmx4/ZyJ+ap5OOzDulonMGJO6rjxfH";
+
+    VuforiaLocalizer vuforia    = null;
+    OpenGLMatrix targetPose     = null;
+    String targetName           = "";
+
 
     @Override
     public void runOpMode()
     {
-        /**
-         * NOTE: Many comments have been omitted from this sample for the
-         * sake of conciseness. If you're just starting out with EasyOpenCv,
-         * you should take a look at {@link InternalCamera1Example} or its
-         * webcam counterpart, {@link WebcamExample} first.
-         */
-        ElapsedTime time = new ElapsedTime();
+        waitForStart();
+
+
+
+        boolean targetFound     = false;    // Set to true when a target is detected by Vuforia
+        double  drive           = 0;        // Desired forward power (-1 to +1)
+        double  turn            = 0;        // Desired turning power (-1 to +1)
+        Point center = new Point();
+        telemetry.addLine("bruh1");
+        telemetry.update();
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+
+
+        telemetry.update();
         phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
-        pipeline = new SkystoneDeterminationPipeline();
+        telemetry.addLine("bruh3");
+        telemetry.update();
+        pipeline = new DeterminationPipeline();
         phoneCam.setPipeline(pipeline);
         dashboard = FtcDashboard.getInstance();
+
 
         // We set the viewport policy to optimized view so the preview doesn't appear 90 deg
         // out when the RC activity is in portrait. We do our actual image processing assuming
         // landscape orientation, though.
         phoneCam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
+        telemetry.addLine("bruh");
+        telemetry.update();
+        webcam.setPipeline(pipeline);
 
         phoneCam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
             @Override
             public void onOpened()
             {
-                phoneCam.startStreaming(320,240, OpenCvCameraRotation.SIDEWAYS_LEFT);
+                telemetry.addLine("Starting");
+                telemetry.update();
+                phoneCam.startStreaming(640,480, OpenCvCameraRotation.SIDEWAYS_LEFT);
             }
 
             @Override
@@ -86,34 +103,40 @@ public class SkystoneDeterminationExample extends LinearOpMode
                 /*
                  * This will be called if the camera could not be opened
                  */
+                telemetry.addLine("Bruh moment");
+                telemetry.update();
             }
         });
 
-        waitForStart();
 
+        telemetry.addLine("Start pressed");
         while (opModeIsActive())
         {
+
             telemetry.addData("Analysis", pipeline.getAnalysis());
-            telemetry.addData("time", time.seconds());
 
+
+            telemetry.addData("Range",  "%5.1f inches", pipeline.targetDistance(pipeline.getAnalysis()));
+            //telemetry.addData("Bearing","%3.0f degrees", pipeline.targetBearing(pipeline.getAnalysis()));
             telemetry.update();
-
-
-
-
-
+            TelemetryPacket p = new TelemetryPacket();
+            p.put("Analysis", pipeline.getAnalysis());
+            p.put("Range", pipeline.targetDistance(pipeline.getAnalysis()));
+            dashboard.startCameraStream(webcam, 30);
+            dashboard.sendTelemetryPacket(p);
 
             // Don't burn CPU cycles busy-looping in this sample
             sleep(50);
         }
+
     }
 
-    public static class SkystoneDeterminationPipeline extends OpenCvPipeline
+    public static class DeterminationPipeline extends OpenCvPipeline
     {
         /*
-         * An enum to define the skystone position
+         * An enum to define the positions
          */
-        public enum SkystonePosition
+        public enum MarkerPosition
         {
             LEFT,
             CENTER,
@@ -126,14 +149,16 @@ public class SkystoneDeterminationExample extends LinearOpMode
         static final Scalar BLUE = new Scalar(0, 0, 255);
         static final Scalar GREEN = new Scalar(0, 255, 0);
 
+        static final int TOLERANCE = 10;
+
         /*
          * The core values which define the location and size of the sample regions
          */
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(109,98);
-        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(181,98);
-        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(253,98);
-        static final int REGION_WIDTH = 20;
-        static final int REGION_HEIGHT = 20;
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(42,90);
+        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(180,90);
+        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(115,160);
+        static final int REGION_WIDTH =  65;
+        static final int REGION_HEIGHT = 65;
 
         /*
          * Points which actually define the sample region rectangles, derived from above values
@@ -177,10 +202,11 @@ public class SkystoneDeterminationExample extends LinearOpMode
         Mat region1_Cb, region2_Cb, region3_Cb;
         Mat YCrCb = new Mat();
         Mat Cb = new Mat();
-        int avg1, avg2, avg3;
+        int avg1, avg2, avg3, diffOne, diffTwo;
+        boolean side = true;
 
         // Volatile since accessed by OpMode thread w/o synchronization
-        private volatile SkystonePosition position = SkystonePosition.LEFT;
+        private volatile MarkerPosition position = MarkerPosition.LEFT;
 
         /*
          * This function takes the RGB frame, converts to YCrCb,
@@ -241,12 +267,12 @@ public class SkystoneDeterminationExample extends LinearOpMode
              *
              * We then take the average pixel value of 3 different regions on that Cb
              * channel, one positioned over each stone. The brightest of the 3 regions
-             * is where we assume the SkyStone to be, since the normal stones show up
+             * is where we assume the marker to be, since the normal stones show up
              * extremely darkly.
              *
              * We also draw rectangles on the screen showing where the sample regions
              * are, as well as drawing a solid rectangle over top the sample region
-             * we believe is on top of the SkyStone.
+             * we believe contains the marker
              *
              * In order for this whole process to work correctly, each sample region
              * should be positioned in the center of each of the first 3 stones, and
@@ -307,16 +333,22 @@ public class SkystoneDeterminationExample extends LinearOpMode
             /*
              * Find the max of the 3 averages
              */
-            int maxOneTwo = Math.max(avg1, avg2);
-            int max = Math.max(maxOneTwo, avg3);
+            diffOne = Math.abs(avg1 - avg3);// may need to change to min depending on color
+            diffTwo = Math.abs(avg2 - avg3);
 
             /*
              * Now that we found the max, we actually need to go and
              * figure out which sample region that value was from
              */
-            if(max == avg1) // Was it from region 1?
+            if(diffOne > TOLERANCE) // Was it from region 1?
             {
-                position = SkystonePosition.LEFT; // Record our analysis
+                if (side){
+                    position = VisionTest.DeterminationPipeline.MarkerPosition.CENTER;
+                }
+                else{
+                    position = VisionTest.DeterminationPipeline.MarkerPosition.LEFT;
+                }
+                ; // Record our analysis
 
                 /*
                  * Draw a solid rectangle on top of the chosen region.
@@ -329,9 +361,15 @@ public class SkystoneDeterminationExample extends LinearOpMode
                         GREEN, // The color the rectangle is drawn in
                         -1); // Negative thickness means solid fill
             }
-            else if(max == avg2) // Was it from region 2?
+            else if(diffTwo > TOLERANCE) // Was it from region 2?
             {
-                position = SkystonePosition.CENTER; // Record our analysis
+                if (side){
+                    position = VisionTest.DeterminationPipeline.MarkerPosition.RIGHT;
+                }
+                else {
+                    position = VisionTest.DeterminationPipeline.MarkerPosition.CENTER;
+                }
+                // Record our analysis
 
                 /*
                  * Draw a solid rectangle on top of the chosen region.
@@ -344,9 +382,15 @@ public class SkystoneDeterminationExample extends LinearOpMode
                         GREEN, // The color the rectangle is drawn in
                         -1); // Negative thickness means solid fill
             }
-            else if(max == avg3) // Was it from region 3?
+            else if(diffOne < TOLERANCE && diffTwo < TOLERANCE) // Was it from region 3?
             {
-                position = SkystonePosition.RIGHT; // Record our analysis
+                if (side){
+                    position = VisionTest.DeterminationPipeline.MarkerPosition.LEFT;
+                }
+                else{
+                    position = VisionTest.DeterminationPipeline.MarkerPosition.RIGHT;
+                }
+                // Record our analysis
 
                 /*
                  * Draw a solid rectangle on top of the chosen region.
@@ -366,14 +410,88 @@ public class SkystoneDeterminationExample extends LinearOpMode
              * to add some annotations to this buffer earlier up.
              */
             return input;
+
         }
 
         /*
          * Call this from the OpMode thread to obtain the latest analysis
          */
-        public SkystonePosition getAnalysis()
+        public MarkerPosition getAnalysis()
         {
             return position;
         }
+
+        public void setSide(boolean left){
+            side = left;
+        }
+
+        public double targetDistance(Enum direction){
+
+            final double MM_PER_INCH = 25.40 ;
+            double  targetRange     = 0;        // Distance from camera to target in Inches
+            double  targetBearing   = 0;        // Robot Heading, relative to target.  Positive degrees means target is to the right.
+            Point center = new Point();
+
+            if(direction == MarkerPosition.LEFT){
+                center.x = Math.abs((region1_pointA.x - region1_pointB.x) / 2);
+                center.y = Math.abs((region1_pointA.y - region1_pointB.y) / 2);
+            }
+            else if(direction == MarkerPosition.CENTER){
+                center.x = Math.abs((region2_pointA.x - region2_pointB.x) / 2);
+                center.y = Math.abs((region2_pointA.y - region2_pointB.y) / 2);
+            }
+            else{//RIGHT
+                center.x = Math.abs((region3_pointA.x - region3_pointB.x) / 2);
+                center.y = Math.abs((region3_pointA.y - region3_pointB.y) / 2);
+            }
+
+            double targetX = center.x / MM_PER_INCH; // Image X axis
+            double targetY = center.y / MM_PER_INCH; // Image Z axis
+
+            targetRange = Math.hypot(targetX, targetY);
+
+            // target bearing is based on angle formed between the X axis and the target range line
+            //targetBearing = Math.toDegrees(Math.asin(targetX / targetRange));
+            return targetRange;
+        }
+        public double targetBearing(String direction){
+            final double MM_PER_INCH = 25.40 ;
+            double  targetRange     = 0;        // Distance from camera to target in Inches
+            double  targetBearing   = 0;        // Robot Heading, relative to target.  Positive degrees means target is to the right.
+            Point center = new Point();
+
+            if(direction.equals("LEFT")){
+                center.x = Math.abs((region1_pointA.x - region1_pointB.x) / 2);
+                center.y = Math.abs((region1_pointA.y - region1_pointB.y) / 2);
+            }
+            else if(direction.equals("CENTER")){
+                center.x = Math.abs((region2_pointA.x - region2_pointB.x) / 2);
+                center.y = Math.abs((region2_pointA.y - region2_pointB.y) / 2);
+            }
+            else{//RIGHT
+                center.x = Math.abs((region3_pointA.x - region3_pointB.x) / 2);
+                center.y = Math.abs((region3_pointA.y - region3_pointB.y) / 2);
+            }
+
+            double targetX = center.x / MM_PER_INCH; // Image X axis
+            double targetY = center.y / MM_PER_INCH; // Image Z axis
+
+            targetRange = Math.hypot(targetX, targetY);
+            targetBearing = Math.toDegrees(Math.asin(targetX / targetRange));
+
+            // target bearing is based on angle formed between the X axis and the target range line
+            //targetBearing = Math.toDegrees(Math.asin(targetX / targetRange));
+            return targetBearing;
+        }
+
+
+
+    }
+    public FtcDashboard getDashboard() {
+        return dashboard;
+    }
+
+    public void setDashboard(FtcDashboard dashboard) {
+        this.dashboard = dashboard;
     }
 }
