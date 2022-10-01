@@ -36,12 +36,36 @@ public class omniman extends OpMode {
 
     @Override
     public void loop() {
-        if (gamepad1.left_stick_y != 0)  {
+        /**if (gamepad1.left_stick_y != 0)  {
             fl.setPower(gamepad1.left_stick_y);
             bl.setPower(gamepad1.left_stick_y);
             fr.setPower(-gamepad1.left_stick_y);
             br.setPower(-gamepad1.left_stick_y);
         }
+        if(gamepad1.right_stick_x !=0) {
+            fr.setPower();
+            br.setPower();
+            fl.setPower();
+            bl.setPower();*/
+        //sets input value variables
+        double forward = gamepad1.left_stick_y;
+        double turn = -gamepad1.right_stick_x;
 
+        //gets left and right side motor speeds
+        double left = forward - turn;
+        double right = forward + turn;
+
+        //checks which motor side is faster and then divides both speeds to get a max of 1 while
+        //keeping proportionality
+        double max = Math.max(Math.abs(left), Math.abs(right));
+        if(max >1){
+            left/= max;
+            right/= max;
+        }
+        //sets motor power
+        fl.setPower(left);
+        bl.setPower(left);
+        fr.setPower(right);
+        br.setPower(right);
     }
 }
