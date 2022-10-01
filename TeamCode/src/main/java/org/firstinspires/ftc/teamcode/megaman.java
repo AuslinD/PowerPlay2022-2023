@@ -46,20 +46,20 @@ public class megaman extends OpMode {
         double blp;
         double brp;
 
-        frp = forward;
+        frp = -forward;
         flp = -forward;
         blp = -forward;
-        brp = forward;
+        brp = -forward;
 
-        frp += sideways;
-        flp -= sideways;
+        frp -= sideways;
+        flp += sideways;
         brp += sideways;
         blp -= sideways;
 
-        frp -= turn;
+        frp += turn;
         flp += turn;
         brp -= turn;
-        blp += turn;
+        blp -= turn;
 
     double max = Math.max(Math.max(frp, flp), Math.max(brp, blp));
 
