@@ -48,8 +48,8 @@ public class omniman extends OpMode {
             fl.setPower();
             bl.setPower();*/
         //sets input value variables
-        double forward = gamepad1.left_stick_y;
-        double turn = -gamepad1.right_stick_x;
+        double turn = gamepad1.left_stick_y;
+        double forward = -gamepad1.right_stick_x;
 
         //gets left and right side motor speeds
         double left = forward - turn;
@@ -66,8 +66,8 @@ public class omniman extends OpMode {
         if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1){
             fl.setPower(left);
             bl.setPower(left);
-            fr.setPower(right);
-            br.setPower(right);
+            fr.setPower(-right);
+            br.setPower(-right);
         }
         else{
             fl.setPower(0);
@@ -75,6 +75,8 @@ public class omniman extends OpMode {
             fr.setPower(0);
             br.setPower(0);
         }
-
+        telemetry.addData("Joystick y", gamepad1.left_stick_y);
+        telemetry.addData("Joystick x", gamepad1.right_stick_x);
+        telemetry.update();
     }
 }
