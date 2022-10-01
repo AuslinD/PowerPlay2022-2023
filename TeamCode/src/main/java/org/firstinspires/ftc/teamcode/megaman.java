@@ -57,8 +57,8 @@ public class megaman extends OpMode {
         blp -= sideways;
 
         frp += turn;
-        flp += turn;
-        brp -= turn;
+        flp -= turn;
+        brp += turn;
         blp -= turn;
 
     double max = Math.max(Math.max(frp, flp), Math.max(brp, blp));
