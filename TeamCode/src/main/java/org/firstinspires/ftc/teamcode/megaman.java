@@ -32,10 +32,56 @@ public class megaman extends OpMode {
         fr = hardwareMap.dcMotor.get("fr");
         br = hardwareMap.dcMotor.get("br");
 
+
     }
 
     @Override
     public void loop() {
-        
+        double forward = gamepad1.left_stick_y;
+        double sideways = -gamepad1.left_stick_x;
+        double turn = gamepad1.right_stick_x;
+
+        double frp;
+        double flp;
+        double blp;
+        double brp;
+
+        frp = forward;
+        flp = -forward;
+        blp = -forward;
+        brp = forward;
+
+        frp += sideways;
+        flp -= sideways;
+        brp += sideways;
+        blp -= sideways;
+
+        frp -= turn;
+        flp += turn;
+        brp -= turn;
+        blp += turn;
+
+    double max = Math.max(Math.max(frp, flp), Math.max(brp, blp));
+
+        if(max >1) {
+            frp /= max;
+            flp /= max;
+            brp /= max;
+            blp /= max;
+        }
+            if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_x) > 0.1){
+                fl.setPower(flp);
+                bl.setPower(blp);
+                fr.setPower(frp);
+                br.setPower(brp);
+            }
+            else {
+                fl.setPower(0);
+                bl.setPower(0);
+                fr.setPower(0);
+                br.setPower(0);
+
+            }
+
     }
 }
