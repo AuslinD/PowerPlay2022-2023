@@ -56,18 +56,18 @@ public class megaman extends OpMode {
         brp += sideways;
         blp -= sideways;
 
-        frp += turn;
-        flp -= turn;
-        brp += turn;
-        blp -= turn;
+        frp -= turn;
+        flp += turn;
+        brp -= turn;
+        blp += turn;
 
-    double max = Math.max(Math.max(frp, flp), Math.max(brp, blp));
+    double max = Math.max(Math.max(Math.abs(frp), Math.abs(flp)), Math.max(Math.abs(brp), Math.abs(blp)));
 
-        if(max >1) {
-            frp /= max;
-            flp /= max;
-            brp /= max;
-            blp /= max;
+        if(Math.abs(max) >1) {
+            frp /= Math.abs(max);
+            flp /= Math.abs(max);
+            brp /= Math.abs(max);
+            blp /= Math.abs(max);
         }
             if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_x) > 0.1){
                 fl.setPower(flp);
