@@ -51,10 +51,10 @@ public class megaman extends OpMode {
         blp = -forward;
         brp = -forward;
 
-        frp -= sideways;
-        flp += sideways;
-        brp += sideways;
-        blp -= sideways;
+        frp += sideways;
+        flp -= sideways;
+        brp -= sideways;
+        blp += sideways;
 
         frp -= turn;
         flp += turn;
