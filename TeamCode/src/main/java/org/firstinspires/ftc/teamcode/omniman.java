@@ -54,6 +54,7 @@ public class omniman extends OpMode {
         //gets left and right side motor speeds
         double left = forward - turn;
         double right = forward + turn;
+        double buff = .5;
 
         //checks which motor side is faster and then divides both speeds to get a max of 1 while
         //keeping proportionality
@@ -62,8 +63,14 @@ public class omniman extends OpMode {
             left/= Math.abs(max);
             right/= Math.abs(max);
         }
-        left /= 2;
-        right /= 2;
+        if(gamepad1.right_trigger > .1){
+            buff = 1;
+        }else{
+            buff = .5;
+        }
+
+        left /= buff;
+        right /=buff;
         //sets motor power
         if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1){
             fl.setPower(left);

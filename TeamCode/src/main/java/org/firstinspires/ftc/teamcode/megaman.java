@@ -17,6 +17,7 @@ public class megaman extends OpMode {
     public DcMotor fr;
     public DcMotor br;
 
+
     BNO055IMU imu;
 
     Orientation angles;
@@ -60,20 +61,32 @@ public class megaman extends OpMode {
         flp += turn;
         brp -= turn;
         blp += turn;
+        double buff = 2/3;
 
-    double max = Math.max(Math.max(Math.abs(frp), Math.abs(flp)), Math.max(Math.abs(brp), Math.abs(blp)));
 
-        if(Math.abs(max) >1) {
-            frp /= Math.abs(max)*2/3;
-            flp /= Math.abs(max)*2/3;
-            brp /= Math.abs(max)*2/3;
-            blp /= Math.abs(max)*2/3;
+
+        double max = Math.max(Math.max(Math.abs(frp), Math.abs(flp)), Math.max(Math.abs(brp), Math.abs(blp)));
+
+            if(Math.abs(max) >1) {
+                frp /= Math.abs(max);
+                flp /= Math.abs(max);
+                brp /= Math.abs(max);
+                blp /= Math.abs(max);
+        }
+        if(gamepad1.right_trigger > .1){
+            buff = 1;
+        }else{
+            buff = 2/3;
         }
             if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_x) > 0.1){
-                fl.setPower(flp);
-                bl.setPower(blp);
-                fr.setPower(frp);
-                br.setPower(brp);
+                
+                telemetry.addData("buff", buff);
+                telemetry.addData("flp", flp);
+                telemetry.update();
+                fl.setPower(flp*buff);
+                bl.setPower(blp*buff);
+                fr.setPower(frp*buff);
+                br.setPower(brp*buff);
             }
             else {
                 fl.setPower(0);
@@ -84,4 +97,6 @@ public class megaman extends OpMode {
             }
 
     }
+
+
 }
