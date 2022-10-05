@@ -62,8 +62,8 @@ public class omniman extends OpMode {
             left/= max;
             right/= max;
         }
-        left /= 2;
-        right /= 2;
+        left /= 4;
+        right /= 4;
         //sets motor power
         if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1){
             fl.setPower(left);
