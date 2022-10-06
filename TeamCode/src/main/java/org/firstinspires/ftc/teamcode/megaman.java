@@ -79,7 +79,7 @@ public class megaman extends OpMode {
             buff = 2/3;
         }
             if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_x) > 0.1){
-                
+
                 telemetry.addData("buff", buff);
                 telemetry.addData("flp", flp);
                 telemetry.update();
