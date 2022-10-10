@@ -16,6 +16,8 @@ public class megaman extends OpMode {
     public DcMotor bl;
     public DcMotor fr;
     public DcMotor br;
+    //public DcMotor cr;
+    //public DcMotor cl;
 
 
     BNO055IMU imu;
@@ -32,6 +34,9 @@ public class megaman extends OpMode {
         bl = hardwareMap.dcMotor.get("bl");
         fr = hardwareMap.dcMotor.get("fr");
         br = hardwareMap.dcMotor.get("br");
+        //cr = hardwareMap.dcMotor.get("cr");
+        //cl = hardwareMap.dcMotor.get("cl");
+
 
 
     }
@@ -49,20 +54,27 @@ public class megaman extends OpMode {
 
         frp = -forward;
         flp = -forward;
-        blp = -forward;
-        brp = -forward;
+        blp = forward;
+        brp = forward;
 
         frp += sideways;
         flp -= sideways;
-        brp -= sideways;
-        blp += sideways;
+        brp += sideways;
+        blp -= sideways;
 
         frp -= turn;
         flp += turn;
-        brp -= turn;
-        blp += turn;
-        double buff = 2/3;
+        brp += turn;
+        blp -= turn;
 
+
+        /**if(gamepad2.left_stick_y != 0){
+            cr.setPower(gamepad2.left_stick_y);
+            cl.setPower(-gamepad2.left_stick_y);
+        }else{
+            cr.setPower(0);
+            cl.setPower(0);
+        }*/
 
 
         double max = Math.max(Math.max(Math.abs(frp), Math.abs(flp)), Math.max(Math.abs(brp), Math.abs(blp)));
@@ -73,20 +85,14 @@ public class megaman extends OpMode {
                 brp /= Math.abs(max);
                 blp /= Math.abs(max);
         }
-        if(gamepad1.right_trigger > .1){
-            buff = 1;
-        }else{
-            buff = 2/3;
-        }
             if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_x) > 0.1){
 
-                telemetry.addData("buff", buff);
                 telemetry.addData("flp", flp);
                 telemetry.update();
-                fl.setPower(flp*buff);
-                bl.setPower(blp*buff);
-                fr.setPower(frp*buff);
-                br.setPower(brp*buff);
+                fl.setPower(flp);
+                bl.setPower(blp);
+                fr.setPower(frp);
+                br.setPower(brp);
             }
             else {
                 fl.setPower(0);
