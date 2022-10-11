@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.opMode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -17,6 +18,7 @@ public class omniman extends OpMode {
     public DcMotor fr;
     public DcMotor br;
 
+    FtcDashboard dash;
     BNO055IMU imu;
 
     Orientation angles;
@@ -31,7 +33,7 @@ public class omniman extends OpMode {
         bl = hardwareMap.dcMotor.get("bl");
         fr = hardwareMap.dcMotor.get("fr");
         br = hardwareMap.dcMotor.get("br");
-
+        dash = FtcDashboard.getInstance();
     }
 
     @Override
