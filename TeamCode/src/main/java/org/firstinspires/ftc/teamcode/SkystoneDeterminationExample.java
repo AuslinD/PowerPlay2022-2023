@@ -78,7 +78,7 @@ public class SkystoneDeterminationExample extends LinearOpMode
             @Override
             public void onOpened()
             {
-                phoneCam.startStreaming(320,240, OpenCvCameraRotation.SIDEWAYS_LEFT);
+                phoneCam.startStreaming(320,240, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
@@ -95,6 +95,9 @@ public class SkystoneDeterminationExample extends LinearOpMode
         while (opModeIsActive())
         {
             telemetry.addData("Analysis", pipeline.getAnalysis());
+            telemetry.addData("avg1", pipeline.avg1);
+            telemetry.addData("avg2", pipeline.avg2);
+            telemetry.addData("avg3", pipeline.avg3);
             telemetry.addData("time", time.seconds());
 
             telemetry.update();

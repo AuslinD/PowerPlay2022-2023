@@ -29,6 +29,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 @TeleOp(name = "visionTest", group = "test")
 public class VisionTest extends LinearOpMode
 {
+
     private FtcDashboard dashboard;
     private OpenCvCamera webcam;
 
@@ -64,8 +65,7 @@ public class VisionTest extends LinearOpMode
         double  drive           = 0;        // Desired forward power (-1 to +1)
         double  turn            = 0;        // Desired turning power (-1 to +1)
         Point center = new Point();
-        telemetry.addLine("bruh1");
-        telemetry.update();
+
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
@@ -109,7 +109,7 @@ public class VisionTest extends LinearOpMode
         });
 
 
-        telemetry.addLine("Start pressed");
+
         while (opModeIsActive())
         {
 
@@ -119,11 +119,7 @@ public class VisionTest extends LinearOpMode
             telemetry.addData("Range",  "%5.1f inches", pipeline.targetDistance(pipeline.getAnalysis()));
             //telemetry.addData("Bearing","%3.0f degrees", pipeline.targetBearing(pipeline.getAnalysis()));
             telemetry.update();
-            TelemetryPacket p = new TelemetryPacket();
-            p.put("Analysis", pipeline.getAnalysis());
-            p.put("Range", pipeline.targetDistance(pipeline.getAnalysis()));
-            dashboard.startCameraStream(webcam, 30);
-            dashboard.sendTelemetryPacket(p);
+
 
             // Don't burn CPU cycles busy-looping in this sample
             sleep(50);
@@ -454,35 +450,7 @@ public class VisionTest extends LinearOpMode
             //targetBearing = Math.toDegrees(Math.asin(targetX / targetRange));
             return targetRange;
         }
-        public double targetBearing(String direction){
-            final double MM_PER_INCH = 25.40 ;
-            double  targetRange     = 0;        // Distance from camera to target in Inches
-            double  targetBearing   = 0;        // Robot Heading, relative to target.  Positive degrees means target is to the right.
-            Point center = new Point();
 
-            if(direction.equals("LEFT")){
-                center.x = Math.abs((region1_pointA.x - region1_pointB.x) / 2);
-                center.y = Math.abs((region1_pointA.y - region1_pointB.y) / 2);
-            }
-            else if(direction.equals("CENTER")){
-                center.x = Math.abs((region2_pointA.x - region2_pointB.x) / 2);
-                center.y = Math.abs((region2_pointA.y - region2_pointB.y) / 2);
-            }
-            else{//RIGHT
-                center.x = Math.abs((region3_pointA.x - region3_pointB.x) / 2);
-                center.y = Math.abs((region3_pointA.y - region3_pointB.y) / 2);
-            }
-
-            double targetX = center.x / MM_PER_INCH; // Image X axis
-            double targetY = center.y / MM_PER_INCH; // Image Z axis
-
-            targetRange = Math.hypot(targetX, targetY);
-            targetBearing = Math.toDegrees(Math.asin(targetX / targetRange));
-
-            // target bearing is based on angle formed between the X axis and the target range line
-            //targetBearing = Math.toDegrees(Math.asin(targetX / targetRange));
-            return targetBearing;
-        }
 
 
 

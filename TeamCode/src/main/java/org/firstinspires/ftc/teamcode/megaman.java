@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.opMode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -18,6 +19,7 @@ public class megaman extends OpMode {
     public DcMotor br;
     //public DcMotor cr;
     //public DcMotor cl;
+    FtcDashboard dash;
 
 
     BNO055IMU imu;
@@ -36,6 +38,7 @@ public class megaman extends OpMode {
         br = hardwareMap.dcMotor.get("br");
         //cr = hardwareMap.dcMotor.get("cr");
         //cl = hardwareMap.dcMotor.get("cl");
+        dash = FtcDashboard.getInstance();
 
 
 
