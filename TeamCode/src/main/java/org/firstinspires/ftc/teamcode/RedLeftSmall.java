@@ -1,16 +1,31 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Autonomous(name = "AutoLeftSmall", group = "RedAuto")
 public class RedLeftSmall extends LinearOpMode {
+
+    WebcamExample.SamplePipeline pipeline;
     Robot robot;
+    WebcamExample.SamplePipeline.AutoPosition pos;
     @Override
     public void runOpMode() throws InterruptedException {
+
+        while (!isStarted()) {
+            pos = pipeline.getAnalysis();
+        }
+
+        waitForStart();
+
         robot = new Robot(this, true);
         robot.initIMU();
+
+        pipeline = new WebcamExample.SamplePipeline();
+
+
 
         //simple sequence to demonstrate the three main autonomous primitives
 
@@ -32,7 +47,12 @@ public class RedLeftSmall extends LinearOpMode {
 
         //TODO: delivering multiple
 
-        
+        // left side (location 1)
+        if(pos == WebcamExample.SamplePipeline.AutoPosition.LEFT){
+
+        }
+
+
 
 
 

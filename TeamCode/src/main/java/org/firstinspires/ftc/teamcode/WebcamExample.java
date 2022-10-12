@@ -41,7 +41,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
 @TeleOp(name = "Webcam Example", group = "vision")
 public class WebcamExample extends LinearOpMode
 {
-    OpenCvWebcam webcam;
+    static OpenCvWebcam webcam;
     SamplePipeline pipeline;
 
     @Override
@@ -191,8 +191,14 @@ public class WebcamExample extends LinearOpMode
      * if you're doing something weird where you do need it synchronized with your OpMode thread,
      * then you will need to account for that accordingly.
      */
-    class SamplePipeline extends OpenCvPipeline
+    static class SamplePipeline extends OpenCvPipeline
     {
+        public enum AutoPosition
+        {
+            LEFT,
+            CENTER,
+            RIGHT
+        }
         boolean viewportPaused;
 
         /*
@@ -208,7 +214,9 @@ public class WebcamExample extends LinearOpMode
         Mat Cb = new Mat();
 
 
+
         int avgCb;
+        private volatile AutoPosition position = AutoPosition.LEFT;
 
 
         void inputToCb(Mat input)
@@ -277,8 +285,21 @@ public class WebcamExample extends LinearOpMode
              * to change which stage of the pipeline is rendered to the viewport when it is
              * tapped, please see {@link PipelineStageSwitchingExample}
              */
+            if(avgCb > 120){
+                position = WebcamExample.SamplePipeline.AutoPosition.RIGHT;
+            }
+            else if(avgCb > 60){
+                position = WebcamExample.SamplePipeline.AutoPosition.CENTER;
+            }
+            else{
+                position = WebcamExample.SamplePipeline.AutoPosition.LEFT;
+            }
 
             return input;
+        }
+
+        public AutoPosition getAnalysis(){
+            return position;
         }
 
         @Override
