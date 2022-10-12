@@ -20,6 +20,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
+import java.util.Scanner;
+
 
 /*
  * This sample demonstrates a basic  method of
