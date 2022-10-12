@@ -39,6 +39,10 @@ public class megaman extends OpMode {
         //cr = hardwareMap.dcMotor.get("cr");
         //cl = hardwareMap.dcMotor.get("cl");
         dash = FtcDashboard.getInstance();
+        fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
 
@@ -92,10 +96,16 @@ public class megaman extends OpMode {
 
                 telemetry.addData("flp", flp);
                 telemetry.update();
-                fl.setPower(flp);
-                bl.setPower(blp);
-                fr.setPower(frp);
-                br.setPower(brp);
+                if(Math.abs(gamepad1.right_trigger) > 0.1){
+                    fl.setPower(flp);
+                    bl.setPower(blp);
+                    fr.setPower(frp);
+                    br.setPower(brp);
+                }
+                fl.setPower(flp * .7);
+                bl.setPower(blp * .7);
+                fr.setPower(frp * .7);
+                br.setPower(brp * .7);
             }
             else {
                 fl.setPower(0);
