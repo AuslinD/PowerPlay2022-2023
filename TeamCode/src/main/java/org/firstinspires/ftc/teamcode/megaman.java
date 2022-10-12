@@ -112,6 +112,8 @@ public class megaman extends OpMode {
                 bl.setPower(0);
                 fr.setPower(0);
                 br.setPower(0);
+                double math = Math.abs(1.2);
+                System.out.println(math);
 
             }
 

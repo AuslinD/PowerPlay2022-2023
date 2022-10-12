@@ -1,12 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Autonomous(name = "AutoLeftSmall", group = "RedAuto")
-public class RedLeftSmall extends LinearOpMode {
+public class LeftSmall extends LinearOpMode {
 
     WebcamExample.SamplePipeline pipeline;
     Robot robot;
@@ -48,14 +46,14 @@ public class RedLeftSmall extends LinearOpMode {
         //TODO: delivering multiple
 
         // left side (location 1)
-        if(pos == WebcamExample.SamplePipeline.AutoPosition.LEFT){
+        if(pos == WebcamExample.SamplePipeline.AutoPosition.CENTER){
+            robot.driveController.rotateModules(Vector2d.RIGHT, true, 4000, this);
+            robot.driveController.drive(Vector2d.FORWARD, 60.96, 1, this);
+
+        }else if(pos == WebcamExample.SamplePipeline.AutoPosition.RIGHT){
+            robot.driveController.rotateModules(Vector2d.RIGHT, true, 4000, this);
+            robot.driveController.drive(Vector2d.FORWARD, 2* 60.96, 1, this);
 
         }
-
-
-
-
-
-
     }
 }

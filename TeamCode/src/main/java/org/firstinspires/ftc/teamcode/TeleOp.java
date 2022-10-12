@@ -11,7 +11,7 @@ public class TeleOp extends OpMode {
     public double DEADBAND_MAG = 0.1;
     public Vector2d DEADBAND_VEC = new Vector2d(DEADBAND_MAG, DEADBAND_MAG);
 
-    public boolean willResetIMU = true;
+     boolean willResetIMU = true;
 
     public void init() {
         robot = new Robot(this, false);
