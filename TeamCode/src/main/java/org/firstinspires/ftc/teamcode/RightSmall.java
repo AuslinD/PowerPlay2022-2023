@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "AutoLeftSmall", group = "RedAuto")
+@Autonomous(name = "AutoRightSmall", group = "Linear Opmode")
 public class RightSmall extends LinearOpMode {
 
     WebcamExample.SamplePipeline pipeline;
