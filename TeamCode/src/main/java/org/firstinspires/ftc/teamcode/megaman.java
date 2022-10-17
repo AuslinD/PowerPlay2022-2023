@@ -102,10 +102,10 @@ public class megaman extends OpMode {
                     fr.setPower(frp);
                     br.setPower(brp);
                 }
-                fl.setPower(flp * .7);
-                bl.setPower(blp * .7);
-                fr.setPower(frp * .7);
-                br.setPower(brp * .7);
+                fl.setPower(flp);
+                bl.setPower(blp);
+                fr.setPower(frp);
+                br.setPower(brp);
             }
             else {
                 fl.setPower(0);
