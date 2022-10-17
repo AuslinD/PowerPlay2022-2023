@@ -91,22 +91,24 @@ public class megaman extends OpMode {
                 flp /= Math.abs(max);
                 brp /= Math.abs(max);
                 blp /= Math.abs(max);
-        }
-            if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_x) > 0.1){
-
-                telemetry.addData("flp", flp);
-                telemetry.update();
-                if(Math.abs(gamepad1.right_trigger) > 0.1){
-                    fl.setPower(flp);
-                    bl.setPower(blp);
-                    fr.setPower(frp);
-                    br.setPower(brp);
-                }
-                fl.setPower(flp);
-                bl.setPower(blp);
-                fr.setPower(frp);
-                br.setPower(brp);
             }
+        if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_x) > 0.1){
+
+            telemetry.addData("flp", flp);
+            telemetry.update();
+            if(Math.abs(gamepad1.right_trigger) > 0.1){
+                 fl.setPower(flp);
+                 bl.setPower(blp);
+                 fr.setPower(frp);
+                 br.setPower(brp);
+            }
+
+            fl.setPower(flp);
+            bl.setPower(blp);
+            fr.setPower(frp);
+            br.setPower(brp);
+            }
+        
             else {
                 fl.setPower(0);
                 bl.setPower(0);
@@ -116,7 +118,6 @@ public class megaman extends OpMode {
                 System.out.println(math);
 
             }
-
     }
 
 
