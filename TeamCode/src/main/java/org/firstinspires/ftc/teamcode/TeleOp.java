@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Diff Swerve TeleOp", group = "TeleOp")
 public class TeleOp extends OpMode {
     Robot robot;
-    Manipulator manipulator;
+    //Manipulator manipulator;
 
     //deadband for joysticks
     public double DEADBAND_MAG = 0.1;
@@ -16,7 +16,7 @@ public class TeleOp extends OpMode {
 
     public void init() {
         robot = new Robot(this, false);
-        manipulator = new Manipulator(this);
+        //manipulator = new Manipulator(this);
     }
 
     //allows driver to indicate that the IMU should not be reset
@@ -37,20 +37,21 @@ public class TeleOp extends OpMode {
         Vector2d joystick2 = new Vector2d(gamepad1.right_stick_x, -gamepad2.right_stick_y); //RIGHT joystick
 
         robot.driveController.updateUsingJoysticks(checkDeadband(joystick1), checkDeadband(joystick2));
-        manipulator.teleOpControls(gamepad2.a);
+
+        //manipulator.teleOpControls(gamepad2.a);
 
 
 
 //        //uncomment for live tuning of ROT_ADVANTAGE constant
-//        if (gamepad1.b) {
-//            robot.driveController.moduleRight.ROT_ADVANTAGE += 0.01;
-//            robot.driveController.moduleLeft.ROT_ADVANTAGE += 0.01;
-//        }
-//        if (gamepad1.x) {
-//            robot.driveController.moduleRight.ROT_ADVANTAGE -= 0.01;
-//            robot.driveController.moduleLeft.ROT_ADVANTAGE -= 0.01;
-//        }
-//        telemetry.addData("ROT_ADVANTAGE: ", robot.driveController.moduleLeft.ROT_ADVANTAGE);
+        if (gamepad1.b) {
+            robot.driveController.moduleRight.ROT_ADVANTAGE += 0.01;
+            robot.driveController.moduleLeft.ROT_ADVANTAGE += 0.01;
+        }
+        if (gamepad1.x) {
+            robot.driveController.moduleRight.ROT_ADVANTAGE -= 0.01;
+            robot.driveController.moduleLeft.ROT_ADVANTAGE -= 0.01;
+        }
+        telemetry.addData("ROT_ADVANTAGE: ", robot.driveController.moduleLeft.ROT_ADVANTAGE);
 
 
         //to confirm that joysticks are operating properly

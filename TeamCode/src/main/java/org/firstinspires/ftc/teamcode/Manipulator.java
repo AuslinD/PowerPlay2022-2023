@@ -17,7 +17,8 @@ public class Manipulator {
 
     private boolean grabEnabled = false;
 
-    DcMotor lift;
+    DcMotor liftLeft;
+    DcMotor liftRight;
     Servo claw;
     private ElapsedTime clawTimer = new ElapsedTime();
     double clawPrevTime;
@@ -26,14 +27,18 @@ public class Manipulator {
         linear_OpMode = opMode;
 
 
-        lift = opMode.hardwareMap.get(DcMotorEx.class,  "lift");
+        liftLeft = opMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
+        liftRight = opMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
         claw = opMode.hardwareMap.get(Servo.class, "claw");
 
 
-        lift.setDirection(DcMotorSimple.Direction.FORWARD);
+        liftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        liftRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        liftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        liftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         //lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -46,14 +51,17 @@ public class Manipulator {
     public Manipulator(OpMode opMode) {
         iterative_OpMode = opMode;
 
-        lift = opMode.hardwareMap.get(DcMotorEx.class,  "lift");
+        liftLeft = opMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
+        liftRight = opMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
         claw = opMode.hardwareMap.get(Servo.class, "claw");
 
-        lift.setDirection(DcMotorSimple.Direction.FORWARD);
+        liftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        liftRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
-
-        lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        liftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        liftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         //lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);

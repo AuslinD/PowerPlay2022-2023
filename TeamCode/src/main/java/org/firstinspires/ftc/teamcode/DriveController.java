@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 enum ModuleSide {LEFT, RIGHT}
 
@@ -29,7 +30,7 @@ public class DriveController {
     public final int MAX_ITERATIONS_ROBOT_ROTATE = 2;
 
     //will multiply the input from the rotation joystick (max value of 1) by this factor
-    public final double ROBOT_ROTATION_SCALE_FACTOR = 0.7;
+    public final double ROBOT_ROTATION_SCALE_FACTOR = 0;
 
     public DriveController(Robot robot) {
         this.robot = robot;

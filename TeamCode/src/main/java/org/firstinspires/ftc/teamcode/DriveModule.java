@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class DriveModule {
     Robot robot;
@@ -38,7 +39,7 @@ public class DriveModule {
     public final double ALLOWED_MODULE_ORIENTATION_ERROR = 5;
 
     //TODO: tune this variable (see commented out section in TeleOp)
-    public final double ROT_ADVANTAGE = 1; //max rotation power divided by max translation power (scaling factor)
+    public double ROT_ADVANTAGE = 1; //max rotation power divided by max translation power (scaling factor)
 
     //this variable is set to 0.7 because when in RUN_USING_ENCODERS mode, powers about ~0.7 are the same
     //setting to 1 may increase robot top speed, but may decrease accuracy
