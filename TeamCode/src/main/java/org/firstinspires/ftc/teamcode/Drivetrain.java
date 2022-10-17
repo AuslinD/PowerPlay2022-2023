@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 
 public class Drivetrain {
@@ -74,6 +75,60 @@ public class Drivetrain {
 
         opMode.telemetry.addLine("Drivetrain Init Completed - Iterative");
         opMode.telemetry.update();
+    }
+
+    public void teleOpControls(Gamepad gamepad1){
+        double FLP = 0;
+        double FRP = 0;
+        double BRP = 0;
+        double BLP = 0;
+
+        if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_x) > 0.1){
+            FRP += gamepad1.left_stick_y;
+            FLP += gamepad1.left_stick_y;
+            BRP += gamepad1.left_stick_y;
+            BLP += gamepad1.left_stick_y;
+
+            FRP += -gamepad1.left_stick_x * 1.1;
+            FLP += -gamepad1.left_stick_x * 1.1;
+            BLP += -gamepad1.left_stick_x * 1.1;
+            BRP += -gamepad1.left_stick_x * 1.1;
+
+            FRP += gamepad1.right_stick_x;
+            FLP += gamepad1.right_stick_x;
+            BRP += gamepad1.right_stick_x;
+            BLP += gamepad1.right_stick_x;
+
+            double max = Math.max(Math.max(Math.abs(FRP), Math.abs(FLP)), Math.max(Math.abs(BRP), Math.abs(BLP)));
+
+            if(Math.abs(max) > 1) {
+                FRP /= Math.abs(max);
+                FLP /= Math.abs(max);
+                BRP /= Math.abs(max);
+                BLP /= Math.abs(max);
+            }
+
+            if(Math.abs(gamepad1.right_trigger) > 0.1){
+                fl.setPower(FLP * .25);
+                bl.setPower(BLP * .25);
+                fr.setPower(FRP * .25);
+                br.setPower(BRP * .25);
+            }
+            else{
+                fl.setPower(FLP);
+                bl.setPower(BLP);
+                fr.setPower(FRP);
+                br.setPower(BRP);
+            }
+
+
+        }
+        else{
+            fl.setPower(0);
+            bl.setPower(0);
+            fr.setPower(0);
+            br.setPower(0);a
+        }
     }
 
 
