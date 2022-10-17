@@ -51,7 +51,7 @@ public class megaman extends OpMode {
     @Override
     public void loop() {
         double forward = gamepad1.left_stick_y;
-        double sideways = -gamepad1.left_stick_x;
+        double sideways = -gamepad1.left_stick_x * 1.1;
         double turn = gamepad1.right_stick_x;
 
         double frp;
@@ -102,10 +102,10 @@ public class megaman extends OpMode {
                     fr.setPower(frp);
                     br.setPower(brp);
                 }
-                fl.setPower(flp * .7);
-                bl.setPower(blp * .7);
-                fr.setPower(frp * .7);
-                br.setPower(brp * .7);
+                fl.setPower(flp);
+                bl.setPower(blp);
+                fr.setPower(frp);
+                br.setPower(brp);
             }
             else {
                 fl.setPower(0);
