@@ -1,10 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class DriveModule {
-    Robot robot;
+    SwerveRobot robot;
 
     //TODO: make sure these motors are not flipped on your drive
     DcMotor motor1; //top motor
@@ -58,7 +57,7 @@ public class DriveModule {
     private double lastMotor2Encoder;
 
 
-    public DriveModule(Robot robot, ModuleSide moduleSide) {
+    public DriveModule(SwerveRobot robot, ModuleSide moduleSide) {
         this.robot = robot;
         this.moduleSide = moduleSide;
         if (moduleSide == ModuleSide.RIGHT) {

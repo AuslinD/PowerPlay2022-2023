@@ -1,13 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 enum ModuleSide {LEFT, RIGHT}
 
 public class DriveController {
-    Robot robot;
+    SwerveRobot robot;
 
     DriveModule moduleLeft;
     DriveModule moduleRight;
@@ -32,7 +30,7 @@ public class DriveController {
     //will multiply the input from the rotation joystick (max value of 1) by this factor
     public final double ROBOT_ROTATION_SCALE_FACTOR = 0;
 
-    public DriveController(Robot robot) {
+    public DriveController(SwerveRobot robot) {
         this.robot = robot;
         moduleLeft = new DriveModule(robot, ModuleSide.LEFT);
         moduleRight = new DriveModule(robot, ModuleSide.RIGHT);

@@ -1,11 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Diff Swerve TeleOp", group = "TeleOp")
 public class TeleOp extends OpMode {
-    Robot robot;
+    SwerveRobot robot;
     //Manipulator manipulator;
 
     //deadband for joysticks
@@ -15,7 +14,7 @@ public class TeleOp extends OpMode {
      boolean willResetIMU = true;
 
     public void init() {
-        robot = new Robot(this, false);
+        robot = new SwerveRobot(this, false);
         //manipulator = new Manipulator(this);
     }
 

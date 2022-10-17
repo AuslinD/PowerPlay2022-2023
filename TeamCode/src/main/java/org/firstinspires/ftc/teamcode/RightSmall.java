@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 public class RightSmall extends LinearOpMode {
 
     WebcamExample.SamplePipeline pipeline;
-    Robot robot;
+    SwerveRobot robot;
     WebcamExample.SamplePipeline.AutoPosition pos;
     @Override
     public void runOpMode() throws InterruptedException {
@@ -18,7 +18,7 @@ public class RightSmall extends LinearOpMode {
 
         waitForStart();
 
-        robot = new Robot(this, true);
+        robot = new SwerveRobot(this, true);
         robot.initIMU();
 
         pipeline = new WebcamExample.SamplePipeline();

@@ -6,10 +6,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @Autonomous(name = "Diff Swerve Test Auto", group = "Linear Opmode")
 
 public class TestAuto extends LinearOpMode {
-    Robot robot;
+    SwerveRobot robot;
 
     public void runOpMode() {
-        robot = new Robot(this, true);
+        robot = new SwerveRobot(this, true);
         robot.initIMU();
 
         //simple sequence to demonstrate the three main autonomous primitives
