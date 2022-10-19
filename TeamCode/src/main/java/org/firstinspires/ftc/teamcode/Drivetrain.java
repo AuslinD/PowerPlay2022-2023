@@ -48,10 +48,10 @@ public class Drivetrain {
     public Drivetrain(OpMode opMode){
         this.iterativeOpMode = opMode;
 
-        fr = this.linearOpMode.hardwareMap.get(DcMotorEx.class, "fr");
-        fl = this.linearOpMode.hardwareMap.get(DcMotorEx.class, "fl");
-        bl = this.linearOpMode.hardwareMap.get(DcMotorEx.class, "bl");
-        br = this.linearOpMode.hardwareMap.get(DcMotorEx.class, "br");
+        fr = this.iterativeOpMode.hardwareMap.get(DcMotorEx.class, "fr");
+        fl = this.iterativeOpMode.hardwareMap.get(DcMotorEx.class, "fl");
+        bl = this.iterativeOpMode.hardwareMap.get(DcMotorEx.class, "bl");
+        br = this.iterativeOpMode.hardwareMap.get(DcMotorEx.class, "br");
 
         fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -127,7 +127,7 @@ public class Drivetrain {
             fl.setPower(0);
             bl.setPower(0);
             fr.setPower(0);
-            br.setPower(0);a
+            br.setPower(0);
         }
     }
 

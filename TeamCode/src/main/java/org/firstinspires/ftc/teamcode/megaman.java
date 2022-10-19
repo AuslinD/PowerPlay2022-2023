@@ -97,10 +97,10 @@ public class megaman extends OpMode {
             telemetry.addData("flp", flp);
             telemetry.update();
             if(Math.abs(gamepad1.right_trigger) > 0.1){
-                 fl.setPower(flp);
-                 bl.setPower(blp);
-                 fr.setPower(frp);
-                 br.setPower(brp);
+                 fl.setPower(flp * .25);
+                 bl.setPower(blp * .25);
+                 fr.setPower(frp * .25);
+                 br.setPower(brp * .25);
             }
 
             fl.setPower(flp);
