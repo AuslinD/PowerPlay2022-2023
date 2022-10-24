@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 public class Robot {
     Drivetrain drivetrain;
-    //Manipulator manip;
+    Manipulator manip;
 
     private OpMode teleOp;
     private LinearOpMode auto;
@@ -14,7 +14,7 @@ public class Robot {
         auto = opMode;
 
         drivetrain = new Drivetrain(opMode);
-        //manip = new Manipulator(opMode);
+        manip = new Manipulator(opMode);
 
 
         opMode.telemetry.addLine("Crabtrain Init Completed - Linear");
@@ -25,7 +25,7 @@ public class Robot {
         teleOp = opMode;
 
         drivetrain = new Drivetrain(opMode);
-        //manip = new Manipulator(opMode);
+        manip = new Manipulator(opMode);
 
         opMode.telemetry.addLine("Crabtrain Init Completed - Iterative");
         opMode.telemetry.update();

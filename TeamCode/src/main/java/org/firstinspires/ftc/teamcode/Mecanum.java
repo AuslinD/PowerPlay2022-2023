@@ -17,5 +17,7 @@ public class Mecanum extends OpMode {
     @Override
     public void loop() {
         robot.drivetrain.teleOpControls(gamepad1);
+        robot.manip.teleOpControls(gamepad2);
+
     }
 }

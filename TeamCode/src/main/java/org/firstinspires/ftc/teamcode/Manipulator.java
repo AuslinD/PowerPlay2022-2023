@@ -1,10 +1,11 @@
-/*package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -17,9 +18,9 @@ public class Manipulator {
 
     private boolean grabEnabled = false;
 
-    DcMotor liftLeft;
-    DcMotor liftRight;
-    Servo claw;
+    private DcMotor liftLeft;
+    private DcMotor liftRight;
+    //Servo claw;
     private ElapsedTime clawTimer = new ElapsedTime();
     double clawPrevTime;
 
@@ -29,7 +30,7 @@ public class Manipulator {
 
         liftLeft = opMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
         liftRight = opMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
-        claw = opMode.hardwareMap.get(Servo.class, "claw");
+        //claw = opMode.hardwareMap.get(Servo.class, "claw");
 
 
         liftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -51,9 +52,9 @@ public class Manipulator {
     public Manipulator(OpMode opMode) {
         iterative_OpMode = opMode;
 
-        liftLeft = opMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
-        liftRight = opMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
-        claw = opMode.hardwareMap.get(Servo.class, "claw");
+        liftLeft = this.iterative_OpMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
+        liftRight = this.iterative_OpMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
+        //claw = opMode.hardwareMap.get(Servo.class, "claw");
 
         liftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
         liftRight.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -72,12 +73,12 @@ public class Manipulator {
 
     // GRABBY STUFF
     public void clawGrab(){
-        claw.setPosition(GRAB);
+        //claw.setPosition(GRAB);
         grabEnabled = true;
     }
 
     public void clawRelease(){
-        claw.setPosition(UNGRAB);
+        //claw.setPosition(UNGRAB);
         grabEnabled = false;
     }
 
@@ -90,14 +91,18 @@ public class Manipulator {
         grabEnabled = !grabEnabled;
     }
 
-    public void teleOpControls(boolean a){
-        if(a){
+    public void teleOpControls(Gamepad gamepad2){
+        if(gamepad2.a){
             clawTimer.reset();
             clawPrevTime = 0;
             if(clawTimer.milliseconds() - clawPrevTime > 200){
                 toggleGrabber();
             }
         }
+        if(Math.abs(gamepad2.left_stick_y) > 0.1){
+            liftLeft.setPower(1);
+            liftRight.setPower(1);
+            iterative_OpMode.telemetry.addData("left y", gamepad2.left_stick_y);
+        }
     }
 }
-*/

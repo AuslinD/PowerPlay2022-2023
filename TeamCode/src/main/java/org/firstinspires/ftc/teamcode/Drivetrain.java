@@ -84,18 +84,18 @@ public class Drivetrain {
         double BLP = 0;
 
         if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_x) > 0.1){
-            FRP += gamepad1.left_stick_y;
+            FRP -= gamepad1.left_stick_y;
             FLP += gamepad1.left_stick_y;
             BRP += gamepad1.left_stick_y;
-            BLP += gamepad1.left_stick_y;
+            BLP -= gamepad1.left_stick_y;
 
             FRP += -gamepad1.left_stick_x * 1.1;
             FLP += -gamepad1.left_stick_x * 1.1;
             BLP += -gamepad1.left_stick_x * 1.1;
             BRP += -gamepad1.left_stick_x * 1.1;
 
-            FRP += gamepad1.right_stick_x;
-            FLP += gamepad1.right_stick_x;
+            FRP -= gamepad1.right_stick_x;
+            FLP -= gamepad1.right_stick_x;
             BRP += gamepad1.right_stick_x;
             BLP += gamepad1.right_stick_x;
 
@@ -109,10 +109,10 @@ public class Drivetrain {
             }
 
             if(Math.abs(gamepad1.right_trigger) > 0.1){
-                fl.setPower(FLP * .25);
-                bl.setPower(BLP * .25);
-                fr.setPower(FRP * .25);
-                br.setPower(BRP * .25);
+                fl.setPower(FLP * .4);
+                bl.setPower(BLP * .4);
+                fr.setPower(FRP * .4);
+                br.setPower(BRP * .4);
             }
             else{
                 fl.setPower(FLP);
