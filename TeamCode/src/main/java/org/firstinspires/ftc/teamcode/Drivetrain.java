@@ -155,6 +155,10 @@ public class Drivetrain {
         br.setPower(powerBR);
     }
 
+    public DcMotor getFl(){
+        return fl;
+    }
+
     public void setAllMotors(double power) {
         fr.setPower(power);
         fl.setPower(power);
