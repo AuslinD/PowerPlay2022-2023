@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class AUto{
     Robot robot;
-    private Drivetrain drive;
+    Drivetrain drive;
     private PID pid = new PID();
 
     public AUto(Drivetrain a){
