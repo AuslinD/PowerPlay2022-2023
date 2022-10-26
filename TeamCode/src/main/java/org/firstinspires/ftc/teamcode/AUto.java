@@ -33,15 +33,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         drive.setAllMotors(0);
     }
 
-    public void turn(Angle angle, double speed, boolean isForward, LinearOpMode LinearOpMode, int timeout){
+    public void turn(double angle, double speed, boolean isForward, LinearOpMode LinearOpMode, int timeout){
         DcMotor wheel = drive.getFl();
-        double initPos = robot.imu
+        double initPos = robot.imu.getAngularOrientation().firstAngle;
         ElapsedTime runtime = new ElapsedTime();
-        while (runtime.seconds() < timeout && Math.abs(wheel.getCurrentPosition() - initPos) < distance){
+        while (runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - initPos) < angle){
             if(isForward)
-                drive.setAllMotors(speed);
+                drive.setMotorPowers(speed,-speed,speed,-speed);
             else
-                drive.setAllMotors(-speed);
+                drive.setMotorPowers(-speed,speed,-speed,speed);
         }
     }
 }
