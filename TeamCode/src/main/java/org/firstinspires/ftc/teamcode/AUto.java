@@ -7,15 +7,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
- public class AUto{
-    Manipulator manipulator;
-    private Drivetrain drive;
+public class AUto{
     Robot robot;
+    Drivetrain drive;
     private PID pid = new PID();
 
-    public AUto(Robot a){
-        robot = a;
-        drive = robot.getDrivetrain();
+    public AUto(Drivetrain a){
+        drive = a;
     }
 
     public void drive(double distance, double speed, boolean isForward, int timeout){
@@ -33,15 +31,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         drive.setAllMotors(0);
     }
 
-    public void turn(Angle angle, double speed, boolean isForward, LinearOpMode LinearOpMode, int timeout){
-        DcMotor wheel = drive.getFl();
-        double initPos = robot.imu
-        ElapsedTime runtime = new ElapsedTime();
-        while (runtime.seconds() < timeout && Math.abs(wheel.getCurrentPosition() - initPos) < distance){
-            if(isForward)
-                drive.setAllMotors(speed);
-            else
-                drive.setAllMotors(-speed);
-        }
+    public void turn(Angle angle, LinearOpMode LinearOpMode){
+
     }
 }
