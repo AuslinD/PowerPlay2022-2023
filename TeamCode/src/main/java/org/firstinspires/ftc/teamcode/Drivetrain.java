@@ -83,6 +83,8 @@ public class Drivetrain {
         double BRP = 0;
         double BLP = 0;
 
+
+
         if(Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_x) > 0.1){
             FRP -= gamepad1.left_stick_y;
             FLP += gamepad1.left_stick_y;
