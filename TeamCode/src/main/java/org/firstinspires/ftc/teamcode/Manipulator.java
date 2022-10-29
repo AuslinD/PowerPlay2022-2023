@@ -64,7 +64,7 @@ public class Manipulator {
         rightLift = this.iterative_OpMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
         claw = opMode.hardwareMap.get(Servo.class, "claw");
 
-        leftLift.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftLift.setDirection(DcMotorSimple.Direction.REVERSE);
         rightLift.setDirection(DcMotorSimple.Direction.FORWARD);
 
         leftLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

@@ -20,8 +20,8 @@ public class TestAutoMecanum extends LinearOpMode{
      Drivetrain drivetrain = no.robot.getDrivetrain();
      @Override
      public void runOpMode() throws InterruptedException {
-          no.drive(2400,1, true,3);
-          no.turn(360, 0.5, true, 5);
+          no.drive(2400,1,3);
+          no.turn(360, 0.5, 5);
           telemetry.addData("Turning Angle 1", robot.imu.getAngularOrientation().firstAngle);
           telemetry.addData("Turning Angle 2", robot.imu.getAngularOrientation().secondAngle);
           telemetry.addData("Turning Angle 3", robot.imu.getAngularOrientation().thirdAngle);
