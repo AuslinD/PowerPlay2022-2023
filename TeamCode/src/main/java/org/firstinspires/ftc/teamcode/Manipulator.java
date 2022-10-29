@@ -13,33 +13,38 @@ public class Manipulator {
     private LinearOpMode linear_OpMode;
     private OpMode iterative_OpMode;
 
-    double GRAB = -1;
-    double UNGRAB = 1;
+    double GRAB = 1;
+    double UNGRAB = -1;
 
     private boolean grabEnabled = false;
 
-    private DcMotor liftLeft;
-    private DcMotor liftRight;
-    //Servo claw;
+    private DcMotor leftLift;
+    private DcMotor rightLift;
+    private int leftLiftTarget;
+    private int rightLiftTarget;
+
+    Servo claw;
     private ElapsedTime clawTimer = new ElapsedTime();
     double clawPrevTime;
 
     public Manipulator(LinearOpMode opMode) {
-        linear_OpMode = opMode;
+        this.linear_OpMode = opMode;
+
+        leftLiftTarget = 0;
+        rightLiftTarget = 0;
+
+        leftLift = opMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
+        rightLift = opMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
+        claw = opMode.hardwareMap.get(Servo.class, "claw");
 
 
-        liftLeft = opMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
-        liftRight = opMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
-        //claw = opMode.hardwareMap.get(Servo.class, "claw");
+        leftLift.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightLift.setDirection(DcMotorSimple.Direction.FORWARD);
 
-
-        liftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
-        liftRight.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        liftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        liftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        liftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        liftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         //lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -50,19 +55,24 @@ public class Manipulator {
     }
 
     public Manipulator(OpMode opMode) {
-        iterative_OpMode = opMode;
+        this.iterative_OpMode = opMode;
 
-        liftLeft = this.iterative_OpMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
-        liftRight = this.iterative_OpMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
-        //claw = opMode.hardwareMap.get(Servo.class, "claw");
+        leftLiftTarget = 0;
+        rightLiftTarget = 0;
 
-        liftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
-        liftRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftLift = this.iterative_OpMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
+        rightLift = this.iterative_OpMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
+        claw = opMode.hardwareMap.get(Servo.class, "claw");
 
-        liftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        liftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        liftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        liftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftLift.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightLift.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        leftLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         //lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -73,12 +83,12 @@ public class Manipulator {
 
     // GRABBY STUFF
     public void clawGrab(){
-        //claw.setPosition(GRAB);
+        claw.setPosition(GRAB);
         grabEnabled = true;
     }
 
     public void clawRelease(){
-        //claw.setPosition(UNGRAB);
+        claw.setPosition(UNGRAB);
         grabEnabled = false;
     }
 
@@ -93,16 +103,37 @@ public class Manipulator {
 
     public void teleOpControls(Gamepad gamepad2){
         if(gamepad2.a){
-            clawTimer.reset();
-            clawPrevTime = 0;
-            if(clawTimer.milliseconds() - clawPrevTime > 200){
-                toggleGrabber();
-            }
+            clawGrab();
+        }
+        if(gamepad2.b){
+            clawRelease();
         }
         if(Math.abs(gamepad2.left_stick_y) > 0.1){
-            liftLeft.setPower(1);
-            liftRight.setPower(1);
-            iterative_OpMode.telemetry.addData("left y", gamepad2.left_stick_y);
+            leftLiftTarget += (int)(gamepad2.left_stick_y * 10);
+            leftLift.setPower(gamepad2.left_stick_y * .5);
+            rightLift.setPower(gamepad2.left_stick_y * .5);
+
+
         }
+        else{
+            rightLift.setPower(0);
+            leftLift.setPower(0);
+
+        }
+        iterative_OpMode.telemetry.addData("left target", leftLiftTarget);
+        iterative_OpMode.telemetry.addData("leftLiftEncoder", leftLift.getCurrentPosition());
+        iterative_OpMode.telemetry.addData("rightLiftEncoder", rightLift.getCurrentPosition());
+
+    }
+
+    public double liftPower(double speed){
+        double k_P = 0.007;
+
+        double error = leftLiftTarget - leftLift.getCurrentPosition();
+        double liftSpeed = speed * k_P * error;
+        if(liftSpeed > 1){
+            liftSpeed = 1;
+        }
+        return liftSpeed;
     }
 }

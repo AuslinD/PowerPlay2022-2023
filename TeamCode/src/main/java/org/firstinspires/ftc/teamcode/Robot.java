@@ -41,8 +41,8 @@ public class Robot {
     public Robot(OpMode opMode) {
         teleOp = opMode;
 
-        drivetrain = new Drivetrain(opMode);
-        manip = new Manipulator(opMode);
+        drivetrain = new Drivetrain(teleOp);
+        manip = new Manipulator(teleOp);
 
         opMode.telemetry.addLine("Crabtrain Init Completed - Iterative");
         opMode.telemetry.update();
