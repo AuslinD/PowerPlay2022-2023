@@ -13,16 +13,22 @@ import org.openftc.easyopencv.OpenCvWebcam;
 
 public class TestAutoMecanum extends LinearOpMode{
      Robot robot;
+     Drivetrain drivetrain;
+
      static OpenCvWebcam webcam;
      WebcamExample.SamplePipeline pipeline;
      WebcamExample.SamplePipeline.AutoPosition pos;
-     AUto no = new AUto(null);
-     Drivetrain drivetrain = no.robot.getDrivetrain();
+
+
      @Override
      public void runOpMode() throws InterruptedException {
+          robot = new Robot(this);
+          AUto no = new AUto(robot);
+          Drivetrain drivetrain = no.robot.getDrivetrain();
           waitForStart();
-          no.drive(2400,1,3);
-          no.turn(360, 0.5, 5);
+          no.drive(3,1,3, this);
+          no.turn(360, 0.5, 5, this);
+          telemetry.addData("motor power", drivetrain.getFl().getPower());
           telemetry.addData("Turning Angle 1", robot.imu.getAngularOrientation().firstAngle);
           telemetry.addData("Turning Angle 2", robot.imu.getAngularOrientation().secondAngle);
           telemetry.addData("Turning Angle 3", robot.imu.getAngularOrientation().thirdAngle);

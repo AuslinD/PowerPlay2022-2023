@@ -1,7 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -16,25 +17,22 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         drive = robot.getDrivetrain();
     }
 
-    public void drive(double distance, double speed, int timeout){
+    public void drive(double distance, double speed, int timeout, LinearOpMode opMode){
 
         DcMotor wheel = drive.getFl();
         double initPos = wheel.getCurrentPosition();
         ElapsedTime runtime = new ElapsedTime();
-        while (runtime.seconds() < timeout && Math.abs(wheel.getCurrentPosition() - initPos) < Math.abs(distance)){
-                drive.setAllMotors(speed);
-                telemetry.addData("Motor power ", drive.getFl().getPower());
+        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(wheel.getCurrentPosition() - initPos) < Math.abs(distance)){
+            drive.setMotorPowers(-speed,speed,speed,-speed);
         }
-
         drive.setAllMotors(0);
     }
 
-    public void turn(double angle, double speed, int timeout){
+    public void turn(double angle, double speed, int timeout, LinearOpMode opMode){
         DcMotor wheel = drive.getFl();
         double initPos = robot.imu.getAngularOrientation().firstAngle;
         ElapsedTime runtime = new ElapsedTime();
-        while (runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - initPos) < Math.abs(angle)){
-            telemetry.addData("turning speed", drive.getFl().getPower());
+        while (opMode.opModeIsActive()&& runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - initPos) < Math.abs(angle)){
             drive.setMotorPowers(-speed,speed,-speed,speed);
         }
     }
