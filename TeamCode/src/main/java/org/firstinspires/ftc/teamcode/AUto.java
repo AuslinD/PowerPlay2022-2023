@@ -39,9 +39,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         ElapsedTime runtime = new ElapsedTime();
         while (runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - initPos) < angle){
             if(isForward)
-                drive.setMotorPowers(speed,-speed,speed,-speed);
-            else
                 drive.setMotorPowers(-speed,speed,-speed,speed);
+            else
+                drive.setMotorPowers(speed,-speed,speed,-speed);
         }
     }
 }
