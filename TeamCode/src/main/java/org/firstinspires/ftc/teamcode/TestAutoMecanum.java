@@ -33,7 +33,7 @@ public class TestAutoMecanum extends LinearOpMode{
           }
           waitForStart();
           no.turn(180, 0.5, 5, this);
-          sleep(2000);
+          sleep(10000);
 
           pipeline = new WebcamExample.SamplePipeline();
 
