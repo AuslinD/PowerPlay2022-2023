@@ -90,7 +90,6 @@ public class TestAutoMecanum extends LinearOpMode{
           }
           telemetry.update();
 
-          waitForStart();
           no.turn(90, 0.5, 5, this);
           sleep(10000);
 
