@@ -127,7 +127,7 @@ public class Manipulator {
     }
 
     public double liftPower(double speed){
-        double k_P = 0.007;
+        double k_P = 0.004;
 
         double error = leftLiftTarget - leftLift.getCurrentPosition();
         double liftSpeed = speed * k_P * error;

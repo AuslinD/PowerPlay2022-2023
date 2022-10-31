@@ -30,12 +30,18 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
     public void turn(double angle, double speed, int timeout, LinearOpMode opMode){
         DcMotor wheel = drive.getFl();
-        double initPos = robot.imu.getAngularOrientation().firstAngle;
+        double startPos = robot.imu.getAngularOrientation().firstAngle;
         ElapsedTime runtime = new ElapsedTime();
-        while (opMode.opModeIsActive()&& runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - initPos) > 5){
+        opMode.telemetry.addData("loop",  Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
+        opMode.telemetry.update();
+        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - angle) > 5){
             double newPower = pid.loop(robot.imu.getAngularOrientation().firstAngle, runtime.seconds());
+            opMode.telemetry.addData("newPower", newPower);
+            opMode.telemetry.update();
             drive.setMotorPowers(newPower,newPower,-newPower,-newPower);
+
         }
-            drive.setMotorPowers(0,0,0,0);
+
+        drive.setMotorPowers(0,0,0,0);
     }
 }
