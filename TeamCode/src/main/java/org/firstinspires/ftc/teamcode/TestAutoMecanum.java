@@ -25,15 +25,6 @@ public class TestAutoMecanum extends LinearOpMode{
           robot = new Robot(this);
           AUto no = new AUto(robot);
           Drivetrain drivetrain = no.robot.getDrivetrain();
-          while (!isStarted()) {
-               telemetry.addData("Turning Angle 1", robot.imu.getAngularOrientation().firstAngle);
-               telemetry.addData("Turning Angle 2", robot.imu.getAngularOrientation().secondAngle);
-               telemetry.addData("Turning Angle 3", robot.imu.getAngularOrientation().thirdAngle);
-               telemetry.update();
-          }
-          waitForStart();
-          no.turn(180, 0.5, 5, this);
-          sleep(10000);
 
           pipeline = new WebcamExample.SamplePipeline();
 
@@ -75,6 +66,7 @@ public class TestAutoMecanum extends LinearOpMode{
           });
           while (!isStarted()) {
                telemetry.addData("pos", pipeline.getAnalysis());
+               telemetry.addData("cb", pipeline.avgCb);
                telemetry.update();
 
                pos = pipeline.getAnalysis();
@@ -97,6 +89,10 @@ public class TestAutoMecanum extends LinearOpMode{
 
           }
           telemetry.update();
+
+          waitForStart();
+          no.turn(180, 0.5, 5, this);
+          sleep(10000);
 
 
 
