@@ -64,13 +64,13 @@ public class TestAutoMecanum extends LinearOpMode{
                      */
                }
           });
-          while (!isStarted()) {
+          //while (!isStarted()) {
                telemetry.addData("pos", pipeline.getAnalysis());
                telemetry.addData("cb", pipeline.avgCb);
                telemetry.update();
 
                pos = pipeline.getAnalysis();
-          }
+          //}
 
           telemetry.addLine("Waiting for start");
           telemetry.update();
@@ -91,7 +91,7 @@ public class TestAutoMecanum extends LinearOpMode{
           telemetry.update();
 
           waitForStart();
-          no.turn(180, 0.5, 5, this);
+          no.turn(90, 0.5, 5, this);
           sleep(10000);
 
 
