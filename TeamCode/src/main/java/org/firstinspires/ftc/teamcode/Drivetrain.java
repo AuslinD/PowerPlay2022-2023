@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 
 public class Drivetrain {
-    private DcMotor fr, fl, br, bl;
+    public DcMotor fr, fl, br, bl;
     private LinearOpMode linearOpMode;
     private OpMode iterativeOpMode;
 

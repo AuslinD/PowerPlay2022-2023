@@ -89,8 +89,8 @@ public class TestAutoMecanum extends LinearOpMode{
 
           }
           telemetry.update();
-
-          no.turn(90, 0.5, 5, this);
+          no.drive(2400, 1,5,this);
+          //no.turn(90, 0.5, 5, this);
           sleep(10000);
 
 

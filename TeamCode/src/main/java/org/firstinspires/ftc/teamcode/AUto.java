@@ -19,10 +19,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
     public void drive(double distance, double speed, int timeout, LinearOpMode opMode){
 
-        DcMotor wheel = drive.getFl();
-        double initPos = wheel.getCurrentPosition();
+        double initPos = drive.br.getCurrentPosition();
         ElapsedTime runtime = new ElapsedTime();
-        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(wheel.getCurrentPosition() - initPos) < Math.abs(distance)){
+        while (opMode.opModeIsActive() && runtime.seconds() < timeout && (drive.br.getCurrentPosition() - initPos) < Math.abs(distance)){
+            opMode.telemetry.addData("position", drive.br.getCurrentPosition());
+            opMode.telemetry.update();
             drive.setMotorPowers(-speed,speed,speed,-speed);
         }
         drive.setAllMotors(0);
