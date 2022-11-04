@@ -15,13 +15,18 @@ public class Manipulator {
 
     double GRAB = 1;
     double UNGRAB = -1;
+    double LIFT_POWER = 0.75;// TODO: change this?
+    double LIFT_HOLD_CONSTANT = 0.15;
+    double TOP_BOUND = -1000; // because motors are reversed lol
+    double LOW_BOUND = 0;
+    private double goalEncoder = 0;
 
     private boolean grabEnabled = false;
 
     private DcMotor leftLift;
     private DcMotor rightLift;
-    private int leftLiftTarget;
-    private int rightLiftTarget;
+    private double leftLiftTarget;
+    private double rightLiftTarget;
 
     Servo claw;
     private ElapsedTime clawTimer = new ElapsedTime();
@@ -41,11 +46,23 @@ public class Manipulator {
         leftLift.setDirection(DcMotorSimple.Direction.FORWARD);
         rightLift.setDirection(DcMotorSimple.Direction.FORWARD);
 
+
         leftLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+
+
+
+        leftLift.setTargetPosition(0);
+        leftLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftLift.setPower(LIFT_POWER);
+
+
+        rightLift.setTargetPosition(0);
+        rightLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightLift.setPower(LIFT_POWER);
 
         //lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -73,6 +90,14 @@ public class Manipulator {
         rightLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        leftLift.setPower(LIFT_POWER);
+        leftLift.setTargetPosition(0);
+        leftLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        rightLift.setPower(LIFT_POWER);
+        rightLift.setTargetPosition(0);
+        rightLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
         //lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -108,6 +133,19 @@ public class Manipulator {
         if(gamepad2.b){
             clawRelease();
         }
+        // LEFT STICK Y IS REVERSE OF WHAT YOU THINK
+        if (gamepad2.left_stick_y < 0){
+            if (leftLiftTarget > TOP_BOUND){
+                leftLiftTarget += 8 * gamepad2.left_stick_y;
+            }
+        }
+
+        if (gamepad2.left_stick_y > 0){
+            if (leftLiftTarget < LOW_BOUND){
+                leftLiftTarget += 15 * gamepad2.left_stick_y;
+            }
+        }
+        /* PREVIOUS LIFT CODE
         if(Math.abs(gamepad2.left_stick_y) > 0.1){
             leftLiftTarget += (int)(gamepad2.left_stick_y * 10);
             leftLift.setPower(gamepad2.left_stick_y * .5);
@@ -120,6 +158,30 @@ public class Manipulator {
             leftLift.setPower(0);
 
         }
+         */
+
+
+        if(leftLiftTarget > LOW_BOUND){// >< because low bound and top bound are weird DONT CHANGE UNLESS FOR SURE THIS IS ISSUE
+            leftLiftTarget = LOW_BOUND;
+        }
+        else if(leftLiftTarget < TOP_BOUND){
+            leftLiftTarget = TOP_BOUND;
+        }
+
+        leftLift.setTargetPosition((int)leftLiftTarget);
+        rightLift.setTargetPosition((int)leftLiftTarget);
+
+
+        // TODO: check if this works
+        if(leftLift.getCurrentPosition() - leftLiftTarget > 0 && leftLift.getCurrentPosition() - leftLiftTarget < 4){
+            leftLift.setPower(LIFT_HOLD_CONSTANT);
+            rightLift.setPower(LIFT_HOLD_CONSTANT);
+        }
+        else{
+            leftLift.setPower(LIFT_POWER);
+            rightLift.setPower(LIFT_POWER);
+        }
+
         iterative_OpMode.telemetry.addData("left target", leftLiftTarget);
         iterative_OpMode.telemetry.addData("leftLiftEncoder", leftLift.getCurrentPosition());
         iterative_OpMode.telemetry.addData("rightLiftEncoder", rightLift.getCurrentPosition());
