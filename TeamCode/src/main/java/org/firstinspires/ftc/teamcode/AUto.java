@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
     Manipulator manipulator;
     private Drivetrain drive;
     Robot robot;
-    private PID pid = new PID(0.025,0.008,0,180);
+    private PID pid = new PID(0.005,0.005,0,90);
 
     public AUto(Robot a){
         robot = a;
@@ -35,9 +35,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         ElapsedTime runtime = new ElapsedTime();
         opMode.telemetry.addData("loop",  Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
         opMode.telemetry.update();
-        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - Math.abs(angle)) > 5){
+        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - Math.abs(angle)) > 1){//TODO: maybe change margin of error
             double newPower = pid.loop(robot.imu.getAngularOrientation().firstAngle, runtime.seconds());
             opMode.telemetry.addData("newPower", newPower);
+            opMode.telemetry.addData("target", angle);
             opMode.telemetry.update();
             drive.setMotorPowers(newPower,newPower,-newPower,-newPower);
             opMode.telemetry.addData("Motor spin", newPower);
