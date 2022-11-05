@@ -187,7 +187,13 @@ public class Manipulator {
         iterative_OpMode.telemetry.addData("rightLiftEncoder", rightLift.getCurrentPosition());
 
     }
+    public void setPosition(int pos){
+        leftLift.setTargetPosition(pos);
+        rightLift.setTargetPosition(pos);
+        liftPower(.5);
 
+
+    }
     public double liftPower(double speed){
         double k_P = 0.004;
 

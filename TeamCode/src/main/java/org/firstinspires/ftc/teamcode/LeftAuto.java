@@ -27,6 +27,7 @@ public class LeftAuto extends LinearOpMode{
         Drivetrain drivetrain = auto.robot.getDrivetrain();
 
         pipeline = new WebcamExample.SamplePipeline();
+        robot.manip.clawGrab();
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -37,6 +38,7 @@ public class LeftAuto extends LinearOpMode{
             @Override
             public void onOpened()
             {
+
                 /*
                  * Tell the webcam to start streaming images to us! Note that you must make sure
                  * the resolution you specify is supported by the camera. If it is not, an exception
@@ -89,8 +91,17 @@ public class LeftAuto extends LinearOpMode{
 
         }
         telemetry.update();
+
+        robot.manip.setPosition(1000);
         auto.drive(1500, 1,5,this);
-        auto.turn(90, 0.5, 20, this);
+        auto.turn(-52, 0.5, 2, this);
+        auto.drive(300,.5,5,this);
+        sleep(250);
+        robot.manip.clawRelease();
+        sleep(500);
+        auto.drive(50,-.25,2,this);
+
+
         pos = WebcamExample.SamplePipeline.AutoPosition.LEFT;
         telemetry.addData("position", pos);
         telemetry.update();
