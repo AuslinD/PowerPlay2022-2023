@@ -1,7 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
-//credit: this class is based on code from FRC 5818 (https://github.com/Team5818/DiffSwerve)
+import java.sql.SQLOutput;
 
+//credit: this class is based on code from FRC 5818 (https://github.com/Team5818/DiffSwerve)
 public class Vector2d {
 
     //Vector constants
