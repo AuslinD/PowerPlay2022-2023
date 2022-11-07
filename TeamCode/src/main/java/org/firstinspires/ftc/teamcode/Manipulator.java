@@ -173,7 +173,7 @@ public class Manipulator {
 
 
         // TODO: check if this works
-        if(leftLift.getCurrentPosition() - leftLiftTarget > 0 && leftLift.getCurrentPosition() - leftLiftTarget < 4){
+        if(leftLift.getCurrentPosition() - leftLiftTarget > 0 && leftLift.getCurrentPosition() - leftLiftTarget < 10){
             leftLift.setPower(LIFT_HOLD_CONSTANT);
             rightLift.setPower(LIFT_HOLD_CONSTANT);
         }

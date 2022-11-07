@@ -68,13 +68,13 @@ public class LeftAuto extends LinearOpMode{
                  */
             }
         });
-        //while (!isStarted()) {
-        telemetry.addData("pos", pipeline.getAnalysis());
-        telemetry.addData("cb", pipeline.avgCb);
-        telemetry.update();
+        while (!isStarted()) {
+            telemetry.addData("pos", pipeline.getAnalysis());
+            telemetry.addData("cb", pipeline.avgCb);
+            telemetry.update();
 
-        pos = pipeline.getAnalysis();
-        //}
+            pos = pipeline.getAnalysis();
+        }
 
         telemetry.addLine("Waiting for start");
         telemetry.update();
