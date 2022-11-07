@@ -29,6 +29,7 @@ public class LeftAuto extends LinearOpMode{
 
         pipeline = new WebcamExample.SamplePipeline();
         robot.manip.clawGrab();
+        robot.manip.setPosition(0);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -94,14 +95,15 @@ public class LeftAuto extends LinearOpMode{
         telemetry.update();
 
 
-        robot.manip.setPosition(1000);
-        sleep(300);
-        auto.drive(1500, 1,5,this);
+        robot.manip.setPosition(750);
+        sleep(200);
+        auto.drive(1450, 1,5,this);
         auto.turn(-52, 0.5, 2, this);
-        auto.drive(250,.5,5,this);
+        auto.drive(200,.5,5,this);
         sleep(250);
         robot.manip.clawRelease();
         sleep(500);
+        robot.manip.setPosition(0);
         auto.drive(250,-.5,2,this);
 
 
@@ -123,9 +125,9 @@ public class LeftAuto extends LinearOpMode{
 
 
         }
-        telemetry.addLine("Dekita!");
 
-
+        robot.manip.setPosition(0);
+        sleep(500);
     }
 }
 
