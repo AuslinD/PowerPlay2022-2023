@@ -94,7 +94,7 @@ public class LeftAuto extends LinearOpMode{
         telemetry.update();
 
 
-        robot.manip.setPosition(800);
+        robot.manip.setPosition(1000);
         sleep(300);
         auto.drive(1500, 1,5,this);
         auto.turn(-52, 0.5, 2, this);
