@@ -10,9 +10,9 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-@Autonomous(name = "Left Auto", group = "Auto")
+@Autonomous(name = "Right Auto", group = "Auto")
 
-public class LeftAuto extends LinearOpMode{
+public class RightAuto extends LinearOpMode{
     Robot robot;
     Drivetrain drivetrain;
 
@@ -93,28 +93,30 @@ public class LeftAuto extends LinearOpMode{
         }
         telemetry.update();
 
-       /* robot.manip.setPosition(1000);
+
+        robot.manip.setPosition(800);
+        sleep(300);
         auto.drive(1500, 1,5,this);
-        auto.turn(-52, 0.5, 2, this);
-        auto.drive(300,.5,5,this);
+        auto.turn(52, 0.5, 2, this);
+        auto.drive(250,.5,5,this);
         sleep(250);
         robot.manip.clawRelease();
         sleep(500);
-        auto.drive(50,-.25,2,this); */
+        auto.drive(250,-.5,2,this);
 
 
-        pos = WebcamExample.SamplePipeline.AutoPosition.RIGHT;
+        pos = WebcamExample.SamplePipeline.AutoPosition.LEFT;
         telemetry.addData("position", pos);
         telemetry.update();
         switch(pos) {
             case LEFT:
-                auto.turn(142, 0.75, 5, this);
+                auto.turn(90, 0.75, 3, this);
                 auto.drive(1300, 0.5, 3,this);
                 break;
             case CENTER:
                 break;
             case RIGHT:
-                auto.turn(-45, 0.5, 3, this);
+                auto.turn(-90, 0.75, 2, this);
                 auto.drive(1200, 0.5, 3,this);
                 break;
 

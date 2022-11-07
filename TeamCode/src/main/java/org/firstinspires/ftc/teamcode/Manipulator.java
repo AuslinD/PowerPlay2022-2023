@@ -189,8 +189,7 @@ public class Manipulator {
     }
     public void setPosition(int pos){
         leftLift.setTargetPosition(pos);
-        rightLift.setTargetPosition(pos);
-        liftPower(.5);
+        rightLift.setTargetPosition(-pos);
 
 
     }
