@@ -246,7 +246,7 @@ public class WebcamExample extends LinearOpMode
              * buffer. Any changes to the child affect the parent, and the
              * reverse also holds true.
              */
-            region1_Cb = Cb.submat(new Rect(new Point(50, 50), new Point(150, 150)));
+            region1_Cb = Cb.submat(new Rect(new Point(200, 90), new Point(245, 140))); // change the drawn box too
 
 
         }
@@ -273,11 +273,11 @@ public class WebcamExample extends LinearOpMode
             Imgproc.rectangle(
                     input,
                     new Point(
-                            50,
-                            50),
+                            200,
+                            90),
                     new Point(
-                            150,
-                            150),
+                            245,
+                            140),
                     new Scalar(0, 255, 0), 4);
 
             /**
@@ -285,10 +285,10 @@ public class WebcamExample extends LinearOpMode
              * to change which stage of the pipeline is rendered to the viewport when it is
              * tapped, please see {@link PipelineStageSwitchingExample}
              */
-            if(avgCb > 123){
+            if(avgCb > 127){
                 position = WebcamExample.SamplePipeline.AutoPosition.RIGHT;
             }
-            else if(avgCb > 118){
+            else if(avgCb > 123){
                 position = WebcamExample.SamplePipeline.AutoPosition.CENTER;
             }
             else{
