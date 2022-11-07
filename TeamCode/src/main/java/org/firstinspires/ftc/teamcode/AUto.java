@@ -21,8 +21,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
         double initPos = drive.br.getCurrentPosition();
         ElapsedTime runtime = new ElapsedTime();
-        while (opMode.opModeIsActive() && runtime.seconds() < timeout && (drive.br.getCurrentPosition() - initPos) < Math.abs(distance)){
-            opMode.telemetry.addData("position", drive.br.getCurrentPosition());
+        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(drive.br.getCurrentPosition() - initPos) < distance){
+            opMode.telemetry.addData("position br ", drive.br.getCurrentPosition());
+            opMode.telemetry.addData("position bl ", drive.bl.getCurrentPosition());
+            opMode.telemetry.addData("position fr ", drive.fr.getCurrentPosition());
+            opMode.telemetry.addData("position fl ", drive.fl.getCurrentPosition());
             opMode.telemetry.addData("target", initPos);
             opMode.telemetry.update();
             drive.setMotorPowers(-speed,speed,speed,-speed);
