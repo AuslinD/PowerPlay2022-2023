@@ -67,13 +67,13 @@ public class RightAuto extends LinearOpMode{
                  */
             }
         });
-        //while (!isStarted()) {
-        telemetry.addData("pos", pipeline.getAnalysis());
-        telemetry.addData("cb", pipeline.avgCb);
-        telemetry.update();
+        while (!isStarted()) {
+            telemetry.addData("pos", pipeline.getAnalysis());
+            telemetry.addData("cb", pipeline.avgCb);
+            telemetry.update();
 
-        pos = pipeline.getAnalysis();
-        //}
+            pos = pipeline.getAnalysis();
+        }
 
         telemetry.addLine("Waiting for start");
         telemetry.update();
@@ -94,23 +94,23 @@ public class RightAuto extends LinearOpMode{
         telemetry.update();
 
 
-        robot.manip.setPosition(800);
+        robot.manip.setPosition(750);
         sleep(300);
         auto.drive(1500, 1,5,this);
-        auto.turn(52, 0.5, 2, this);
-        auto.drive(250,.5,5,this);
+        auto.turn(62, 0.5, 2, this);
+        auto.drive(300,.5,5,this);
         sleep(250);
         robot.manip.clawRelease();
         sleep(500);
         auto.drive(250,-.5,2,this);
 
 
-        pos = WebcamExample.SamplePipeline.AutoPosition.LEFT;
+
         telemetry.addData("position", pos);
         telemetry.update();
         switch(pos) {
             case LEFT:
-                auto.turn(90, 0.75, 3, this);
+                auto.turn(95, 0.75, 3, this);
                 auto.drive(1300, 0.5, 3,this);
                 break;
             case CENTER:

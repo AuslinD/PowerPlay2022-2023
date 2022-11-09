@@ -13,9 +13,9 @@ public class Manipulator {
     private LinearOpMode linear_OpMode;
     private OpMode iterative_OpMode;
 
-    double GRAB = 1;
-    double UNGRAB = -1;
-    double LIFT_POWER = 0.75;// TODO: change this?
+    double GRAB = 0.8;
+    double UNGRAB = 0.5;
+    double LIFT_POWER = 1;// TODO: change this?
     double LIFT_HOLD_CONSTANT = 0.15;
     double TOP_BOUND = -1000; // because motors are reversed lol
     double LOW_BOUND = 0;
@@ -133,18 +133,6 @@ public class Manipulator {
         if(gamepad2.b){
             clawRelease();
         }
-        // LEFT STICK Y IS REVERSE OF WHAT YOU THINK
-        if (gamepad2.left_stick_y < 0){
-            if (leftLiftTarget > TOP_BOUND){
-                leftLiftTarget += 8 * gamepad2.left_stick_y;
-            }
-        }
-
-        if (gamepad2.left_stick_y > 0){
-            if (leftLiftTarget < LOW_BOUND){
-                leftLiftTarget += 15 * gamepad2.left_stick_y;
-            }
-        }
         /* PREVIOUS LIFT CODE
         if(Math.abs(gamepad2.left_stick_y) > 0.1){
             leftLiftTarget += (int)(gamepad2.left_stick_y * 10);
@@ -159,14 +147,33 @@ public class Manipulator {
 
         }
          */
+        if(Math.abs(gamepad2.right_trigger) > 0.1){
+            leftLiftTarget += 10 * gamepad2.left_stick_y;
+        }
+        else{
+            // LEFT STICK Y IS REVERSE OF WHAT YOU THINK
+            if (gamepad2.left_stick_y < 0){
+                if (leftLiftTarget > TOP_BOUND){
+                    leftLiftTarget += 10 * gamepad2.left_stick_y;
+                }
+            }
+
+            if (gamepad2.left_stick_y > 0){
+                if (leftLiftTarget < LOW_BOUND){
+                    leftLiftTarget += 15 * gamepad2.left_stick_y;
+                }
+            }
 
 
-        if(leftLiftTarget > LOW_BOUND){// >< because low bound and top bound are weird DONT CHANGE UNLESS FOR SURE THIS IS ISSUE
-            leftLiftTarget = LOW_BOUND;
+            if(leftLiftTarget > LOW_BOUND){// >< because low bound and top bound are weird DONT CHANGE UNLESS FOR SURE THIS IS ISSUE
+                leftLiftTarget = LOW_BOUND;
+            }
+            else if(leftLiftTarget < TOP_BOUND){
+                leftLiftTarget = TOP_BOUND;
+            }
         }
-        else if(leftLiftTarget < TOP_BOUND){
-            leftLiftTarget = TOP_BOUND;
-        }
+
+
 
         leftLift.setTargetPosition((int)leftLiftTarget);
         rightLift.setTargetPosition((int)leftLiftTarget);
@@ -176,6 +183,7 @@ public class Manipulator {
         if(leftLift.getCurrentPosition() - leftLiftTarget > 0 && leftLift.getCurrentPosition() - leftLiftTarget < 10){
             leftLift.setPower(LIFT_HOLD_CONSTANT);
             rightLift.setPower(LIFT_HOLD_CONSTANT);
+            iterative_OpMode.telemetry.addData("near target position", leftLift.getCurrentPosition() - leftLiftTarget);
         }
         else{
             leftLift.setPower(LIFT_POWER);

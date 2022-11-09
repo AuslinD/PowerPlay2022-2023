@@ -93,28 +93,29 @@ public class LeftAuto extends LinearOpMode{
         }
         telemetry.update();
 
-       /* robot.manip.setPosition(1000);
+        robot.manip.setPosition(740);
         auto.drive(1500, 1,5,this);
-        auto.turn(-52, 0.5, 2, this);
-        auto.drive(300,.5,5,this);
+        auto.turn(-50, 0.5, 2, this);
+        auto.drive(250,.5,5,this);
         sleep(250);
         robot.manip.clawRelease();
         sleep(500);
-        auto.drive(50,-.25,2,this); */
+        auto.drive(140,-.25,2,this);
 
 
-        pos = WebcamExample.SamplePipeline.AutoPosition.RIGHT;
+
         telemetry.addData("position", pos);
         telemetry.update();
         switch(pos) {
             case LEFT:
-                auto.turn(142, 0.75, 5, this);
-                auto.drive(1300, 0.5, 3,this);
+                auto.turn(95, 0.75, 5, this);
+                auto.drive(1400, 0.5, 3,this);
                 break;
             case CENTER:
+                auto.drive(140, -.25, 3, this);
                 break;
             case RIGHT:
-                auto.turn(-45, 0.5, 3, this);
+                auto.turn(-90, 0.5, 3, this);
                 auto.drive(1200, 0.5, 3,this);
                 break;
 
