@@ -285,14 +285,14 @@ public class WebcamExample extends LinearOpMode
              * to change which stage of the pipeline is rendered to the viewport when it is
              * tapped, please see {@link PipelineStageSwitchingExample}
              */
-            if(avgCb > 126){
+            if(avgCb >= 120){
                 position = WebcamExample.SamplePipeline.AutoPosition.RIGHT;
             }
-            else if(avgCb > 124){
-                position = WebcamExample.SamplePipeline.AutoPosition.CENTER;
+            else if(avgCb <= 114){
+                position = AutoPosition.LEFT;
             }
             else{
-                position = WebcamExample.SamplePipeline.AutoPosition.LEFT;
+                position = WebcamExample.SamplePipeline.AutoPosition.CENTER;
             }
 
             return input;

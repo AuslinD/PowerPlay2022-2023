@@ -97,7 +97,7 @@ public class RightAuto extends LinearOpMode{
         robot.manip.setPosition(750);
         sleep(300);
         auto.drive(1500, 1,5,this);
-        auto.turn(62, 0.5, 2, this);
+        auto.turn(62, 0.5, 4, this);
         auto.drive(300,.5,5,this);
         sleep(750);
         robot.manip.clawRelease();
@@ -125,6 +125,8 @@ public class RightAuto extends LinearOpMode{
 
 
         }
+
+        robot.manip.setPosition(0);
         telemetry.addLine("Dekita!");
 
 
