@@ -99,10 +99,11 @@ public class RightAuto extends LinearOpMode{
         auto.drive(1500, 1,5,this);
         auto.turn(62, 0.5, 2, this);
         auto.drive(300,.5,5,this);
-        sleep(250);
+        sleep(750);
         robot.manip.clawRelease();
         sleep(500);
-        auto.drive(250,-.5,2,this);
+        auto.drive(350,-.5,3,this);
+        auto.turn(0,.5,2,this);
 
 
 
@@ -114,6 +115,7 @@ public class RightAuto extends LinearOpMode{
                 auto.drive(1300, 0.5, 3,this);
                 break;
             case CENTER:
+                auto.drive(75, -.25, 3, this);
                 break;
             case RIGHT:
                 auto.turn(-90, 0.75, 2, this);
