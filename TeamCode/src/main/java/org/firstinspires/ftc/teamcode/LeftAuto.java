@@ -123,9 +123,13 @@ public class LeftAuto extends LinearOpMode{
 
 
         }
+        robot.manip.setPower(0.5);
+        robot.manip.setPosition(0);
+        sleep(3000);
         telemetry.addLine("Dekita!");
 
-
+        telemetry.update();
     }
+
 }
 

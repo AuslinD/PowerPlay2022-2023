@@ -17,8 +17,8 @@ public class Manipulator {
     double UNGRAB = 0;
     double LIFT_POWER = 1;// TODO: change this?
     double LIFT_HOLD_CONSTANT = 0.15;
-    double TOP_BOUND = -1300; // because motors are reversed lol
-    double LOW_BOUND = 100;
+    double TOP_BOUND = -1100; // because motors are reversed lol
+    double LOW_BOUND = 50;
     private double goalEncoder = 0;
 
     private boolean grabEnabled = false;
@@ -200,6 +200,10 @@ public class Manipulator {
         rightLift.setTargetPosition(-pos);
 
 
+    }
+    public void setPower(double power){
+        leftLift.setPower(power);
+        rightLift.setPower(power);
     }
     public double liftPower(double speed){
         double k_P = 0.004;
