@@ -273,7 +273,7 @@ public class WebcamExample extends LinearOpMode
             Imgproc.rectangle(
                     input,
                     new Point(
-                            235,
+                            233,
                             100),
                     new Point(
                             280,
@@ -288,7 +288,7 @@ public class WebcamExample extends LinearOpMode
             if(avgCb >= 120){
                 position = WebcamExample.SamplePipeline.AutoPosition.RIGHT;
             }
-            else if(avgCb <= 114){
+            else if(avgCb <= 115){
                 position = AutoPosition.LEFT;
             }
             else{
