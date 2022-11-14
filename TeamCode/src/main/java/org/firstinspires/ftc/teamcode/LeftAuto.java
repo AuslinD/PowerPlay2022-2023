@@ -94,20 +94,32 @@ public class LeftAuto extends LinearOpMode{
         telemetry.update();
 
         robot.manip.setPosition(740);
-        auto.drive(1425, 1,5,this);
-        auto.turn(-50, 0.5, 2, this);
-        auto.drive(220,.5,5,this);
+        auto.drive(1425,5,this);
+        auto.turn(-50,2, this);
+        auto.drive(220,5,this);
         sleep(750);
         robot.manip.setPower(0.5);
         robot.manip.setPosition(400);
         robot.manip.clawRelease();
         sleep(500);
-        auto.drive(350,-.5,3,this);
-        auto.turn(90,.5,2,this);
-        auto.drive(1400,-.5,3,this);
-        auto.turn(45,.5,3,this);
-        auto.drive(300,.5,3,this);
-        
+        auto.drive(350,3,this);
+        auto.turn(90,2,this);
+        robot.manip.setPosition(0);
+        auto.drive(1400,3,this);
+        auto.turn(45, 3, this);
+        auto.drive(100,3,this);
+        for(int i = 0; i < 5; i++) {
+            robot.manip.setPosition(100);
+            robot.manip.clawGrab();
+            robot.manip.setPosition(150);
+            auto.turn(-135,3,this);
+            auto.drive(300,3,this);
+            robot.manip.setPosition(100);
+            robot.manip.clawRelease();
+            auto.turn(60,3,this);
+
+
+        }
 
 
 
@@ -115,15 +127,16 @@ public class LeftAuto extends LinearOpMode{
         telemetry.update();
         switch(pos) {
             case LEFT:
-                auto.turn(95, 0.75, 5, this);
-                auto.drive(1400, 0.5, 3,this);
+                auto.turn(95, 5, this);
+                auto.drive(1400, 3,this);
                 break;
             case CENTER:
-                auto.drive(75, -.25, 3, this);
+                auto.drive(75, 3, this);
+                auto.turn(0,5,this);
                 break;
             case RIGHT:
-                auto.turn(-90, 0.5, 3, this);
-                auto.drive(1200, 0.5, 3,this);
+                auto.turn(-90, 3, this);
+                auto.drive(1200, 3,this);
                 break;
 
 
@@ -132,7 +145,6 @@ public class LeftAuto extends LinearOpMode{
         robot.manip.setPower(0.5);
         robot.manip.setPosition(0);
         sleep(3000);
-        telemetry.addLine("Dekita!");
 
         telemetry.update();
     }

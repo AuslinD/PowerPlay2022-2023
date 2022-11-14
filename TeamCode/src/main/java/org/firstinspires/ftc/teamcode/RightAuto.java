@@ -97,16 +97,16 @@ public class RightAuto extends LinearOpMode{
         telemetry.update();
         robot.manip.setPosition(750);
         sleep(300);
-        auto.drive(1315, 1,5,this);
-        auto.turn(50, 0.5, 4, this);
-        auto.drive(440,.25,5,this);
+        auto.drive(1315,5,this);
+        auto.turn(50, 4, this);
+        auto.drive(440,5,this);
         sleep(750);
         robot.manip.setPower(0.5);
         robot.manip.setPosition(400);
         robot.manip.clawRelease();
         sleep(500);
-        auto.drive(350,-.5,3,this);
-        auto.turn(0,.5,2,this);
+        auto.drive(350,3,this);
+        auto.turn(0,2,this);
 
 
 
@@ -114,16 +114,16 @@ public class RightAuto extends LinearOpMode{
         telemetry.update();
         switch(pos) {
             case LEFT:
-                auto.turn(95, 0.75, 3, this);
-                auto.drive(1300, 0.5, 3,this);
+                auto.turn(95, 3, this);
+                auto.drive(1300, 3,this);
                 break;
             case CENTER:
-                auto.turn(35, 0, 2,this);
-                auto.drive(5, -.25, 3, this);
+                auto.turn(35, 2,this);
+                auto.drive(5, 3, this);
                 break;
             case RIGHT:
-                auto.turn(-90, 0.75, 2, this);
-                auto.drive(1200, 0.5, 3,this);
+                auto.turn(-90, 2, this);
+                auto.drive(1200, 3,this);
                 break;
 
 
