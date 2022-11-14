@@ -103,7 +103,11 @@ public class LeftAuto extends LinearOpMode{
         robot.manip.clawRelease();
         sleep(500);
         auto.drive(350,-.5,3,this);
-        auto.turn(0,.5,2,this);
+        auto.turn(90,.5,2,this);
+        auto.drive(1400,-.5,3,this);
+        auto.turn(45,.5,3,this);
+        auto.drive(300,.5,3,this);
+        
 
 
 

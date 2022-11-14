@@ -21,14 +21,19 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
         double initPos = drive.br.getCurrentPosition();
         ElapsedTime runtime = new ElapsedTime();
+        PID pid = new PID(0.005,0.001,0,distance);
         while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(drive.br.getCurrentPosition() - initPos) < distance){
             opMode.telemetry.addData("position br ", drive.br.getCurrentPosition());
             opMode.telemetry.addData("position bl ", drive.bl.getCurrentPosition());
             opMode.telemetry.addData("position fr ", drive.fr.getCurrentPosition());
             opMode.telemetry.addData("position fl ", drive.fl.getCurrentPosition());
             opMode.telemetry.addData("target", initPos);
+            opMode.telemetry.addData("distance til: ", drive.br.getCurrentPosition() - initPos);
+            double newPower = pid.loop(drive.br.getCurrentPosition() - initPos, runtime.seconds());
+
+            drive.setMotorPowers(-newPower,newPower,newPower,-newPower);
+            opMode.telemetry.addData("newpower ",newPower);
             opMode.telemetry.update();
-            drive.setMotorPowers(-speed,speed,speed,-speed);
         }
         drive.setAllMotors(0);
     }
