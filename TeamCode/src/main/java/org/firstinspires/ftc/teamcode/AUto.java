@@ -17,7 +17,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         drive = robot.getDrivetrain();
     }
 
-    public void drive(double distance, double speed, int timeout, LinearOpMode opMode){
+    public void drive(double distance, int timeout, LinearOpMode opMode){
 
         double initPos = drive.br.getCurrentPosition();
         ElapsedTime runtime = new ElapsedTime();
@@ -38,7 +38,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         drive.setAllMotors(0);
     }
 
-    public void turn(double angle, double speed, int timeout, LinearOpMode opMode){
+    public void turn(double angle, int timeout, LinearOpMode opMode){
         DcMotor wheel = drive.getFl();
         double startPos = robot.imu.getAngularOrientation().firstAngle;
         ElapsedTime runtime = new ElapsedTime();
