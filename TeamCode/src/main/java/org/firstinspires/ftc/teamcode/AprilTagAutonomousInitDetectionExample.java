@@ -37,6 +37,7 @@ import java.util.ArrayList;
 @Autonomous(name = "AprilTag test", group = "test")
 public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
 {
+    AUto auto = new AUto(new Robot(this));
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -61,6 +62,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
     @Override
     public void runOpMode()
     {
+        char pos = ' ';
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
@@ -97,8 +99,20 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
 
                 for(AprilTagDetection tag : currentDetections)
                 {
-                    if(tag.id == 9 || tag.id == 15 || tag.id == 12)
-                    {
+                    if(tag.id == 9) {
+                        pos = 'L';
+                        tagOfInterest = tag;
+                        tagFound = true;
+                        break;
+                    }
+                    if(tag.id == 15) {
+                        pos = 'C';
+                        tagOfInterest = tag;
+                        tagFound = true;
+                        break;
+                    }
+                    if(tag.id == 12) {
+                        pos = 'R';
                         tagOfInterest = tag;
                         tagFound = true;
                         break;
@@ -164,19 +178,19 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
             telemetry.update();
         }
 
-        /* Actually do something useful */
+        /* Demo example
         if(tagOfInterest == null)
         {
             /*
              * Insert your autonomous code here, presumably running some default configuration
              * since the tag was never sighted during INIT
-             */
+
         }
         else
         {
             /*
              * Insert your autonomous code here, probably using the tag pose to decide your configuration.
-             */
+
 
             // e.g.
             if(tagOfInterest.pose.x <= 20)
@@ -192,6 +206,24 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
                 // do something else
             }
         }
+         */
+        /*
+        if(pos == 'L'){
+            auto.turn(90, 2, this);
+        }
+        else if(pos == 'C'){
+            auto.drive(100, 2, this);
+        }
+        else if(pos == 'R'){
+            auto.turn(-90, 2, this);
+        }
+        else{
+            auto.drive(-50, 2, this);
+        }
+
+         */
+        telemetry.addData("pos", pos);
+        telemetry.update();
 
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
