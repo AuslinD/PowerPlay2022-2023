@@ -37,7 +37,7 @@ import java.util.ArrayList;
 @Autonomous(name = "AprilTag test", group = "test")
 public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
 {
-    AUto auto = new AUto(new Robot(this));
+    //AUto auto = new AUto(new Robot(this));
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -105,13 +105,13 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
                         tagFound = true;
                         break;
                     }
-                    if(tag.id == 15) {
+                    if(tag.id == 12) {
                         pos = 'C';
                         tagOfInterest = tag;
                         tagFound = true;
                         break;
                     }
-                    if(tag.id == 12) {
+                    if(tag.id == 15) {
                         pos = 'R';
                         tagOfInterest = tag;
                         tagFound = true;
