@@ -207,6 +207,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
             }
         }
          */
+        /*
         if(pos == 'L'){
             auto.turn(90, 2, this);
         }
@@ -219,6 +220,8 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
         else{
             auto.drive(-50, 2, this);
         }
+
+         */
         telemetry.addData("pos", pos);
         telemetry.update();
 
