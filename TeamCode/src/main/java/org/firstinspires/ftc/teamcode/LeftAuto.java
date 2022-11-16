@@ -5,10 +5,13 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
+
+import java.util.ArrayList;
 
 @Autonomous(name = "Left Auto", group = "Auto")
 
@@ -16,9 +19,26 @@ public class LeftAuto extends LinearOpMode{
     Robot robot;
     Drivetrain drivetrain;
 
-    static OpenCvWebcam webcam;
-    WebcamExample.SamplePipeline pipeline;
-    WebcamExample.SamplePipeline.AutoPosition pos;
+    OpenCvCamera camera;
+    AprilTagDetectionPipeline aprilTagDetectionPipeline;
+
+    static final double FEET_PER_METER = 3.28084;
+
+    // Lens intrinsics
+    // UNITS ARE PIXELS
+    // NOTE: this calibration is for the C920 webcam at 800x448.
+    // You will need to do your own calibration for other configurations!
+    double fx = 578.272;
+    double fy = 578.272;
+    double cx = 402.145;
+    double cy = 221.506;
+
+    // UNITS ARE METERS
+    double tagsize = 0.166;
+
+    int ID_TAG_OF_INTEREST = 18; // Tag ID 18 from the 36h11 family
+
+    AprilTagDetection tagOfInterest = null;
 
 
     @Override
@@ -27,69 +47,102 @@ public class LeftAuto extends LinearOpMode{
         AUto auto = new AUto(robot);
         Drivetrain drivetrain = auto.robot.getDrivetrain();
 
-        pipeline = new WebcamExample.SamplePipeline();
-        robot.manip.clawGrab();
-
+        char pos = ' ';
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        webcam.setPipeline(pipeline);
-        webcam.setMillisecondsPermissionTimeout(2500); // Timeout for obtaining permission is configurable. Set before opening.
-        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
+
+        camera.setPipeline(aprilTagDetectionPipeline);
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
             @Override
             public void onOpened()
             {
-
-                /*
-                 * Tell the webcam to start streaming images to us! Note that you must make sure
-                 * the resolution you specify is supported by the camera. If it is not, an exception
-                 * will be thrown.
-                 *
-                 * Keep in mind that the SDK's UVC driver (what OpenCvWebcam uses under the hood) only
-                 * supports streaming from the webcam in the uncompressed YUV image format. This means
-                 * that the maximum resolution you can stream at and still get up to 30FPS is 480p (640x480).
-                 * Streaming at e.g. 720p will limit you to up to 10FPS and so on and so forth.
-                 *
-                 * Also, we specify the rotation that the webcam is used in. This is so that the image
-                 * from the camera sensor can be rotated such that it is always displayed with the image upright.
-                 * For a front facing camera, rotation is defined assuming the user is looking at the screen.
-                 * For a rear facing camera or a webcam, rotation is defined assuming the camera is facing
-                 * away from the user.
-                 */
-                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+                camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
             public void onError(int errorCode)
             {
-                /*
-                 * This will be called if the camera could not be opened
-                 */
+
             }
         });
-        while (!isStarted()) {
-            telemetry.addData("pos", pipeline.getAnalysis());
-            telemetry.addData("cb", pipeline.avgCb);
+
+        telemetry.setMsTransmissionInterval(50);
+
+        /*
+         * The INIT-loop:
+         * This REPLACES waitForStart!
+         */
+        while (!isStarted() && !isStopRequested())
+        {
+            ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
+
+            if(currentDetections.size() != 0)
+            {
+                boolean tagFound = false;
+
+                for(AprilTagDetection tag : currentDetections)
+                {
+                    if(tag.id == 9) {
+                        pos = 'L';
+                        tagOfInterest = tag;
+                        tagFound = true;
+                        break;
+                    }
+                    if(tag.id == 12) {
+                        pos = 'C';
+                        tagOfInterest = tag;
+                        tagFound = true;
+                        break;
+                    }
+                    if(tag.id == 15) {
+                        pos = 'R';
+                        tagOfInterest = tag;
+                        tagFound = true;
+                        break;
+                    }
+                }
+
+                if(tagFound)
+                {
+                    telemetry.addLine("Tag of interest is in sight!\n\nLocation data:");
+                    tagToTelemetry(tagOfInterest);
+                }
+                else
+                {
+                    telemetry.addLine("Don't see tag of interest :(");
+
+                    if(tagOfInterest == null)
+                    {
+                        telemetry.addLine("(The tag has never been seen)");
+                    }
+                    else
+                    {
+                        telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
+                        tagToTelemetry(tagOfInterest);
+                    }
+                }
+
+            }
+            else
+            {
+                telemetry.addLine("Don't see tag of interest :(");
+
+                if(tagOfInterest == null)
+                {
+                    telemetry.addLine("(The tag has never been seen)");
+                }
+                else
+                {
+                    telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
+                    tagToTelemetry(tagOfInterest);
+                }
+
+            }
+
             telemetry.update();
-
-            pos = pipeline.getAnalysis();
-        }
-
-        telemetry.addLine("Waiting for start");
-        telemetry.update();
-        waitForStart();
-        if (pos == WebcamExample.SamplePipeline.AutoPosition.LEFT) {
-            telemetry.addLine("detected pos1");
-
-        }
-        else if(pos == WebcamExample.SamplePipeline.AutoPosition.CENTER) {
-            telemetry.addLine("deteccted pos2");
-
-
-        }
-        else {
-            telemetry.addLine("deteccted pos3");
-
+            sleep(20);
         }
         telemetry.update();
 
@@ -125,15 +178,15 @@ public class LeftAuto extends LinearOpMode{
         telemetry.addData("position", pos);
         telemetry.update();
         switch(pos) {
-            case LEFT:
+            case 'L':
                 //auto.turn(95, 5, this);
                 //auto.drive(1400, 3,this);
                 break;
-            case CENTER:
+            case 'C':
                 auto.drive(1200, 3, this);
                 //auto.turn(0,5,this);
                 break;
-            case RIGHT:
+            case 'R':
                 //auto.turn(-90, 3, this);
                 auto.drive(2400, 3,this);
                 break;
@@ -147,6 +200,15 @@ public class LeftAuto extends LinearOpMode{
 
         telemetry.update();
     }
-
+    void tagToTelemetry(AprilTagDetection detection)
+    {
+        telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
+        telemetry.addLine(String.format("Translation X: %.2f feet", detection.pose.x*FEET_PER_METER));
+        telemetry.addLine(String.format("Translation Y: %.2f feet", detection.pose.y*FEET_PER_METER));
+        telemetry.addLine(String.format("Translation Z: %.2f feet", detection.pose.z*FEET_PER_METER));
+        telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", Math.toDegrees(detection.pose.yaw)));
+        telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
+        telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
+    }
 }
 
