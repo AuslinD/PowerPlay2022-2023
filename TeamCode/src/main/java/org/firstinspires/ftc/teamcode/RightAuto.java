@@ -98,11 +98,12 @@ public class RightAuto extends LinearOpMode{
         robot.manip.setPosition(750);
         sleep(300);
         auto.drive(1315,5,this);
-        auto.turn(50, 4, this);
+        auto.turn(48, 4, this);
         auto.drive(440,5,this);
         sleep(750);
         robot.manip.setPower(0.5);
         robot.manip.setPosition(400);
+        sleep(200);
         robot.manip.clawRelease();
         sleep(500);
         auto.drive(-350,3,this);
