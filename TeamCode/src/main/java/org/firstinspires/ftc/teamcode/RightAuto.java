@@ -44,9 +44,10 @@ public class RightAuto extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
         robot = new Robot(this);
+        robot.manip.clawGrab();
         AUto auto = new AUto(robot);
         Drivetrain drivetrain = auto.robot.getDrivetrain();
-
+        robot.manip.clawGrab();
         char pos = ' ';
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -151,8 +152,8 @@ public class RightAuto extends LinearOpMode{
         robot.manip.setPosition(750);
         sleep(300);
         auto.drive(1315,5,this);
-        auto.turn(48, 4, this);
-        auto.drive(440,5,this);
+        auto.turn(46, 4, this);
+        auto.drive(400,5,this);
         sleep(750);
         robot.manip.setPower(0.5);
         robot.manip.setPosition(400);

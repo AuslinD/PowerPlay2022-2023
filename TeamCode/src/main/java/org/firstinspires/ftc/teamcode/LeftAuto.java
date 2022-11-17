@@ -46,6 +46,7 @@ public class LeftAuto extends LinearOpMode{
         robot = new Robot(this);
         AUto auto = new AUto(robot);
         Drivetrain drivetrain = auto.robot.getDrivetrain();
+        robot.manip.clawGrab();
 
         char pos = ' ';
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());

@@ -21,7 +21,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
         double initPos = drive.br.getCurrentPosition();
         ElapsedTime runtime = new ElapsedTime();
-        PID pid = new PID(0.035,0.0008,0.0008,distance);
+        PID pid = new PID(0.045,0.0005,0.003,distance);
         while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(drive.br.getCurrentPosition() - initPos) < Math.abs(distance)){
             opMode.telemetry.addData("position br ", drive.br.getCurrentPosition());
             opMode.telemetry.addData("position bl ", drive.bl.getCurrentPosition());
