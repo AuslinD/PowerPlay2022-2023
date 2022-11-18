@@ -201,6 +201,7 @@ public class Manipulator {
 
 
     }
+
     public void setPower(double power){
         leftLift.setPower(power);
         rightLift.setPower(power);
@@ -215,4 +216,18 @@ public class Manipulator {
         }
         return liftSpeed;
     }
-}
+    public boolean isClosed(){
+        if (claw.getPosition() == 1){
+            return true;
+        }
+        return false;
+
+    }
+    public void distanceSensor(Gamepad gamepad2, double distance){ //figure out how to make it so that when driver presses the release, claw releases for like a few seconds before this code starts again//
+        if (gamepad2.x){
+            if (distance <= 4.3 && !isClosed()) {
+                clawGrab();
+
+        }
+    }
+}}
