@@ -148,22 +148,30 @@ public class LeftAuto extends LinearOpMode{
         telemetry.update();
 
         robot.manip.setPosition(740);
-        auto.drive(1425,5,this);
-        auto.turn(-50,2, this);
-        auto.drive(220,5,this);
-        sleep(750);
-        robot.manip.setPower(0.5);
+        auto.drive(1440,5,this);
+        auto.turn(-40,2, this);
+        auto.drive(330,3,this);
+        sleep(1000);
+        robot.manip.setPower(0.3);
         robot.manip.setPosition(400);
         robot.manip.clawRelease();
-        sleep(500);
-        auto.drive(350,3,this);
-        auto.turn(90,2,this);
+        sleep(600);
+        auto.drive(-275,3,this);
         robot.manip.setPosition(0);
-        auto.drive(1400,3,this);
-        auto.turn(45, 3, this);
-        auto.drive(100,3,this);
+        auto.turn(90,2,this);
+        auto.drive(1250,3,this);
+        auto.turn(5, 3, this);
+        sleep(100);
+        auto.drive(750,5,this);
+        auto.turn(30,2,this);
+        auto.drive(50,2,this);
+        robot.manip.setPosition(400);
+        sleep(200);
+        robot.manip.clawGrab();
+        sleep(200);
+        robot.manip.setPosition(500);
 
-        for(int i = 0; i < 5; i++) {
+        /*for(int i = 0; i < 5; i++) {
             robot.manip.setPosition(100 - i*10);
             robot.manip.clawGrab();
             robot.manip.setPosition(150);
@@ -172,24 +180,24 @@ public class LeftAuto extends LinearOpMode{
             robot.manip.setPosition(100);
             robot.manip.clawRelease();
             auto.turn(60,3,this);
-        }
-        auto.turn(-90,3,this);
+        }*/
+        //auto.turn(-90,3,this);
 
 
         telemetry.addData("position", pos);
         telemetry.update();
         switch(pos) {
             case 'L':
-                //auto.turn(95, 5, this);
-                //auto.drive(1400, 3,this);
+                auto.turn(95, 5, this);
+                auto.drive(1400, 3,this);
                 break;
             case 'C':
-                auto.drive(1200, 3, this);
-                //auto.turn(0,5,this);
+                //auto.drive(1200, 3, this);
+                auto.turn(0,5,this);
                 break;
             case 'R':
-                //auto.turn(-90, 3, this);
-                auto.drive(2400, 3,this);
+                auto.turn(-90, 3, this);
+                auto.drive(800, 3,this);
                 break;
 
 
