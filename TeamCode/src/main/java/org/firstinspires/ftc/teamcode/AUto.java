@@ -30,7 +30,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             opMode.telemetry.addData("target", initPos);
             opMode.telemetry.addData("distance til: ", drive.br.getCurrentPosition() - initPos);
             double newPower = pid.loop(drive.br.getCurrentPosition() - initPos, runtime.seconds());
-
+            newPower = newPower * 0.5;
             drive.setMotorPowers(-newPower,newPower, newPower,-newPower);
             opMode.telemetry.addData("newpower ",newPower);
             opMode.telemetry.update();

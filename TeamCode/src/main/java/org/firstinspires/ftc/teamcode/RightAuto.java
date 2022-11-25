@@ -153,19 +153,40 @@ public class RightAuto extends LinearOpMode{
         sleep(300);
         auto.drive(1315,5,this);
         auto.turn(46, 4, this);
+        //start to score//
         auto.drive(400,5,this);
         sleep(750);
         robot.manip.setPower(0.5);
         robot.manip.setPosition(400);
         sleep(200);
         robot.manip.clawRelease();
+        //robot releases//
         sleep(500);
         auto.drive(-350,3,this);
         auto.turn(0,2,this);
+        //beginning of cycle//
+        auto.drive(1390,5,this);
+        auto.turn(-80, 4, this);
+        int cyclepos = 230;
+        robot.manip.setPosition(cyclepos);
+        auto.drive(1360, 5, this);
+        robot.manip.clawGrab();
+        sleep(500);
+        robot.manip.setPosition(500);
+        auto.drive(-350,5,this);
+        auto.turn(-200, 5, this);
+        sleep(500);
+        auto.drive(200,2,this);
+        robot.manip.clawRelease();
+        auto.turn(135,5,this);
+        auto.drive(200,2,this);
+        /*cyclepos =- 20;
+        robot.manip.setPosition(cyclepos);*/
 
 
 
-        telemetry.addData("position", pos);
+
+        /*telemetry.addData("position", pos);
         telemetry.update();
         switch(pos) {
             case 'L':
@@ -183,7 +204,7 @@ public class RightAuto extends LinearOpMode{
 
 
 
-        }
+        }*/
         robot.manip.setPower(0.5);
         robot.manip.setPosition(0);
         telemetry.addLine("Dekita!");

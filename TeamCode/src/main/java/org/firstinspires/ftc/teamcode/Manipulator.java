@@ -13,7 +13,7 @@ public class Manipulator {
     private LinearOpMode linear_OpMode;
     private OpMode iterative_OpMode;
 
-    double GRAB = 1;
+    double GRAB = .65;
     double UNGRAB = 0.4;
     double LIFT_POWER = 1;// TODO: change this?
     double LIFT_HOLD_CONSTANT = 0.15;
@@ -117,14 +117,14 @@ public class Manipulator {
         grabEnabled = false;
     }
 
-    public void toggleGrabber(){
+    /*public void toggleGrabber(){
         if (grabEnabled) {
             clawRelease();
         } else {
             clawGrab();
         }
         grabEnabled = !grabEnabled;
-    }
+    }*/
 
     public void teleOpControls(Gamepad gamepad2){
         if(gamepad2.a){
@@ -222,12 +222,12 @@ public class Manipulator {
         }
         return false;
 
-    }
+    }/*
     public void distanceSensor(Gamepad gamepad2, double distance){ //figure out how to make it so that when driver presses the release, claw releases for like a few seconds before this code starts again//
         if (gamepad2.x){
             if (distance <= 4.3 && !isClosed()) {
                 clawGrab();
 
         }
-    }
-}}
+    }*/
+}
