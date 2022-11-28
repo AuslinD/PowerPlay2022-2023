@@ -133,6 +133,9 @@ public class Manipulator {
         if(gamepad2.b){
             clawRelease();
         }
+        if(gamepad2.dpad_down){
+            leftLiftTarget = 0;
+        }
         /* PREVIOUS LIFT CODE
         if(Math.abs(gamepad2.left_stick_y) > 0.1){
             leftLiftTarget += (int)(gamepad2.left_stick_y * 10);
