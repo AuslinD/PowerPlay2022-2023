@@ -44,6 +44,7 @@ public class LeftAuto extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
         robot = new Robot(this);
+        robot.manip.clawGrab();
         AUto auto = new AUto(robot);
         Drivetrain drivetrain = auto.robot.getDrivetrain();
         robot.manip.clawGrab();
@@ -147,57 +148,68 @@ public class LeftAuto extends LinearOpMode{
         }
         telemetry.update();
 
-        robot.manip.setPosition(740);
-        auto.drive(1440,5,this);
-        auto.turn(-40,2, this);
-        auto.drive(330,3,this);
-        sleep(1000);
-        robot.manip.setPower(0.3);
+        telemetry.addData("pos", pos);
+        telemetry.update();
+        robot.manip.setPosition(450);
+        sleep(300);
+        auto.drive(1315,5,this);
+        auto.turn(-43, 3, this);
+        //start to score//
+        auto.PIDDrive(400,0.03,0, 0.001,5,this);
+        robot.manip.setPosition(750);
+        auto.drive(130, 2, this);
+        sleep(750);
+
+        robot.manip.setPower(0.5);
         robot.manip.setPosition(400);
+        sleep(500);
         robot.manip.clawRelease();
-        sleep(600);
-        auto.drive(-275,3,this);
-        robot.manip.setPosition(0);
-        auto.turn(90,2,this);
-        auto.drive(1250,3,this);
-        auto.turn(5, 3, this);
+        //robot releases//
+        sleep(500);
+        auto.drive(-350,3,this);
+        auto.turn(0,2,this);
+        //beginning of cycle//
+        auto.drive(1365,5,this);
+        auto.turn(80, 4, this);
+        int cyclepos = 220;
+        robot.manip.setPosition(cyclepos);
+        auto.drive(1500, 5, this);//tgis
         sleep(100);
-        auto.drive(750,5,this);
-        auto.turn(30,2,this);
-        auto.drive(50,2,this);
-        robot.manip.setPosition(400);
-        sleep(200);
         robot.manip.clawGrab();
-        sleep(200);
+        sleep(500);
         robot.manip.setPosition(500);
-
-        /*for(int i = 0; i < 5; i++) {
-            robot.manip.setPosition(100 - i*10);
-            robot.manip.clawGrab();
-            robot.manip.setPosition(150);
-            auto.turn(-120,3,this);
-            auto.drive(300,3,this);
-            robot.manip.setPosition(100);
-            robot.manip.clawRelease();
-            auto.turn(60,3,this);
-        }*/
-        //auto.turn(-90,3,this);
-
+        sleep(200);
+        auto.drive(-350,5,this);
+        auto.turn(-145, 3, this);//this
+        sleep(500);
+        auto.drive(200,2,this);
+        //release was here before
+        //auto.turn(180,2,this);
+        robot.manip.setPosition(200);
+        sleep(100);
+        robot.manip.clawRelease();
+        sleep(200);
+        auto.drive(-150,3,this);
+        robot.manip.setPosition(0);
+        //auto.drive(200,2,this);
+        /*cyclepos =- 20;
+        robot.manip.setPosition(cyclepos);*/
 
         telemetry.addData("position", pos);
         telemetry.update();
         switch(pos) {
             case 'L':
-                auto.turn(95, 5, this);
-                auto.drive(1400, 3,this);
+                auto.turn(90, 5, this);
+                auto.drive(300, 3,this);
                 break;
             case 'C':
                 //auto.drive(1200, 3, this);
-                auto.turn(0,5,this);
+                auto.turn(-90,5,this);
+                auto.drive(1000,3,this);
                 break;
             case 'R':
                 auto.turn(-90, 3, this);
-                auto.drive(800, 3,this);
+                auto.drive(2200, 3,this);
                 break;
 
 
