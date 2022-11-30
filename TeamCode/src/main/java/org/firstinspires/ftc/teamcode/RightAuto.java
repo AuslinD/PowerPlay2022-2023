@@ -168,7 +168,7 @@ public class RightAuto extends LinearOpMode{
         auto.drive(-350,3,this);
         auto.turn(0,2,this);
         //beginning of cycle//
-        auto.drive(1365,5,this);
+        auto.drive(1340,5,this);
         auto.turn(-80, 4, this);
         int cyclepos = 220;
         robot.manip.setPosition(cyclepos);
