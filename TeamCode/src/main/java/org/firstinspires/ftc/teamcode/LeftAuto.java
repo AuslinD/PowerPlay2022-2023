@@ -147,12 +147,14 @@ public class LeftAuto extends LinearOpMode{
             sleep(20);
         }
         telemetry.update();
-
+        if(pos == ' '){
+            pos = 'R';
+        }
         telemetry.addData("pos", pos);
         telemetry.update();
         robot.manip.setPosition(450);
         sleep(300);
-        auto.drive(1315,5,this);
+        auto.drive(1385,5,this);
         auto.turn(-43, 3, this);
         //start to score//
         auto.PIDDrive(400,0.03,0, 0.001,5,this);
@@ -169,7 +171,7 @@ public class LeftAuto extends LinearOpMode{
         auto.drive(-350,3,this);
         auto.turn(0,2,this);
         //beginning of cycle//
-        auto.drive(1365,5,this);
+        auto.drive(1345,5,this);
         auto.turn(80, 4, this);
         int cyclepos = 220;
         robot.manip.setPosition(cyclepos);
@@ -209,7 +211,7 @@ public class LeftAuto extends LinearOpMode{
                 break;
             case 'R':
                 auto.turn(-90, 3, this);
-                auto.drive(2200, 3,this);
+                auto.drive(2220, 3,this);
                 break;
 
 

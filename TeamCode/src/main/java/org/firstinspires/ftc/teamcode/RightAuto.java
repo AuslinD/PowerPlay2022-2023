@@ -146,7 +146,9 @@ public class RightAuto extends LinearOpMode{
             sleep(20);
         }
         telemetry.update();
-
+        if(pos == ' '){
+            pos = 'R';
+        }
         telemetry.addData("pos", pos);
         telemetry.update();
         robot.manip.setPosition(450);
