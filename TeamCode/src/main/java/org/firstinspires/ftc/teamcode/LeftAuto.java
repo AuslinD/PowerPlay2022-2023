@@ -209,13 +209,9 @@ public class LeftAuto extends LinearOpMode{
                 auto.turn(-90,5,this);
                 auto.drive(1000,3,this);
                 break;
-            case 'R':
+            default:
                 auto.turn(-90, 3, this);
                 auto.drive(2220, 3,this);
-                break;
-
-
-
         }
         robot.manip.setPower(0.5);
         robot.manip.setPosition(0);

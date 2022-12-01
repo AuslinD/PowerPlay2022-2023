@@ -15,7 +15,7 @@ public class Manipulator {
 
     double GRAB = .635;
     double UNGRAB = 0.4;
-    double LIFT_POWER = 1;// TODO: change this?
+    double LIFT_POWER = 0.9;// TODO: change this?
     double LIFT_HOLD_CONSTANT = 0.15;
     double TOP_BOUND = -1100; // because motors are reversed lol
     double LOW_BOUND = 50;

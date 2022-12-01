@@ -210,13 +210,10 @@ public class RightAuto extends LinearOpMode{
                 auto.turn(90, 2,this);
                 auto.drive(1000, 3, this);
                 break;
-            case 'R':
+            default:
                 auto.turn(-60, 3, this);
                 auto.drive(300, 3,this);
                 sleep(200);
-                break;
-
-
 
         }
         robot.manip.setPower(0.5);
