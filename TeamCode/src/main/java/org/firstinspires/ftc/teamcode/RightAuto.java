@@ -154,11 +154,11 @@ public class RightAuto extends LinearOpMode{
         robot.manip.setPosition(450);
         sleep(300);
         auto.drive(1315,5,this);
-        auto.turn(43, 3, this);
+        auto.turn(44, 3, this);
         //start to score//
         auto.PIDDrive(400,0.03,0, 0.001,5,this);
         robot.manip.setPosition(750);
-        auto.drive(130, 2, this);
+        auto.drive(155, 2, this);
         sleep(750);
 
         robot.manip.setPower(0.5);
@@ -167,20 +167,21 @@ public class RightAuto extends LinearOpMode{
         robot.manip.clawRelease();
         //robot releases//
         sleep(500);
-        auto.drive(-350,3,this);
+        auto.drive(-400,3,this);
         auto.turn(0,2,this);
+
         //beginning of cycle//
-        auto.drive(1340,5,this);
-        auto.turn(-80, 4, this);
+        auto.drive(1250,3,this);
+        auto.turn(-80, 3, this);
         int cyclepos = 220;
         robot.manip.setPosition(cyclepos);
-        auto.drive(1500, 5, this);//tgis
+        auto.drive(1500, 3, this);//tgis
         sleep(100);
         robot.manip.clawGrab();
         sleep(500);
         robot.manip.setPosition(500);
         sleep(200);
-        auto.drive(-350,5,this);
+        auto.drive(-360,5,this);
         auto.turn(145, 3, this);//this
         sleep(500);
         auto.drive(200,2,this);
@@ -191,7 +192,7 @@ public class RightAuto extends LinearOpMode{
         robot.manip.clawRelease();
         sleep(200);
         auto.drive(-150,3,this);
-        robot.manip.setPosition(0);
+        robot.manip.setPosition(0)  ;
         //auto.drive(200,2,this);
         /*cyclepos =- 20;
         robot.manip.setPosition(cyclepos);*/
@@ -210,15 +211,18 @@ public class RightAuto extends LinearOpMode{
                 auto.turn(90, 2,this);
                 auto.drive(1000, 3, this);
                 break;
+            case 'R':
+                auto.turn(-65,5,this);
+                auto.drive(250,3,this);
+                break;
             default:
-                auto.turn(-60, 3, this);
-                auto.drive(300, 3,this);
+                auto.turn(-65, 5, this);
+                auto.drive(250, 3,this);
                 sleep(200);
-
         }
         robot.manip.setPower(0.5);
         robot.manip.setPosition(0);
-        telemetry.addLine("Dekita!");
+
 
 
     }
