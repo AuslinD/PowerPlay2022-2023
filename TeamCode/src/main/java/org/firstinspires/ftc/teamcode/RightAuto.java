@@ -178,7 +178,7 @@ public class RightAuto extends LinearOpMode{
         auto.drive(1500, 3, this);//tgis
         sleep(100);
         robot.manip.clawGrab();
-        sleep(500);
+        sleep(700);
         robot.manip.setPosition(500);
         sleep(200);
         auto.drive(-360,5,this);
@@ -205,11 +205,11 @@ public class RightAuto extends LinearOpMode{
         switch(pos) {
             case 'L':
                 auto.turn(90, 3, this);
-                auto.drive(2200, 3,this);
+                auto.drive(2400, 3,this);
                 break;
             case 'C':
                 auto.turn(90, 2,this);
-                auto.drive(1000, 3, this);
+                auto.drive(1100, 3, this);
                 break;
             case 'R':
                 auto.turn(-65,5,this);
