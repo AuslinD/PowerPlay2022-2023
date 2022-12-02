@@ -154,7 +154,7 @@ public class LeftAuto extends LinearOpMode{
         telemetry.update();
         robot.manip.setPosition(450);
         sleep(300);
-        auto.drive(1375,5,this);
+        auto.drive(1400,5,this);
         auto.turn(-42, 3, this);
         //start to score//
         auto.PIDDrive(400,0.03,0, 0.001,5,this);

@@ -184,7 +184,7 @@ public class RightAuto extends LinearOpMode{
         auto.drive(-360,5,this);
         auto.turn(145, 3, this);//this
         sleep(500);
-        auto.drive(200,2,this);
+        auto.drive(180,2,this);
         //release was here before
         //auto.turn(180,2,this);
         robot.manip.setPosition(200);
@@ -192,7 +192,8 @@ public class RightAuto extends LinearOpMode{
         robot.manip.clawRelease();
         sleep(200);
         auto.drive(-150,3,this);
-        robot.manip.setPosition(0)  ;
+        robot.manip.setPosition(0);
+        sleep(100);
         //auto.drive(200,2,this);
         /*cyclepos =- 20;
         robot.manip.setPosition(cyclepos);*/
