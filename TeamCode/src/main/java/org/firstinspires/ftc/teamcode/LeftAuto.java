@@ -154,12 +154,12 @@ public class LeftAuto extends LinearOpMode{
         telemetry.update();
         robot.manip.setPosition(450);
         sleep(300);
-        auto.drive(1385,5,this);
-        auto.turn(-43, 3, this);
+        auto.drive(1375,5,this);
+        auto.turn(-42, 3, this);
         //start to score//
         auto.PIDDrive(400,0.03,0, 0.001,5,this);
         robot.manip.setPosition(750);
-        auto.drive(130, 2, this);
+        auto.drive(155, 2, this);
         sleep(750);
 
         robot.manip.setPower(0.5);
@@ -168,21 +168,21 @@ public class LeftAuto extends LinearOpMode{
         robot.manip.clawRelease();
         //robot releases//
         sleep(500);
-        auto.drive(-350,3,this);
+        auto.drive(-500,3,this);
         auto.turn(0,2,this);
         //beginning of cycle//
-        auto.drive(1345,5,this);
-        auto.turn(80, 4, this);
+        auto.drive(1240,5,this);
+        auto.turn(90, 4, this);
         int cyclepos = 220;
         robot.manip.setPosition(cyclepos);
         auto.drive(1500, 5, this);//tgis
         sleep(100);
         robot.manip.clawGrab();
-        sleep(500);
+        sleep(700);
         robot.manip.setPosition(500);
         sleep(200);
-        auto.drive(-350,5,this);
-        auto.turn(-145, 3, this);//this
+        auto.drive(-360,5,this);
+        auto.turn(-145, 5, this);//this
         sleep(500);
         auto.drive(200,2,this);
         //release was here before
@@ -202,7 +202,7 @@ public class LeftAuto extends LinearOpMode{
         switch(pos) {
             case 'L':
                 auto.turn(90, 5, this);
-                auto.drive(300, 3,this);
+                auto.drive(200, 3,this);
                 break;
             case 'C':
                 //auto.drive(1200, 3, this);
@@ -211,7 +211,7 @@ public class LeftAuto extends LinearOpMode{
                 break;
             default:
                 auto.turn(-90, 3, this);
-                auto.drive(2220, 3,this);
+                auto.drive(2400, 3,this);
         }
         robot.manip.setPower(0.5);
         robot.manip.setPosition(0);
