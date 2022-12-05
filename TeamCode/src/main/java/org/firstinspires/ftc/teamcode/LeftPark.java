@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -12,10 +13,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
 import java.util.ArrayList;
-
-@Autonomous(name = "Left Auto", group = "Auto")
-
-public class LeftAuto extends LinearOpMode{
+@Autonomous(name = "Left Park", group = "Auto")
+public class LeftPark extends LinearOpMode{
     Robot robot;
     Drivetrain drivetrain;
 
@@ -154,12 +153,12 @@ public class LeftAuto extends LinearOpMode{
         telemetry.update();
         robot.manip.setPosition(450);
         sleep(300);
-        auto.drive(1400,5,this);
-        auto.turn(-42, 3, this);
+        auto.drive(1500,5,this);
+        auto.turn(-41, 3, this);
         //start to score//
-        auto.PIDDrive(400,0.03,0, 0.001,5,this);
+        auto.PIDDrive(290,0.03,0, 0.001,5,this);
         robot.manip.setPosition(750);
-        auto.drive(155, 2, this);
+        auto.drive(125, 2, this);
         sleep(750);
 
         robot.manip.setPower(0.5);
@@ -168,50 +167,50 @@ public class LeftAuto extends LinearOpMode{
         robot.manip.clawRelease();
         //robot releases//
         sleep(500);
-        auto.drive(-500,3,this);
+        auto.drive(-400,3,this);
         auto.turn(0,2,this);
-        //beginning of cycle//
-        auto.drive(1240,5,this);
-        auto.turn(90, 4, this);
-        int cyclepos = 220;
-        robot.manip.setPosition(cyclepos);
-        auto.drive(1500, 5, this);//tgis
-        sleep(100);
-        robot.manip.clawGrab();
-        sleep(700);
-        robot.manip.setPosition(500);
-        sleep(200);
-        auto.drive(-360,5,this);
-        auto.turn(-145, 5, this);//this
-        sleep(500);
-        auto.drive(200,2,this);
-        //release was here before
-        //auto.turn(180,2,this);
-        robot.manip.setPosition(200);
-        sleep(100);
-        robot.manip.clawRelease();
-        sleep(200);
-        auto.drive(-150,3,this);
-        robot.manip.setPosition(0);
-        //auto.drive(200,2,this);
-        /*cyclepos =- 20;
-        robot.manip.setPosition(cyclepos);*/
-
-        telemetry.addData("position", pos);
-        telemetry.update();
+//        //beginning of cycle//
+//        auto.drive(1240,5,this);
+//        auto.turn(90, 4, this);
+//        int cyclepos = 220;
+//        robot.manip.setPosition(cyclepos);
+//        auto.drive(1500, 5, this);//tgis
+//        sleep(100);
+//        robot.manip.clawGrab();
+//        sleep(700);
+//        robot.manip.setPosition(500);
+//        sleep(200);
+//        auto.drive(-360,5,this);
+//        auto.turn(-145, 5, this);//this
+//        sleep(500);
+//        auto.drive(200,2,this);
+//        //release was here before
+//        //auto.turn(180,2,this);
+//        robot.manip.setPosition(200);
+//        sleep(100);
+//        robot.manip.clawRelease();
+//        sleep(200);
+//        auto.drive(-150,3,this);
+//        robot.manip.setPosition(0);
+//        //auto.drive(200,2,this);
+//        /*cyclepos =- 20;
+//        robot.manip.setPosition(cyclepos);*/
+//
+//        telemetry.addData("position", pos);
+//        telemetry.update();
         switch(pos) {
             case 'L':
-                auto.turn(90, 5, this);
-                auto.drive(200, 3,this);
+                auto.turn(89, 5, this);
+                auto.drive(1350, 3,this);
                 break;
             case 'C':
                 //auto.drive(1200, 3, this);
-                auto.turn(-90,5,this);
-                auto.drive(1000,3,this);
+                auto.turn(0,5,this);
+                auto.drive(70,3,this);
                 break;
             default:
-                auto.turn(-90, 3, this);
-                auto.drive(2400, 3,this);
+                auto.turn(-85, 3, this);
+                auto.drive(1400, 3,this);
         }
         robot.manip.setPower(0.5);
         robot.manip.setPosition(0);
@@ -230,4 +229,3 @@ public class LeftAuto extends LinearOpMode{
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
 }
-

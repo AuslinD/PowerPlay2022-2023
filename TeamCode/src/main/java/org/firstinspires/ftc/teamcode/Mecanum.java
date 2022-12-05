@@ -22,6 +22,8 @@ public class Mecanum extends OpMode {
     public void loop() {
         robot.drivetrain.teleOpControls(gamepad1);
         robot.manip.teleOpControls(gamepad2);
-        robot.manip.distanceSensor(gamepad2, distance.getDistance(DistanceUnit.CM));
+        /*robot.manip.distanceSensor(gamepad2, distance.getDistance(DistanceUnit.CM));
+        telemetry.addData("distance", distance.getDistance(DistanceUnit.CM));
+        telemetry.update();*/
     }
 }
