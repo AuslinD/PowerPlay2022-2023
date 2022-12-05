@@ -136,6 +136,12 @@ public class Manipulator {
         if(gamepad2.dpad_down){
             leftLiftTarget = 0;
         }
+        if(gamepad2.dpad_up){
+            leftLiftTarget = -1050;
+        }
+        if(gamepad2.right_bumper){
+            leftLiftTarget = -200;
+        }
         /* PREVIOUS LIFT CODE
         if(Math.abs(gamepad2.left_stick_y) > 0.1){
             leftLiftTarget += (int)(gamepad2.left_stick_y * 10);
