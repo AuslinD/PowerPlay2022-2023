@@ -13,15 +13,38 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(0, 0, 0))
-                                .forward(30)
-                                .turn(Math.toRadians(90))
-                                .forward(30)
-                                .turn(Math.toRadians(90))
-                                .forward(30)
-                                .turn(Math.toRadians(90))
-                                .forward(30)
-                                .turn(Math.toRadians(90))
+                        drive.trajectorySequenceBuilder(new Pose2d(35, -60, Math.toRadians(90)))
+                                .forward(25)
+                                .turn(Math.toRadians(-45))
+                                .forward(5)
+                                //drop cone//
+                                .forward(-5)
+                                .turn(Math.toRadians(45))
+                                .forward(23)
+                                .turn(Math.toRadians(-90))
+                                .forward(25)
+                                //get cone//
+                                .forward(-25)
+                                .turn(Math.toRadians(135))
+                                .forward(5)
+                                //drop cone//
+                                .forward(-5)
+                                .turn(Math.toRadians(-135))
+                                .forward(25)
+                                //get cone//
+                                .forward(-25)
+                                .turn(Math.toRadians(135))
+                                .forward(5)
+                                //drop cone//
+                                .forward(-5)
+                                .turn(Math.toRadians(-135))
+                                .forward(25)
+                                //get cone//
+                                .forward(-25)
+                                .turn(Math.toRadians(135))
+                                .forward(5)
+                                //drop cone//
+                                .forward(-5)
                                 .build()
                 );
 
