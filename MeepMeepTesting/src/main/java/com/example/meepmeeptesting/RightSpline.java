@@ -15,7 +15,7 @@ public class RightSpline {
                 .setConstraints(100, 80, Math.toRadians(180), Math.toRadians(180), 15)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(35.5, -64.75, Math.toRadians(90)))
-                                .lineToSplineHeading(new Pose2d(34, -10.25, Math.toRadians(135)))
+                                .lineToSplineHeading(new Pose2d(30, -6.25, Math.toRadians(135)))
                                 .forward(5)
                                 .forward(2)
                                 .back(7)
