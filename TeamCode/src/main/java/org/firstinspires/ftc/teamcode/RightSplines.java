@@ -156,59 +156,90 @@ public class RightSplines extends LinearOpMode {
                 .build();
         Trajectory deliverPreStack = drive.trajectoryBuilder(start.end())
                 .forward(5)
+                .addTemporalMarker(0.5, () ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND);
+                })
                 .forward(2)
+                .addDisplacementMarker(() ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND - 200);
+                    manipulator.clawRelease();
+                    manipulator.setPosition((int) manipulator.LOW_BOUND);
+                })
                 .build();
         Trajectory backPre = drive.trajectoryBuilder(deliverPreStack.end())
                 .back(7)
                 .build();
         Trajectory toFiveStack = drive.trajectoryBuilder(backPre.end())
                 .lineToSplineHeading(new Pose2d(-59, 12, Math.toRadians(0)))
+                .addDisplacementMarker(() ->{
+                    manipulator.clawGrab();
+                })
                 .build();
-        Trajectory high = drive.trajectoryBuilder(toFiveStack.end())
-                .lineToLinearHeading(new Pose2d(-34, 10.25, Math.toRadians(135)))
-                .build();
-        Trajectory deliver = drive.trajectoryBuilder(high.end())
-                .forward(5)
-                .forward(2)
-                .build();
-        Trajectory back = drive.trajectoryBuilder(deliver.end())
-                .back(7)
-                .build();
-        Trajectory firstFiveStack = drive.trajectoryBuilder(back.end())
-                .lineToLinearHeading(new Pose2d(-59, 12, Math.toRadians(0)))
-                .build();
-        Trajectory firstHigh = drive.trajectoryBuilder(firstFiveStack.end())
-                .lineToSplineHeading(new Pose2d(-34, 10.25, Math.toRadians(135)))
+
+        Trajectory firstHigh = drive.trajectoryBuilder(toFiveStack.end())
+                .lineToLinearHeading(new Pose2d(-34, 10.25, Math.toRadians(45)))
                 .build();
         Trajectory firstDeliver = drive.trajectoryBuilder(firstHigh.end())
                 .forward(5)
+                .addTemporalMarker(0.5, () ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND);
+                })
                 .forward(2)
+                .addDisplacementMarker(() ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND - 200);
+                    manipulator.clawRelease();
+                    manipulator.setPosition((int) manipulator.LOW_BOUND);
+                })
                 .build();
         Trajectory firstBack = drive.trajectoryBuilder(firstDeliver.end())
                 .back(7)
                 .build();
+
         Trajectory secondFiveStack = drive.trajectoryBuilder(firstBack.end())
                 .lineToLinearHeading(new Pose2d(-59, 12, Math.toRadians(0)))
+                .addDisplacementMarker(() ->{
+                    manipulator.clawGrab();
+                })
                 .build();
         Trajectory secondHigh = drive.trajectoryBuilder(secondFiveStack.end())
-                .lineToSplineHeading(new Pose2d(-34, 10.25, Math.toRadians(135)))
+                .lineToSplineHeading(new Pose2d(-34, 10.25, Math.toRadians(45)))
                 .build();
         Trajectory secondDeliver = drive.trajectoryBuilder(secondHigh.end())
                 .forward(5)
+                .addTemporalMarker(0.5, () ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND);
+                })
                 .forward(2)
+                .addDisplacementMarker(() ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND - 200);
+                    manipulator.clawRelease();
+                    manipulator.setPosition((int) manipulator.LOW_BOUND);
+                })
                 .build();
         Trajectory secondBack = drive.trajectoryBuilder(secondDeliver.end())
                 .back(7)
                 .build();
+
         Trajectory thirdFiveStack = drive.trajectoryBuilder(secondBack.end())
                 .lineToLinearHeading(new Pose2d(-59, 12, Math.toRadians(0)))
+                .addDisplacementMarker(() ->{
+                    manipulator.clawGrab();
+                })
                 .build();
         Trajectory thirdHigh = drive.trajectoryBuilder(thirdFiveStack.end())
-                .lineToSplineHeading(new Pose2d(-34, 10.25, Math.toRadians(135)))
+                .lineToSplineHeading(new Pose2d(-34, 10.25, Math.toRadians(45)))
                 .build();
         Trajectory thirdDeliver = drive.trajectoryBuilder(thirdHigh.end())
                 .forward(5)
+                .addTemporalMarker(0.5, () ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND);
+                })
                 .forward(2)
+                .addDisplacementMarker(() ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND - 200);
+                    manipulator.clawRelease();
+                    manipulator.setPosition((int) manipulator.LOW_BOUND);
+                })
                 .build();
         Trajectory thirdBack = drive.trajectoryBuilder(thirdDeliver.end())
                 .back(7)
@@ -216,25 +247,61 @@ public class RightSplines extends LinearOpMode {
 
         Trajectory fourFiveStack = drive.trajectoryBuilder(thirdBack.end())
                 .lineToLinearHeading(new Pose2d(-59, 12, Math.toRadians(0)))
+                .addDisplacementMarker(() ->{
+                    manipulator.clawGrab();
+                })
                 .build();
         Trajectory fourHigh = drive.trajectoryBuilder(fourFiveStack.end())
-                .lineToSplineHeading(new Pose2d(-34, 10.25, Math.toRadians(135)))
+                .lineToSplineHeading(new Pose2d(-34, 10.25, Math.toRadians(45)))
                 .build();
-
         Trajectory fourDeliver = drive.trajectoryBuilder(fourHigh.end())
                 .forward(5)
+                .addTemporalMarker(0.5, () ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND);
+                })
                 .forward(2)
+                .addDisplacementMarker(() ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND - 200);
+                    manipulator.clawRelease();
+                    manipulator.setPosition((int) manipulator.LOW_BOUND);
+                })
                 .build();
         Trajectory fourBack = drive.trajectoryBuilder(fourDeliver.end())
                 .back(7)
                 .build();
-        Trajectory rightPark = drive.trajectoryBuilder(fourBack.end())
+
+        Trajectory fiveFiveStack = drive.trajectoryBuilder(fourBack.end())
+                .lineToLinearHeading(new Pose2d(-59, 12, Math.toRadians(0)))
+                .addDisplacementMarker(() ->{
+                    manipulator.clawGrab();
+                })
+                .build();
+        Trajectory fiveHigh = drive.trajectoryBuilder(fiveFiveStack.end())
+                .lineToSplineHeading(new Pose2d(-34, 10.25, Math.toRadians(45)))
+                .build();
+        Trajectory fiveDeliver = drive.trajectoryBuilder(fiveHigh.end())
+                .forward(5)
+                .addTemporalMarker(0.5, () ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND);
+                })
+                .forward(2)
+                .addDisplacementMarker(() ->{
+                    manipulator.setPosition((int) manipulator.TOP_BOUND - 200);
+                    manipulator.clawRelease();
+                    manipulator.setPosition((int) manipulator.LOW_BOUND);
+                })
+                .build();
+        Trajectory fiveBack = drive.trajectoryBuilder(fiveDeliver.end())
+                .back(7)
+                .build();
+
+        Trajectory rightPark = drive.trajectoryBuilder(fiveBack.end())
                 .lineToLinearHeading(new Pose2d(-58, 12, Math.toRadians(180)))
                 .build();
-        Trajectory midPark = drive.trajectoryBuilder(fourBack.end())
+        Trajectory midPark = drive.trajectoryBuilder(fiveBack.end())
                 .lineToLinearHeading(new Pose2d(-34, 12, Math.toRadians(180)))
                 .build();
-        Trajectory leftPark = drive.trajectoryBuilder(fourBack.end())
+        Trajectory leftPark = drive.trajectoryBuilder(fiveBack.end())
                 .lineToLinearHeading(new Pose2d(-14, 12, Math.toRadians(180)))
                 .build();
         waitForStart();
@@ -248,11 +315,6 @@ public class RightSplines extends LinearOpMode {
         drive.followTrajectory(backPre);
 
         drive.followTrajectory(toFiveStack);
-        drive.followTrajectory(high);
-        drive.followTrajectory(deliver);
-        drive.followTrajectory(back);
-
-        drive.followTrajectory(firstFiveStack);
         drive.followTrajectory(firstHigh);
         drive.followTrajectory(firstDeliver);
         drive.followTrajectory(firstBack);
@@ -272,8 +334,27 @@ public class RightSplines extends LinearOpMode {
         drive.followTrajectory(fourDeliver);
         drive.followTrajectory(fourBack);
 
+        drive.followTrajectory(fiveFiveStack);
+        drive.followTrajectory(fiveHigh);
+        drive.followTrajectory(fiveDeliver);
+        drive.followTrajectory(fiveBack);
+
         //TODO: implement change park
-        drive.followTrajectory(rightPark);
+        telemetry.update();
+        switch(pos) {
+            case 'L':
+                drive.followTrajectory(leftPark);
+                break;
+            case 'C':
+                drive.followTrajectory(midPark);
+                break;
+            case 'R':
+                drive.followTrajectory(rightPark);
+                break;
+            default:
+                drive.followTrajectory(rightPark);
+        }
+        manipulator.setPosition(0);
 
     }
 
