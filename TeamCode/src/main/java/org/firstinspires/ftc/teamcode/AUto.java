@@ -21,7 +21,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
         double initPos = drive.br.getCurrentPosition();
         ElapsedTime runtime = new ElapsedTime();
-        PID pid = new PID(0.05,0.0008,0.001,distance);
+        PID pid = new PID(0.08,0.0008,0.001,distance);
         while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(drive.br.getCurrentPosition() - initPos) < Math.abs(distance)){
             opMode.telemetry.addData("position br ", drive.br.getCurrentPosition());
             opMode.telemetry.addData("position bl ", drive.bl.getCurrentPosition());
@@ -30,7 +30,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             opMode.telemetry.addData("target", initPos);
             opMode.telemetry.addData("distance til: ", drive.br.getCurrentPosition() - initPos);
             double newPower = pid.loop(drive.br.getCurrentPosition() - initPos, runtime.seconds());
-            newPower = newPower * 0.5;
+            newPower = newPower * 0.475;
             drive.setMotorPowers(-newPower,newPower, newPower,-newPower);
             opMode.telemetry.addData("newpower ",newPower);
             opMode.telemetry.update();
@@ -66,8 +66,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         opMode.telemetry.addData("loop",  Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
         opMode.telemetry.update();
         PID pid = new PID(0.007,0.003,0.001, angle);
-        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - Math.abs(angle)) > 1){//TODO: maybe change margin of error
-            double newPower = pid.loop(robot.imu.getAngularOrientation().firstAngle, runtime.seconds());
+        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - Math.abs(angle)) > 1.5){//TODO: maybe change margin of error
+            double newPower = pid.loop(robot.imu.getAngularOrientation().firstAngle, runtime.seconds()) * .8;
             opMode.telemetry.addData("newPower", newPower);
             opMode.telemetry.addData("target", angle);
             opMode.telemetry.update();

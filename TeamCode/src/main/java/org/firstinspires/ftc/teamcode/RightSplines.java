@@ -16,7 +16,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 @Autonomous(name = "Right Splines", group = "Auto")
 public class RightSplines extends LinearOpMode {
-    Robot robot;
+    Manipulator manipulator;
     Drivetrain drivetrain;
 
     OpenCvCamera camera;
@@ -41,11 +41,10 @@ public class RightSplines extends LinearOpMode {
     AprilTagDetection tagOfInterest = null;
     @Override
     public void runOpMode() throws InterruptedException {
-        robot = new Robot(this);
-        robot.manip.clawGrab();
-        AUto auto = new AUto(robot);
-        Drivetrain drivetrain = auto.robot.getDrivetrain();
-        robot.manip.clawGrab();
+
+
+        manipulator = new Manipulator(this);
+        manipulator.clawGrab();
         char pos = ' ';
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -153,7 +152,7 @@ public class RightSplines extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         Trajectory start = drive.trajectoryBuilder(new Pose2d(-35.5, 64.75, Math.toRadians(-90)))
-                .lineToSplineHeading(new Pose2d(-34, 10.25, Math.toRadians(-135)))
+                .lineToSplineHeading(new Pose2d(-34, 10.25, Math.toRadians(45)))
                 .build();
         Trajectory deliverPreStack = drive.trajectoryBuilder(start.end())
                 .forward(5)

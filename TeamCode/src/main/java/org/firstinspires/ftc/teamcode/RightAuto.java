@@ -153,8 +153,8 @@ public class RightAuto extends LinearOpMode{
         telemetry.update();
         robot.manip.setPosition(450);
         sleep(300);
-        auto.drive(1315,5,this);
-        auto.turn(44, 3, this);
+        auto.drive(1305,5,this);
+        auto.turn(44.5, 3, this);
         //start to score//
         auto.PIDDrive(400,0.03,0, 0.001,5,this);
         robot.manip.setPosition(750);
@@ -162,7 +162,7 @@ public class RightAuto extends LinearOpMode{
         sleep(750);
 
         robot.manip.setPower(0.5);
-        robot.manip.setPosition(400);
+        robot.manip.setPosition(370);
         sleep(500);
         robot.manip.clawRelease();
         //robot releases//
@@ -175,7 +175,7 @@ public class RightAuto extends LinearOpMode{
         auto.turn(-80, 3, this);
         int cyclepos = 220;
         robot.manip.setPosition(cyclepos);
-        auto.drive(1500, 3, this);//tgis
+        auto.drive(1400, 3, this);//tgis
         sleep(100);
         robot.manip.clawGrab();
         sleep(700);
@@ -210,7 +210,7 @@ public class RightAuto extends LinearOpMode{
                 break;
             case 'C':
                 auto.turn(90, 2,this);
-                auto.drive(1100, 3, this);
+                auto.drive(1000, 3, this);
                 break;
             case 'R':
                 auto.turn(-65,5,this);
