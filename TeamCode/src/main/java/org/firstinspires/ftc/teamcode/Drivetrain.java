@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import androidx.annotation.NonNull;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,11 +9,29 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.util.Encoder;
+
+import java.util.Arrays;
+import java.util.List;
+
 
 public class Drivetrain {
     public DcMotor fr, fl, br, bl;
     private LinearOpMode linearOpMode;
     private OpMode iterativeOpMode;
+
+    public static double TICKS_PER_REV = 8192;
+    public static double WHEEL_RADIUS = 0.748031; // in
+    public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
+
+    public static double LATERAL_DISTANCE = 11.713; // in; distance between the left and right wheels
+    public static double FORWARD_OFFSET = 1.673228; // in; offset of the lateral wheel
+
+    private Encoder leftEncoder, rightEncoder, frontEncoder;
+    public static double X_MULTIPLIER = 1.013705869; // Multiplier in the X direction
+    public static double Y_MULTIPLIER = 1.006231168; // Multiplier in the Y direction
+
+
 
     public Drivetrain(LinearOpMode opMode){
         this.linearOpMode = opMode;
@@ -20,6 +40,9 @@ public class Drivetrain {
         fl = this.linearOpMode.hardwareMap.get(DcMotorEx.class, "fl");
         bl = this.linearOpMode.hardwareMap.get(DcMotorEx.class, "bl");
         br = this.linearOpMode.hardwareMap.get(DcMotorEx.class, "br");
+
+        leftEncoder = new Encoder(this.linearOpMode.hardwareMap.get(DcMotorEx.class, "leftOdom"));
+        rightEncoder = new Encoder(this.linearOpMode.hardwareMap.get(DcMotorEx.class, "rightOdom"));
 
         fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -168,5 +191,18 @@ public class Drivetrain {
         br.setPower(power);
     }
 
+    public static double encoderTicksToInches(double ticks) {
+        return WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;
+
+    }
+
+    @NonNull
+    public List<Double> getWheelPositions() {
+        return Arrays.asList(
+                encoderTicksToInches(leftEncoder.getCurrentPosition()) * X_MULTIPLIER,
+                encoderTicksToInches(rightEncoder.getCurrentPosition()) * X_MULTIPLIER,
+                encoderTicksToInches(frontEncoder.getCurrentPosition()) * Y_MULTIPLIER
+        );
+    }
 
 }

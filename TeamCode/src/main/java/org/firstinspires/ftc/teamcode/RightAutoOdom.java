@@ -2,20 +2,17 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvWebcam;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "Right Auto", group = "Auto")
-
-public class RightAuto extends LinearOpMode{
+@Autonomous(name = "Right Encoder", group = "Auto")
+public class RightAutoOdom extends LinearOpMode {
     Robot robot;
     Drivetrain drivetrain;
 
@@ -46,6 +43,7 @@ public class RightAuto extends LinearOpMode{
         robot = new Robot(this);
         robot.manip.clawGrab();
         AUto auto = new AUto(robot);
+        auto.initHeading = robot.imu.getAngularOrientation().firstAngle;
         Drivetrain drivetrain = auto.robot.getDrivetrain();
         robot.manip.clawGrab();
         char pos = ' ';
@@ -155,45 +153,48 @@ public class RightAuto extends LinearOpMode{
         telemetry.update();
         robot.manip.setPosition(450);
         sleep(300);
-        auto.drive(1305,5,this);
-        auto.turn(44.5, 3, this);
+        auto.driveOdom(52,5,this);
+        auto.toHeading(44.5, 3, this);
 
         //start to score//
         auto.PIDDrive(400,0.03,0, 0.001,5,this);
-        robot.manip.setPosition(750);
+        robot.manip.setPosition(1050);
         auto.drive(155, 2, this);
         sleep(750);
 
         robot.manip.setPower(0.5);
-        robot.manip.setPosition(370);
+        robot.manip.setPosition(670);
         sleep(500);
         robot.manip.clawRelease();
         //robot releases//
         sleep(500);
         auto.drive(-400,3,this);
-        auto.turn(0,2,this);
+        auto.toHeading(-90,2,this);
 
         //beginning of cycle//
-        auto.drive(1250,3,this);
-        auto.turn(-80, 3, this);
+        //auto.drive(1250,3,this);
+        //auto.turn(-80, 3, this);
         int cyclepos = 220;
         robot.manip.setPosition(cyclepos);
-        auto.drive(1400, 3, this);//tgis
+        auto.driveOdom(24, 3, this);//tgis
         sleep(100);
         robot.manip.clawGrab();
         sleep(700);
         robot.manip.setPosition(500);
         sleep(200);
-        auto.drive(-360,5,this);
-        auto.turn(145, 3, this);//this
+        auto.driveOdom(-24,5,this);
+        auto.toHeading(45, 3, this);//this
         sleep(500);
-        auto.drive(180,2,this);
+        auto.drive(380,2,this);
         //release was here before
         //auto.turn(180,2,this);
-        robot.manip.setPosition(200);
-        sleep(100);
+        robot.manip.setPosition(1050);
+        auto.drive(155, 2, this);
+        sleep(200);
+        robot.manip.setPosition(670);
         robot.manip.clawRelease();
         sleep(200);
+
         auto.drive(-150,3,this);
         robot.manip.setPosition(0);
         sleep(100);
@@ -208,19 +209,19 @@ public class RightAuto extends LinearOpMode{
         telemetry.update();
         switch(pos) {
             case 'L':
-                auto.turn(90, 3, this);
+                auto.toHeading(90, 3, this);
                 auto.drive(2400, 3,this);
                 break;
             case 'C':
-                auto.turn(90, 2,this);
-                auto.drive(1000, 3, this);
+                auto.toHeading(90, 2,this);
+                auto.drive(10, 3, this);
                 break;
             case 'R':
-                auto.turn(-65,5,this);
+                auto.toHeading(-90,5,this);
                 auto.drive(250,3,this);
                 break;
             default:
-                auto.turn(-65, 5, this);
+                auto.turn(-90, 5, this);
                 auto.drive(250, 3,this);
                 sleep(200);
         }
@@ -242,4 +243,3 @@ public class RightAuto extends LinearOpMode{
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
 }
-

@@ -14,6 +14,7 @@ public class Robot {
     BNO055IMU imu;
 
 
+
     public Robot(LinearOpMode opMode){
         auto = opMode;
 
@@ -33,7 +34,6 @@ public class Robot {
         // and named "imu".
         imu = opMode.hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
-
         opMode.telemetry.addLine("Crabtrain Init Completed - Linear");
         opMode.telemetry.update();
     }

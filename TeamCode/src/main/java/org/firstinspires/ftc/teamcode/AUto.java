@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
     Manipulator manipulator;
     private Drivetrain drive;
     Robot robot;
+    double initHeading;
 
 
     public AUto(Robot a){
@@ -77,5 +78,40 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         }
 
         drive.setMotorPowers(0,0,0,0);
+    }
+
+    public void toHeading(double angle, int timeout, LinearOpMode opMode){
+        ElapsedTime runtime = new ElapsedTime();
+        opMode.telemetry.addData("loop",  Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
+        opMode.telemetry.update();
+        PID pid = new PID(0.007,0.003,0.001, initHeading + angle);
+        while(opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - initHeading + Math.abs(angle)) > 1.5){
+            double newPower = pid.loop(robot.imu.getAngularOrientation().firstAngle, runtime.seconds()) * .8;
+            opMode.telemetry.addData("newPower", newPower);
+            opMode.telemetry.addData("target", angle);
+            opMode.telemetry.update();
+            drive.setMotorPowers(newPower,newPower,-newPower,-newPower);
+            opMode.telemetry.addData("Motor spin", newPower);
+            opMode.telemetry.addData("angle", robot.imu.getAngularOrientation().firstAngle);
+        }
+    }
+    public void driveOdom(double distance, int timeout, LinearOpMode opMode){
+        double initPos = drive.getWheelPositions().get(0);
+        ElapsedTime runtime = new ElapsedTime();
+        PID pid = new PID(0.08,0.0008,0.001,distance);
+        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs((drive.getWheelPositions().get(0)) - initPos) < Math.abs(distance)){
+            opMode.telemetry.addData("position 0 ", drive.getWheelPositions().get(0));
+            opMode.telemetry.addData("position 0 ", drive.getWheelPositions().get(0));
+            opMode.telemetry.addData("position 1 ", drive.getWheelPositions().get(1));
+            opMode.telemetry.addData("position 1 ", drive.getWheelPositions().get(1));
+            opMode.telemetry.addData("target", initPos);
+            opMode.telemetry.addData("distance til: ", drive.getWheelPositions().get(0) - initPos);
+            double newPower = pid.loop(drive.getWheelPositions().get(0) - initPos, runtime.seconds());
+            newPower = newPower * 0.475;
+            drive.setMotorPowers(-newPower,newPower, newPower,-newPower);
+            opMode.telemetry.addData("newpower ",newPower);
+            opMode.telemetry.update();
+        }
+        drive.setAllMotors(0);
     }
 }
