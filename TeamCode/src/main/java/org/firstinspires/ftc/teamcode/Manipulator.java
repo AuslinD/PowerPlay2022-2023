@@ -13,7 +13,7 @@ public class Manipulator {
     private LinearOpMode linear_OpMode;
     private OpMode iterative_OpMode;
 
-    double GRAB = .623;
+    double GRAB = .70;
     double UNGRAB = 0.47;
     double LIFT_POWER = 0.9;// TODO: change this?
     double LIFT_HOLD_CONSTANT = 0.15;

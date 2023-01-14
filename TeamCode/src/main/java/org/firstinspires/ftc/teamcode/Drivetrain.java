@@ -43,7 +43,7 @@ public class Drivetrain {
 
         leftEncoder = new Encoder(this.linearOpMode.hardwareMap.get(DcMotorEx.class, "leftOdom"));
         rightEncoder = new Encoder(this.linearOpMode.hardwareMap.get(DcMotorEx.class, "rightOdom"));
-
+        frontEncoder = new Encoder(this.linearOpMode.hardwareMap.get(DcMotorEx.class, "fl"));
         fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         br.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

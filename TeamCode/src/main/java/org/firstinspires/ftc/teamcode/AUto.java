@@ -84,12 +84,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         ElapsedTime runtime = new ElapsedTime();
         opMode.telemetry.addData("loop",  Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
         opMode.telemetry.update();
-        PID pid = new PID(0.007,0.003,0.001, initHeading + angle);
-        while(opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - initHeading + Math.abs(angle)) > 1.5){
+        PID pid = new PID(0.01,0.003,0.001, initHeading + angle);
+        while(opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - initHeading + Math.abs(angle)) > 1){
             double newPower = pid.loop(robot.imu.getAngularOrientation().firstAngle, runtime.seconds()) * .8;
             opMode.telemetry.addData("newPower", newPower);
             opMode.telemetry.addData("target", angle);
             opMode.telemetry.update();
+            newPower *= .9;
             drive.setMotorPowers(newPower,newPower,-newPower,-newPower);
             opMode.telemetry.addData("Motor spin", newPower);
             opMode.telemetry.addData("angle", robot.imu.getAngularOrientation().firstAngle);
