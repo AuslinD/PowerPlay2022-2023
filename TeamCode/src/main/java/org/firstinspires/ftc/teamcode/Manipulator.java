@@ -15,9 +15,9 @@ public class Manipulator {
 
     double GRAB = .70;
     double UNGRAB = 0.47;
-    double LIFT_POWER = 0.9;// TODO: change this?
+    double LIFT_POWER = 1;// TODO: change this?
     double LIFT_HOLD_CONSTANT = 0.15;
-    double TOP_BOUND = -1100; // because motors are reversed lol
+    double TOP_BOUND = -2000; // because motors are reversed lol
     double LOW_BOUND = 50;
     private double goalEncoder = 0;
 
@@ -137,7 +137,7 @@ public class Manipulator {
             leftLiftTarget = 0;
         }
         if(gamepad2.dpad_up){
-            leftLiftTarget = -1050;
+            leftLiftTarget = -2100;
         }
         if(gamepad2.right_bumper){
             leftLiftTarget = -200;
@@ -157,19 +157,19 @@ public class Manipulator {
         }
          */
         if(Math.abs(gamepad2.right_trigger) > 0.1){
-            leftLiftTarget += 10 * gamepad2.left_stick_y;
+            leftLiftTarget += 30 * gamepad2.left_stick_y;
         }
         else{
             // LEFT STICK Y IS REVERSE OF WHAT YOU THINK
             if (gamepad2.left_stick_y < 0){
                 if (leftLiftTarget > TOP_BOUND){
-                    leftLiftTarget += 10 * gamepad2.left_stick_y;
+                    leftLiftTarget += 30 * gamepad2.left_stick_y;
                 }
             }
 
             if (gamepad2.left_stick_y > 0){
                 if (leftLiftTarget < LOW_BOUND){
-                    leftLiftTarget += 15 * gamepad2.left_stick_y;
+                    leftLiftTarget += 40 * gamepad2.left_stick_y;
                 }
             }
 
