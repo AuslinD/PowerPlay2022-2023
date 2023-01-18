@@ -151,7 +151,7 @@ public class RightAutoOdom extends LinearOpMode {
 
         telemetry.addData("pos", pos);
         telemetry.update();
-        robot.manip.setPosition(450);
+        robot.manip.setPosition(900);
         sleep(300);
         auto.driveOdom(42.25,5,this);//42.25
         auto.toHeading(46, 3, this);
