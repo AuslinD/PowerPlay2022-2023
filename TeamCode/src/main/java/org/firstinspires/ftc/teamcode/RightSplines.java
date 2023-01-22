@@ -29,7 +29,7 @@ public class RightSplines extends LinearOpMode {
     // NOTE: this calibration is for the C920 webcam at 800x448.
     // You will need to do your own calibration for other configurations!
     int CONE_HEIGHT = 60;
-    int angleOffset = 0;
+    int angleOffset = 5;
     int xOffSet = 0;
     int yOffSet = 0;
     double fx = 578.272;
@@ -158,7 +158,7 @@ public class RightSplines extends LinearOpMode {
                 .forward(48)
                 .build();
         Trajectory start = drive.trajectoryBuilder(forward.end())
-                .lineToSplineHeading(new Pose2d(-30, 10.25, Math.toRadians(-45)))
+                .lineToSplineHeading(new Pose2d(-30, 10.25, Math.toRadians(-45 - angleOffset)))
                 .addDisplacementMarker(() ->{
                     angleOffset += 2;
                 })
