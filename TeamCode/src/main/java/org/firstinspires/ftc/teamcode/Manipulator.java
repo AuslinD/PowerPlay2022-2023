@@ -232,6 +232,14 @@ public class Manipulator {
         return false;
 
     }
+    //waits for milliseconds
+    public void stop(int time){
+        ElapsedTime waitTime = new ElapsedTime();
+        waitTime.reset();
+        while(waitTime.milliseconds() < time){
+            linear_OpMode.telemetry.addData("current time", waitTime.milliseconds());
+        }
+    }
     /*
     public void distanceSensor(Gamepad gamepad2, double distance, int timeout) { //figure out how to make it so that when driver presses the release, claw releases for like a few seconds before this code starts again//
         ElapsedTime runtime = new ElapsedTime();

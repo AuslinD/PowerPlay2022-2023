@@ -172,7 +172,8 @@ public class RightSplines extends LinearOpMode {
                 .forward(4)
                 .addTemporalMarker(5,() ->{
                     manipulator.setPosition((int) manipulator.TOP_BOUND+700);
-                    //sleep(100);
+                    //manip.stop waits for milliseconds
+                    manipulator.stop(500);
 
                 })
                 .addTemporalMarker(5.5,() ->{
@@ -200,7 +201,7 @@ public class RightSplines extends LinearOpMode {
                 .build();
         Trajectory firstDeliver = drive.trajectoryBuilder(firstHigh.end())
                 .forward(5)
-                .addTemporalMarker(0, () ->{
+                .addDisplacementMarker(() ->{
                     manipulator.setPosition((int) manipulator.TOP_BOUND);
                 })
                 .forward(2)
@@ -239,6 +240,7 @@ public class RightSplines extends LinearOpMode {
                 .addDisplacementMarker(() ->{
                     manipulator.setPosition((int) manipulator.TOP_BOUND + 100);
                     manipulator.clawRelease();
+                    manipulator.stop(500);
                     //sleep(100);
 
                 })
@@ -268,6 +270,7 @@ public class RightSplines extends LinearOpMode {
                 .addDisplacementMarker(() ->{
                     manipulator.setPosition((int) manipulator.TOP_BOUND + 200);
                     manipulator.clawRelease();
+                    manipulator.stop(500);
                     //sleep(100);
 
                 })
@@ -297,6 +300,7 @@ public class RightSplines extends LinearOpMode {
                 .addDisplacementMarker(() ->{
                     manipulator.setPosition((int) manipulator.TOP_BOUND - 400);
                     manipulator.clawRelease();
+                    manipulator.stop(500);
                     manipulator.setPosition((int) manipulator.LOW_BOUND);
                 })
                 .build();
