@@ -190,6 +190,8 @@ public class RightSplines extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(-48 + xOffSet, 10.05 + yOffSet, Math.toRadians(-180)))
                 .addDisplacementMarker(() ->{
                     manipulator.clawGrab();
+                    manipulator.setPosition((int) manipulator.TOP_BOUND / 3);
+                    manipulator.stop(1000);
                 })
                 .build();
 
@@ -208,6 +210,7 @@ public class RightSplines extends LinearOpMode {
                 .addDisplacementMarker(() ->{
                     manipulator.setPosition((int) manipulator.TOP_BOUND + 400);
                     manipulator.clawRelease();
+                    manipulator.stop(1000);
                     //sleep(100);
 
                 })
@@ -223,6 +226,8 @@ public class RightSplines extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-53 + xOffSet, 10.05 + yOffSet, Math.toRadians(-180)))
                 .addDisplacementMarker(() ->{
                     manipulator.clawGrab();
+                    manipulator.setPosition((int) manipulator.TOP_BOUND / 3);
+                    manipulator.stop(1000);
                 })
                 .build();
         Trajectory secondHigh = drive.trajectoryBuilder(secondFiveStack.end())
@@ -256,6 +261,8 @@ public class RightSplines extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-58 + xOffSet, 12 + yOffSet, Math.toRadians(-180)))
                 .addDisplacementMarker(() ->{
                     manipulator.clawGrab();
+                    manipulator.setPosition((int)manipulator.TOP_BOUND / 3);
+                    manipulator.stop(1000);
                 })
                 .build();
         Trajectory thirdHigh = drive.trajectoryBuilder(thirdFiveStack.end())
@@ -286,6 +293,7 @@ public class RightSplines extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-59, 12, Math.toRadians(-180 + angleOffset)))
                 .addDisplacementMarker(() ->{
                     manipulator.clawGrab();
+                    manipulator.stop(1000);
                 })
                 .build();
         Trajectory fourHigh = drive.trajectoryBuilder(fourFiveStack.end())
@@ -315,6 +323,7 @@ public class RightSplines extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-59, 12, Math.toRadians(-180 + angleOffset)))
                 .addDisplacementMarker(() ->{
                     manipulator.clawGrab();
+                    manipulator.stop(1000);
                 })
                 .build();
         Trajectory fiveHigh = drive.trajectoryBuilder(fiveFiveStack.end())
