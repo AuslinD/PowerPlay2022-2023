@@ -97,17 +97,17 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         }
     }
     public void driveOdom(double distance, int timeout, LinearOpMode opMode){
-        double initPos = drive.getWheelPositions().get(0);
+        double initPos = drive.getWheelPositions().get(1);
         ElapsedTime runtime = new ElapsedTime();
         PID pid = new PID(0.08,0.0008,0.001,distance);
-        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs((drive.getWheelPositions().get(0)) - initPos) < Math.abs(distance)){
+        while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs((drive.getWheelPositions().get(1)) - initPos) < Math.abs(distance)){
             opMode.telemetry.addData("position 0 ", drive.getWheelPositions().get(0));
             opMode.telemetry.addData("position 0 ", drive.getWheelPositions().get(0));
             opMode.telemetry.addData("position 1 ", drive.getWheelPositions().get(1));
             opMode.telemetry.addData("position 1 ", drive.getWheelPositions().get(1));
             opMode.telemetry.addData("target", initPos);
-            opMode.telemetry.addData("distance til: ", drive.getWheelPositions().get(0) - initPos);
-            double newPower = pid.loop(drive.getWheelPositions().get(0) - initPos, runtime.seconds());
+            opMode.telemetry.addData("distance til: ", drive.getWheelPositions().get(1) - initPos);
+            double newPower = pid.loop(drive.getWheelPositions().get(1) - initPos, runtime.seconds());
             newPower = newPower * 0.475;
             drive.setMotorPowers(-newPower,newPower, newPower,-newPower);
             opMode.telemetry.addData("newpower ",newPower);

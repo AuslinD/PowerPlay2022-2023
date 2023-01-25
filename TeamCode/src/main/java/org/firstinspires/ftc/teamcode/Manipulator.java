@@ -17,8 +17,8 @@ public class Manipulator {
     double UNGRAB = 0.50;
     double LIFT_POWER = 1;// TODO: change this?
     double LIFT_HOLD_CONSTANT = 0.15;
-    double TOP_BOUND = -2000; // because motors are reversed lol
-    double LOW_BOUND = 200;
+    double TOP_BOUND = -1900; // because motors are reversed lol
+    double LOW_BOUND = 150;
     private double goalEncoder = 0;
 
     private boolean grabEnabled = false;
@@ -137,7 +137,7 @@ public class Manipulator {
             leftLiftTarget = 0;
         }
         if(gamepad2.dpad_up){
-            leftLiftTarget = -2100;
+            leftLiftTarget = -1900;
         }
         if(gamepad2.right_bumper){
             leftLiftTarget = -200;
