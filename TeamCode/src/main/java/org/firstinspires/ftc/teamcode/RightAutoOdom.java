@@ -151,24 +151,24 @@ public class RightAutoOdom extends LinearOpMode {
 
         telemetry.addData("pos", pos);
         telemetry.update();
-        robot.manip.setPosition(900);
+        robot.manip.setPosition(-900);
         sleep(100);
         auto.driveOdom(42.25,5,this);//42.25
-        auto.toHeading(50, 3, this);
+        auto.toHeading(52, 3, this);
 
         //start to score//
         auto.PIDDrive(400,0.03,0, 0.001,5,this);
-        robot.manip.setPosition(2000);
+        robot.manip.setPosition(-2000);
         sleep(100);
         auto.PIDDrive(205, 0.007, 0, 0.001, 3, this);
-        sleep(100);
+        sleep(50);
 
-        robot.manip.setPower(0.5);
-        robot.manip.setPosition(1340);
-        sleep(100);
+        robot.manip.setPower(1);
+        robot.manip.setPosition(-1340);
+        sleep(75);
         robot.manip.clawRelease();
         //robot releases//
-        sleep(100);
+        sleep(50);
         auto.drive(-150,3,this);
         int cyclepos = 220;
         robot.manip.setPosition(cyclepos);
@@ -178,30 +178,48 @@ public class RightAutoOdom extends LinearOpMode {
         //auto.drive(1250,3,this);
         //auto.turn(-80, 3, this);
 
-        auto.driveOdom(25, 3, this);//tgis
-        sleep(100);
+        auto.driveOdom(22, 2, this);//tgis
+        sleep(50);
         robot.manip.clawGrab();
-        sleep(100);
-        robot.manip.setPosition(1000);
-        sleep(100);
+        sleep(50);
+        robot.manip.setPosition(-800);
+        sleep(150);
         auto.driveOdom(-23.5,5,this);
-        sleep(100);
-        auto.turn(45, 3, this);//this
-        sleep(100);
+        sleep(50);
+        auto.toHeading(45, 3, this);//this
+        sleep(50);
         auto.drive(380,2,this);
         //release was here before
         //auto.turn(180,2,this);
-        robot.manip.setPosition(-1800);
+        robot.manip.setPosition(-2000);
         auto.PIDDrive(250, 0.007, 0, 0.001, 3, this);
-        sleep(100);
-        robot.manip.setPosition(1500);
+        sleep(50);
+        robot.manip.setPosition(-800);
         robot.manip.clawRelease();
         sleep(100);
-
+//cycle 2 electric boogaloo
         auto.drive(-300,3,this);
-        auto.toHeading(-90,3,this);
-        auto.drive(-100,3,this);
         robot.manip.setPosition(0);
+        auto.toHeading(-90,3,this);
+        sleep(50);
+        robot.manip.setPosition(-800);
+        auto.drive(380,3,this);
+        sleep(50);
+        robot.manip.clawGrab();
+        sleep(100);
+        robot.manip.setPosition(-1500);
+        auto.driveOdom(-23.5,5,this);
+        sleep(50);
+        auto.toHeading(45,3,this);
+        auto.drive(380,2,this);
+        robot.manip.setPosition(-1800);
+        auto.PIDDrive(250,0.007,0,0.001,3,this);
+        robot.manip.setPosition(-1000);
+        robot.manip.setPosition(0);
+
+
+
+
         sleep(100);
         //auto.drive(200,2,this);
         /*cyclepos =- 20;
