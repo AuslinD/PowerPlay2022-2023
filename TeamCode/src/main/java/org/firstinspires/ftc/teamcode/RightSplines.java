@@ -169,7 +169,7 @@ public class RightSplines extends LinearOpMode {
                     manipulator.setPosition((int) manipulator.TOP_BOUND+000);
 
                 })
-                .forward(4)
+                //.forward(4)//
                 .addTemporalMarker(5,() ->{
                     manipulator.setPosition((int) manipulator.TOP_BOUND+700);
                     //manip.stop waits for milliseconds

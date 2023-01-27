@@ -154,22 +154,24 @@ public class RightAutoOdom extends LinearOpMode {
         robot.manip.setPosition(-900);
         sleep(100);
         auto.driveOdom(42.25,5,this);//42.25
-        auto.toHeading(52, 3, this);
+        auto.toHeading(53, 3, this);
 
         //start to score//
         auto.PIDDrive(400,0.03,0, 0.001,5,this);
-        robot.manip.setPosition(-2000);
+        robot.manip.setPosition(-2200);
         sleep(100);
         auto.PIDDrive(205, 0.007, 0, 0.001, 3, this);
         sleep(50);
 
         robot.manip.setPower(1);
         robot.manip.setPosition(-1340);
-        sleep(75);
+        sleep(100);
         robot.manip.clawRelease();
         //robot releases//
         sleep(50);
-        auto.drive(-150,3,this);
+        //robot.manip.setPosition(2100);
+        //sleep(100);
+        auto.drive(-315,3,this);
         int cyclepos = 220;
         robot.manip.setPosition(cyclepos);
         auto.toHeading(-90,2,this);
@@ -178,13 +180,14 @@ public class RightAutoOdom extends LinearOpMode {
         //auto.drive(1250,3,this);
         //auto.turn(-80, 3, this);
 
-        auto.driveOdom(22, 2, this);//tgis
-        sleep(50);
+        auto.driveOdom(21, 2, this);//tgis
+        //robot.manip.setPosition(-650);
+        sleep(100);
         robot.manip.clawGrab();
         sleep(50);
-        robot.manip.setPosition(-800);
-        sleep(150);
-        auto.driveOdom(-23.5,5,this);
+        robot.manip.setPosition(-900);
+        sleep(100);
+        auto.driveOdom(-21,5,this);
         sleep(50);
         auto.toHeading(45, 3, this);//this
         sleep(50);
@@ -198,15 +201,17 @@ public class RightAutoOdom extends LinearOpMode {
         robot.manip.clawRelease();
         sleep(100);
 //cycle 2 electric boogaloo
-        auto.drive(-300,3,this);
+        /*auto.drive(-300,3,this);
         robot.manip.setPosition(0);
         auto.toHeading(-90,3,this);
         sleep(50);
         robot.manip.setPosition(-800);
-        auto.drive(380,3,this);
-        sleep(50);
+        auto.drive(22,5,this);
+        //auto.drive(380,3,this);
+        sleep(100);
         robot.manip.clawGrab();
         sleep(100);
+//not an easter egg and deffinitly not matthew
         robot.manip.setPosition(-1500);
         auto.driveOdom(-23.5,5,this);
         sleep(50);
@@ -241,7 +246,7 @@ public class RightAutoOdom extends LinearOpMode {
                 break;
             case 'R':
                 auto.toHeading(-90,5,this);
-                auto.drive(1500,3,this);
+                auto.drive(2000,3,this);
                 break;
             default:
                 auto.toHeading(-90, 5, this);
