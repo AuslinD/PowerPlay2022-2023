@@ -157,7 +157,7 @@ public class Manipulator {
         }
          */
         if(Math.abs(gamepad2.right_trigger) > 0.1){
-            leftLiftTarget += 30 * gamepad2.left_stick_y;
+            leftLiftTarget += 15 * gamepad2.left_stick_y;
         }
         else{
             // LEFT STICK Y IS REVERSE OF WHAT YOU THINK
