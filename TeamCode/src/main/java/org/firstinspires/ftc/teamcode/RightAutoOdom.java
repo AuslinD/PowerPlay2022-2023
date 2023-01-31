@@ -151,53 +151,55 @@ public class RightAutoOdom extends LinearOpMode {
 
         telemetry.addData("pos", pos);
         telemetry.update();
-        robot.manip.setPosition(-900);
+        robot.manip.setPosition(900);
         sleep(100);
-        auto.driveOdom(42.25,5,this);//42.25
-        auto.toHeading(53, 3, this);
+        auto.driveOdom(41.25,5,this);//42.25
+        auto.toHeading(50, 3, this);
 
         //start to score//
-        auto.PIDDrive(400,0.03,0, 0.001,5,this);
-        robot.manip.setPosition(-2200);
+        robot.manip.setPosition(2100);
+        auto.PIDDrive(300,0.03,0, 0.001,5,this);
+
         sleep(100);
         auto.PIDDrive(205, 0.007, 0, 0.001, 3, this);
         sleep(50);
 
         robot.manip.setPower(1);
-        robot.manip.setPosition(-1340);
-        sleep(100);
+        robot.manip.setPosition(1340);
+        sleep(500);
         robot.manip.clawRelease();
         //robot releases//
         sleep(50);
         //robot.manip.setPosition(2100);
         //sleep(100);
-        auto.drive(-315,3,this);
-        int cyclepos = 220;
+        auto.drive(-415,3,this);
+        int cyclepos = 320;
         robot.manip.setPosition(cyclepos);
-        auto.toHeading(-90,2,this);
+        auto.toHeading(-88,2,this);
 
         //beginning of cycle//
         //auto.drive(1250,3,this);
         //auto.turn(-80, 3, this);
 
-        auto.driveOdom(21, 2, this);//tgis
+        auto.driveOdom(18.5, 2, this);//tgis
         //robot.manip.setPosition(-650);
-        sleep(100);
+        sleep(500);
         robot.manip.clawGrab();
+        sleep(500);
+        robot.manip.setPosition(900);
+        sleep(500);
+        auto.driveOdom(-14.5,5,this);
         sleep(50);
-        robot.manip.setPosition(-900);
-        sleep(100);
-        auto.driveOdom(-21,5,this);
-        sleep(50);
-        auto.toHeading(45, 3, this);//this
-        sleep(50);
+        //second delivery
+        auto.toHeading(35, 5, this);//this
+        sleep(200);
         auto.drive(380,2,this);
         //release was here before
         //auto.turn(180,2,this);
-        robot.manip.setPosition(-2000);
+        robot.manip.setPosition(2000);
         auto.PIDDrive(250, 0.007, 0, 0.001, 3, this);
-        sleep(50);
-        robot.manip.setPosition(-800);
+        sleep(200);
+        robot.manip.setPosition(1340);
         robot.manip.clawRelease();
         sleep(100);
 //cycle 2 electric boogaloo
