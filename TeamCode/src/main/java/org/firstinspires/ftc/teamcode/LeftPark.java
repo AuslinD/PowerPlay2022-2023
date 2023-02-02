@@ -151,7 +151,7 @@ public class LeftPark extends LinearOpMode{
         }
         telemetry.addData("pos", pos);
         telemetry.update();
-        robot.manip.setPosition(450);
+        robot.manip.setPosition(900);
         sleep(300);
         auto.drive(1500,5,this);
         auto.turn(-41, 3, this);
@@ -210,7 +210,7 @@ public class LeftPark extends LinearOpMode{
                 break;
             default:
                 auto.turn(-85, 3, this);
-                auto.drive(1400, 3,this);
+                auto.drive(1300, 3,this);
         }
         robot.manip.setPower(0.5);
         robot.manip.setPosition(0);
