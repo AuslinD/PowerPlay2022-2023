@@ -38,6 +38,8 @@ public class TurnTest extends LinearOpMode {
         AUto auto = new AUto(robot);
         auto.initHeading = robot.imu.getAngularOrientation().firstAngle;
         waitForStart();
-        auto.toHeading(45, 100, this);
+        auto.toHeading(-90, 100, this);
+        auto.toHeading(-180, 100, this);
+        auto.toHeading(90, 100, this);
     }
 }

@@ -84,8 +84,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         ElapsedTime runtime = new ElapsedTime();
         opMode.telemetry.addData("loop",  Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
         opMode.telemetry.update();
-        PID pid = new PID(0.011,0.005,0.001, initHeading + angle);
-        while(opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - initHeading - Math.abs(angle)) > 0.25){
+        PID pid = new PID(0.015,0.008,0.003, initHeading + angle);
+        while(opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - angle) > 0.25){
             double newPower = pid.loop(robot.imu.getAngularOrientation().firstAngle, runtime.seconds()) * .8;
 
             opMode.telemetry.addData("initHeading", initHeading);
@@ -96,7 +96,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             drive.setMotorPowers(newPower,newPower,-newPower,-newPower);
             opMode.telemetry.addData("Motor power", newPower);
             opMode.telemetry.addData("angle", robot.imu.getAngularOrientation().firstAngle);
-            opMode.telemetry.addData("condition", Math.abs(robot.imu.getAngularOrientation().firstAngle - initHeading - Math.abs(angle)));
+            opMode.telemetry.addData("condition", Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
         }
     }
     public void driveOdom(double distance, int timeout, LinearOpMode opMode){
