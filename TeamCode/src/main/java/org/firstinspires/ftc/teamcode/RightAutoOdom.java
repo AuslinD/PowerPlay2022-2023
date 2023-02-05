@@ -153,23 +153,21 @@ public class RightAutoOdom extends LinearOpMode {
         telemetry.update();
         robot.manip.setPosition(900);
         sleep(100);
-        auto.driveOdom(45.5,5,this);//42.25
+        auto.driveOdom(44,5,this);//42.25
         auto.toHeading(47, 4, this);
 
         //start to score//
         robot.manip.setPosition(2070);
-        auto.PIDDrive(400,0.03,0, 0.001,5,this);
+        auto.PIDDrive(370,0.03,0, 0.001,5,this);
 
         sleep(100);
-        auto.PIDDrive(255, 0.007, 0, 0.001, 3, this);
+        auto.PIDDrive(225, 0.007, 0, 0.001, 3, this);
         sleep(50);
 
         robot.manip.setPower(1);
         robot.manip.setPosition(1340);
-        sleep(250);
         robot.manip.clawRelease();
         //robot releases//
-        sleep(50);
         //robot.manip.setPosition(2100);
         //sleep(100);
         auto.drive(-370,3,this);
@@ -181,7 +179,7 @@ public class RightAutoOdom extends LinearOpMode {
         //auto.drive(1250,3,this);
         //auto.turn(-80, 3, this);
 
-        auto.driveOdom(22.5, 2, this);//tgis
+        auto.driveOdom(22.3, 2, this);//tgis
         //robot.manip.setPosition(-650);
         sleep(250);
         robot.manip.clawGrab();
@@ -202,6 +200,8 @@ public class RightAutoOdom extends LinearOpMode {
         auto.PIDDrive(225, 0.007, 0, 0.001, 3, this);
         sleep(200);
         auto.toHeading(43.8, 1, this);
+        auto.drive(100,2,this);
+        sleep(250);
 
         robot.manip.setPosition(1340);
         robot.manip.clawRelease();
@@ -246,7 +246,7 @@ public class RightAutoOdom extends LinearOpMode {
         switch(pos) {
             case 'L':
                 auto.toHeading(90, 3, this);
-                auto.drive(1000, 3,this);
+                auto.drive(1100, 3,this);
                 break;
             case 'C':
                 auto.toHeading(90, 2,this);
