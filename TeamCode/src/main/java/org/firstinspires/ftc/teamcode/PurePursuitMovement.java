@@ -19,7 +19,8 @@ public class PurePursuitMovement extends PurePursuitMath {
         double XPower = relativeXToTarget / (Math.abs(relativeXToTarget) + Math.abs(relativeYToTarget));
         double YPower = relativeYToTarget / (Math.abs(relativeXToTarget) + Math.abs(relativeYToTarget));
 
-        movement_x = XPower;
-        movement_y = YPower;
+        //implement
+        //movement_x = XPower * moveSpeed;
+        //movement_y = YPower * moveSpeed;
     }
 }
