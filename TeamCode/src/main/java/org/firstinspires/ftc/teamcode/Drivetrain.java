@@ -42,8 +42,8 @@ public class Drivetrain {
         br = this.linearOpMode.hardwareMap.get(DcMotorEx.class, "br");
 
         leftEncoder = new Encoder(this.linearOpMode.hardwareMap.get(DcMotorEx.class, "leftOdom"));
-        rightEncoder = new Encoder(this.linearOpMode.hardwareMap.get(DcMotorEx.class, "rightOdom"));
-        frontEncoder = new Encoder(this.linearOpMode.hardwareMap.get(DcMotorEx.class, "fl"));
+        //rightEncoder = new Encoder(this.linearOpMode.hardwareMap.get(DcMotorEx.class, "rightOdom"));
+        frontEncoder = new Encoder(this.linearOpMode.hardwareMap.get(DcMotorEx.class, "frontOdom"));
         fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         br.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -200,7 +200,7 @@ public class Drivetrain {
     public List<Double> getWheelPositions() {
         return Arrays.asList(
                 encoderTicksToInches(leftEncoder.getCurrentPosition()) * X_MULTIPLIER,
-                encoderTicksToInches(rightEncoder.getCurrentPosition()) * X_MULTIPLIER,
+                //encoderTicksToInches(rightEncoder.getCurrentPosition()) * X_MULTIPLIER,
                 encoderTicksToInches(frontEncoder.getCurrentPosition()) * Y_MULTIPLIER
         );
     }

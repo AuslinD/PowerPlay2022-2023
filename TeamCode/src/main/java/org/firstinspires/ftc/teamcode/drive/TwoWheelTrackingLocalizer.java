@@ -51,7 +51,7 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
     // Parallel/Perpendicular to the forward axis
     // Parallel wheel is parallel to the forward axis
     // Perpendicular is perpendicular to the forward axis
-    private Encoder rightEncoder, frontEncoder;
+    private Encoder leftEncoder, frontEncoder;
 
     private SampleMecanumDrive drive;
 
@@ -63,11 +63,11 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
 
         this.drive = drive;
 
-        rightEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "rightOdom"));
+        leftEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "leftOdom"));
         frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "fl"));
 
         // TODO: reverse any encoders using Encoder.setDirection(Encoder.Direction.REVERSE)
-        rightEncoder.setDirection(Encoder.Direction.REVERSE);
+        leftEncoder.setDirection(Encoder.Direction.REVERSE);
         frontEncoder.setDirection(Encoder.Direction.REVERSE);
     }
 
@@ -89,7 +89,7 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
     @Override
     public List<Double> getWheelPositions() {
         return Arrays.asList(
-                encoderTicksToInches(rightEncoder.getCurrentPosition()) * X_MULTIPLIER,
+                encoderTicksToInches(leftEncoder.getCurrentPosition()) * X_MULTIPLIER,
                 encoderTicksToInches(frontEncoder.getCurrentPosition()) * Y_MULTIPLIER
         );
     }
@@ -102,7 +102,7 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
         //  compensation method
 
         return Arrays.asList(
-                encoderTicksToInches(rightEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
+                encoderTicksToInches(leftEncoder.getCorrectedVelocity()) * X_MULTIPLIER,
                 encoderTicksToInches(frontEncoder.getCorrectedVelocity()) * Y_MULTIPLIER
         );
     }

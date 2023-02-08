@@ -106,8 +106,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         while (opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs((drive.getWheelPositions().get(0)) - initPos) < Math.abs(distance)){
             opMode.telemetry.addData("position 0 ", drive.getWheelPositions().get(0));
             opMode.telemetry.addData("position 0 ", drive.getWheelPositions().get(0));
-            opMode.telemetry.addData("position 1 ", drive.getWheelPositions().get(1));
-            opMode.telemetry.addData("position 1 ", drive.getWheelPositions().get(1));
+            //opMode.telemetry.addData("position 1 ", drive.getWheelPositions().get(1));
+            //opMode.telemetry.addData("position 1 ", drive.getWheelPositions().get(1));
             opMode.telemetry.addData("target", initPos);
             opMode.telemetry.addData("distance til: ", Math.abs((drive.getWheelPositions().get(0)) - initPos) - Math.abs(distance));
             double newPower = pid.loop(drive.getWheelPositions().get(0) - initPos, runtime.seconds());
