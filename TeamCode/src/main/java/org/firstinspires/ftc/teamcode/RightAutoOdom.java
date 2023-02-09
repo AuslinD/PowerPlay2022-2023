@@ -154,7 +154,7 @@ public class RightAutoOdom extends LinearOpMode {
         robot.manip.setPosition(900);
         sleep(100);
         auto.driveOdom(44,5,this);//42.25
-        auto.toHeading(135, 4, this);
+        auto.toHeading(130, 4, this);
 
         //start to score//
         robot.manip.setPosition(1500);
@@ -162,7 +162,7 @@ public class RightAutoOdom extends LinearOpMode {
 
         sleep(100);
         //auto.PIDDrive(225, 0.007, 0, 0.001, 3, this);
-        auto.driveOdom(1,5,this);
+        auto.driveOdom(1.5,5,this);
         sleep(50);
 
         robot.manip.setPower(1);
@@ -171,7 +171,7 @@ public class RightAutoOdom extends LinearOpMode {
         //robot releases//
         //robot.manip.setPosition(2100);
         //sleep(100);
-        auto.driveOdom(-6,3,this);
+        auto.driveOdom(-8,3,this);
         int cyclepos = 320;
         robot.manip.setPosition(cyclepos);
         auto.toHeading(-84,5,this);
