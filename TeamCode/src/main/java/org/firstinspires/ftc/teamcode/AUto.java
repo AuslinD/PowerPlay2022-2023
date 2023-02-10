@@ -12,9 +12,9 @@ import com.acmerobotics.dashboard.config.Config;
     Robot robot;
     double initHeading;
 
-    public static double kp = .03;
-    public static double ki = .015;
-    public static double kd = .0040;
+    public static double kp = .16311;
+    public static double ki = .069;
+    public static double kd = .00420;
 
 
     public AUto(Robot a){
