@@ -12,9 +12,15 @@ import com.acmerobotics.dashboard.config.Config;
     Robot robot;
     double initHeading;
 
-    public static double kp = .16311;
-    public static double ki = .069;
-    public static double kd = .00420;
+    public static double forward_kp = 0.0925;
+
+    public static double forward_ki = 0.005;
+
+    public static double forward_kd = 0.001;
+
+    public static double turn_kp = 0.007;
+    public static double turn_ki = 0.00085;
+    public static double turn_kd = 0.000658;
 
 
     public AUto(Robot a){
@@ -88,7 +94,7 @@ import com.acmerobotics.dashboard.config.Config;
         ElapsedTime runtime = new ElapsedTime();
         opMode.telemetry.addData("loop",  Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
         opMode.telemetry.update();
-        PID pid = new PID(kp,ki,kd, initHeading + angle);
+        PID pid = new PID(turn_kp,turn_ki,turn_kd, initHeading + angle);
         while(opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - angle) > 0.1){
             double newPower = pid.loop(robot.imu.getAngularOrientation().firstAngle, runtime.seconds());// * .8
 
@@ -96,7 +102,7 @@ import com.acmerobotics.dashboard.config.Config;
             opMode.telemetry.addData("newPower", newPower);
             opMode.telemetry.addData("target", initHeading + angle);
             opMode.telemetry.update();
-            //newPower *= .9;
+            newPower *= .9;
             drive.setMotorPowers(newPower,newPower,-newPower,-newPower);
             opMode.telemetry.addData("Motor power", newPower);
             opMode.telemetry.addData("angle", robot.imu.getAngularOrientation().firstAngle);
@@ -106,7 +112,7 @@ import com.acmerobotics.dashboard.config.Config;
     public void driveOdom(double distance, int timeout, LinearOpMode opMode){
         double initPos = drive.getWheelPositions().get(0);
         ElapsedTime runtime = new ElapsedTime();
-        PID pid = new PID(0.12,0.005,0.001,distance);
+        PID pid = new PID(forward_kp,forward_ki,forward_kd,distance);
         while (opMode.opModeIsActive() && runtime.seconds() < timeout && !(Math.abs(drive.getWheelPositions().get(0) - (initPos + distance)) < 0.1)){
             opMode.telemetry.addData("position 0 ", drive.getWheelPositions().get(0));
             opMode.telemetry.addData("position 0 ", drive.getWheelPositions().get(0));

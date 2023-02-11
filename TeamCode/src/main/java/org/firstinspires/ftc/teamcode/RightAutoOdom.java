@@ -153,28 +153,29 @@ public class RightAutoOdom extends LinearOpMode {
         telemetry.update();
         robot.manip.setPosition(900);
         sleep(100);
-        auto.driveOdom(44,5,this);//42.25
-        auto.toHeading(130, 4, this);
+        auto.driveOdom(50,5,this);//42.25
+        auto.toHeading(135, 4, this);
 
         //start to score//
         robot.manip.setPosition(1500);
-        auto.driveOdom(5,3,this);
+        auto.driveOdom(7,3,this);
 
         sleep(100);
         //auto.PIDDrive(225, 0.007, 0, 0.001, 3, this);
-        auto.driveOdom(1.5,5,this);
+        auto.driveOdom(1,5,this);
         sleep(50);
 
         robot.manip.setPower(1);
         robot.manip.setPosition(700);
         robot.manip.clawRelease();
+        sleep(50);
         //robot releases//
         //robot.manip.setPosition(2100);
         //sleep(100);
         auto.driveOdom(-8,3,this);
         int cyclepos = 320;
         robot.manip.setPosition(cyclepos);
-        auto.toHeading(-84,5,this);
+        auto.toHeading(-90,5,this);
 
         //beginning of cycle//
         //auto.drive(1250,3,this);
@@ -193,13 +194,10 @@ public class RightAutoOdom extends LinearOpMode {
         //second delivery
         auto.toHeading(133, 5, this);//this
         sleep(200);
-        auto.driveOdom(5,2,this);
         //release was here before
         //auto.turn(180,2,this);
         robot.manip.setPosition(1500);
-        sleep(50);
-        auto.driveOdom(2, 5, this);
-        sleep(200);
+        auto.driveOdom(7,2,this);
         //auto.toHeading(43.8, 1, this);
         //auto.drive(100,2,this);
         sleep(250);
