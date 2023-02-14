@@ -12,14 +12,14 @@ import com.acmerobotics.dashboard.config.Config;
     Robot robot;
     double initHeading;
 
-    public static double forward_kp = 0.0925;
+    public static double forward_kp = 0.100;
 
-    public static double forward_ki = 0.005;
+    public static double forward_ki = 0.004;
 
     public static double forward_kd = 0.001;
 
     public static double turn_kp = 0.007;
-    public static double turn_ki = 0.00085;
+    public static double turn_ki = 0.00065;
     public static double turn_kd = 0.000658;
 
 
@@ -95,11 +95,11 @@ import com.acmerobotics.dashboard.config.Config;
         opMode.telemetry.addData("loop",  Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
         opMode.telemetry.update();
         PID pid = new PID(turn_kp,turn_ki,turn_kd, initHeading + angle);
-        while(opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - angle) > 0.1){
+        while(opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(robot.imu.getAngularOrientation().firstAngle - (initHeading + angle)) > 0.3){
             double newPower = pid.loop(robot.imu.getAngularOrientation().firstAngle, runtime.seconds());// * .8
 
             opMode.telemetry.addData("initHeading", initHeading);
-            opMode.telemetry.addData("newPower", newPower);
+            //opMode.telemetry.addData("newPower", newPower);
             opMode.telemetry.addData("target", initHeading + angle);
             opMode.telemetry.update();
             newPower *= .9;
@@ -108,6 +108,7 @@ import com.acmerobotics.dashboard.config.Config;
             opMode.telemetry.addData("angle", robot.imu.getAngularOrientation().firstAngle);
             opMode.telemetry.addData("condition", Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
         }
+        drive.setAllMotors(0);
     }
     public void driveOdom(double distance, int timeout, LinearOpMode opMode){
         double initPos = drive.getWheelPositions().get(0);
@@ -126,6 +127,7 @@ import com.acmerobotics.dashboard.config.Config;
             opMode.telemetry.addData("newpower ",newPower);
             opMode.telemetry.update();
         }
+        drive.setAllMotors(0);
         /* debugging
         while (!(opMode.opModeIsActive() && runtime.seconds() < timeout && Math.abs(drive.getWheelPositions().get(0) - (initPos + distance)) < 0.1)){
             opMode.telemetry.addData("condition", Math.abs(drive.getWheelPositions().get(0) - (initPos + distance)));
