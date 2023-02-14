@@ -12,7 +12,7 @@ import com.acmerobotics.dashboard.config.Config;
     Robot robot;
     double initHeading;
 
-    public static double forward_kp = 0.100;
+    public static double forward_kp = 0.110;
 
     public static double forward_ki = 0.004;
 
@@ -90,7 +90,7 @@ import com.acmerobotics.dashboard.config.Config;
         drive.setMotorPowers(0,0,0,0);
     }
 
-    public void toHeading(double angle, int timeout, LinearOpMode opMode){
+    public void toHeading(double angle, double timeout, LinearOpMode opMode){
         ElapsedTime runtime = new ElapsedTime();
         opMode.telemetry.addData("loop",  Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
         opMode.telemetry.update();
@@ -110,7 +110,7 @@ import com.acmerobotics.dashboard.config.Config;
         }
         drive.setAllMotors(0);
     }
-    public void driveOdom(double distance, int timeout, LinearOpMode opMode){
+    public void driveOdom(double distance, double timeout, LinearOpMode opMode){
         double initPos = drive.getWheelPositions().get(0);
         ElapsedTime runtime = new ElapsedTime();
         PID pid = new PID(forward_kp,forward_ki,forward_kd,distance);
