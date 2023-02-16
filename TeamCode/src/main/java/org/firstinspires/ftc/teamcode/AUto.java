@@ -91,6 +91,7 @@ import com.acmerobotics.dashboard.config.Config;
     }
 
     public void toHeading(double angle, double timeout, LinearOpMode opMode){
+        drive.setAllMotors(0);
         ElapsedTime runtime = new ElapsedTime();
         opMode.telemetry.addData("loop",  Math.abs(robot.imu.getAngularOrientation().firstAngle - angle));
         opMode.telemetry.update();
@@ -122,7 +123,7 @@ import com.acmerobotics.dashboard.config.Config;
             opMode.telemetry.addData("target", initPos + distance);
             opMode.telemetry.addData("distance til: ", Math.abs((drive.getWheelPositions().get(0)) - initPos) - Math.abs(distance));
             double newPower = pid.loop(drive.getWheelPositions().get(0) - initPos, runtime.seconds());
-            newPower = newPower * 0.475;
+            newPower = newPower * 0.4;
             drive.setMotorPowers(-newPower,newPower, newPower,-newPower);
             opMode.telemetry.addData("newpower ",newPower);
             opMode.telemetry.update();
