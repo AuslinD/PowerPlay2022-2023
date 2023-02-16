@@ -153,7 +153,7 @@ public class RightAutoOdom extends LinearOpMode {
         telemetry.update();
         robot.manip.setPosition(900);
         sleep(100);
-        auto.driveOdom(50,2.5,this);//2.5
+        auto.driveOdom(50,.5,this);//2.5
         auto.toHeading(135, 1.5, this);
 
         //start to score//

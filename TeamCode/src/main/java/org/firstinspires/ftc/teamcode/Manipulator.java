@@ -13,8 +13,8 @@ public class Manipulator {
     private LinearOpMode linear_OpMode;
     private OpMode iterative_OpMode;
 
-    double GRAB = .71;
-    double UNGRAB = 0.50;
+    double GRAB = .85;
+    double UNGRAB = 0.325;
     double LIFT_POWER = 1;// TODO: change this?
     double LIFT_HOLD_CONSTANT = 0.15;
     double TOP_BOUND = -2100; // because motors are reversed lol
