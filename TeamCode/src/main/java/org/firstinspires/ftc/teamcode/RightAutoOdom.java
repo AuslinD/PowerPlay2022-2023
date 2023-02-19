@@ -153,8 +153,8 @@ public class RightAutoOdom extends LinearOpMode {
         telemetry.update();
         robot.manip.setPosition(900);
         sleep(100);
-        auto.driveOdom(50,2,this);//2.5
-        auto.toHeading(135, 1.5, this);
+        auto.driveOdom(49,2,this);//2.5
+        auto.toHeading(135, 1.75, this);
 
         //start to score//
         robot.manip.setPosition(1500);
@@ -170,16 +170,16 @@ public class RightAutoOdom extends LinearOpMode {
         //robot releases//
         //robot.manip.setPosition(2100);
         //sleep(100);
-        auto.driveOdom(-7,.25,this);
+        auto.driveOdom(-9.5,.25,this);
         int cyclepos = 400;
         robot.manip.setPosition(cyclepos);
-        auto.toHeading(-90,1.5,this);
+        auto.toHeading(-90,2,this);
 
         //beginning of cycle//
         //auto.drive(1250,3,this);
         //auto.turn(-80, 3, this);
 
-        auto.driveOdom(23.5, 1.5, this);//tgis
+        auto.driveOdom(25.25, 3, this);//tgis
         //robot.manip.setPosition(-650);
         sleep(250);
         robot.manip.clawGrab();
@@ -188,10 +188,10 @@ public class RightAutoOdom extends LinearOpMode {
         sleep(500);
         auto.toHeading(-90,.3,this);
         sleep(100);
-        auto.driveOdom(-23.5,2,this);
+        auto.driveOdom(-25.5,3,this);
         sleep(50);
         //second delivery
-        auto.toHeading(130, 1.5, this);//this
+        auto.toHeading(130, 1.75, this);//this
         sleep(200);
         //release was here before
         //auto.turn(180,2,this);
@@ -210,16 +210,16 @@ public class RightAutoOdom extends LinearOpMode {
         robot.manip.setPosition(350);
 
         //TODO: 2nd cycle
-        auto.toHeading(-90,1.5,this);
-        auto.driveOdom(24.5,1.25,this);
+        auto.toHeading(-90,1.75,this);
+        auto.driveOdom(25.25,3,this);
         sleep(100);
         robot.manip.clawGrab();
-        sleep(150);
+        sleep(175);
         robot.manip.setPosition(1000);
         sleep(100);
         auto.toHeading(-90,.3,this);
-        auto.driveOdom(-24.5,1.25,this);
-        auto.toHeading(130,1.5,this);
+        auto.driveOdom(-25.5,3,this);
+        auto.toHeading(130,1.75,this);
         robot.manip.setPosition(1500);
         auto.driveOdom(10,.25,this);
         robot.manip.setPosition(800);

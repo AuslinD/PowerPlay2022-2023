@@ -12,11 +12,11 @@ import com.acmerobotics.dashboard.config.Config;
     Robot robot;
     double initHeading;
 
-    public static double forward_kp = 0.15311;
+    public static double forward_kp = 0.1;
 
-    public static double forward_ki = 0.004;
+    public static double forward_ki = 0;
 
-    public static double forward_kd = 0.0025;
+    public static double forward_kd = 0.005;
 
     public static double turn_kp = 0.007;
     public static double turn_ki = 0.00065;
@@ -41,7 +41,7 @@ import com.acmerobotics.dashboard.config.Config;
             opMode.telemetry.addData("target", initPos);
             opMode.telemetry.addData("distance til: ", drive.br.getCurrentPosition() - initPos);
             double newPower = pid.loop(drive.br.getCurrentPosition() - initPos, runtime.seconds());
-            newPower = newPower * 0.475;
+            //newPower = newPower * 0.475;
             drive.setMotorPowers(-newPower,newPower, newPower,-newPower);
             opMode.telemetry.addData("newpower ",newPower);
             opMode.telemetry.update();
@@ -62,7 +62,7 @@ import com.acmerobotics.dashboard.config.Config;
              opMode.telemetry.addData("target", initPos);
              opMode.telemetry.addData("distance til: ", drive.br.getCurrentPosition() - initPos);
              double newPower = pid.loop(drive.br.getCurrentPosition() - initPos, runtime.seconds());
-             newPower = newPower * 0.5;
+             //newPower = newPower * 0.5;
              drive.setMotorPowers(-newPower,newPower, newPower,-newPower);
              opMode.telemetry.addData("newpower ",newPower);
              opMode.telemetry.update();
