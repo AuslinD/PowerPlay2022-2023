@@ -12,11 +12,11 @@ import com.acmerobotics.dashboard.config.Config;
     Robot robot;
     double initHeading;
 
-    public static double forward_kp = 0.1;
+    public static double forward_kp = 0.14;
 
-    public static double forward_ki = 0;
+    public static double forward_ki = 0.006;
 
-    public static double forward_kd = 0.005;
+    public static double forward_kd = 0.01;
 
     public static double turn_kp = 0.007;
     public static double turn_ki = 0.00065;
