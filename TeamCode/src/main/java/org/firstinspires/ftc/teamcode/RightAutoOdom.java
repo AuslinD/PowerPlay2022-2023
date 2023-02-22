@@ -173,7 +173,7 @@ public class RightAutoOdom extends LinearOpMode {
         //robot releases//
         //robot.manip.setPosition(2100);
         //sleep(100);
-        auto.driveOdom(-8.75,.25,this);
+        auto.driveOdom(-8,.25,this);
         int cyclepos = 400;
         robot.manip.setPosition(cyclepos);
         auto.toHeading(-90,1.75,this);
@@ -182,16 +182,16 @@ public class RightAutoOdom extends LinearOpMode {
         //auto.drive(1250,3,this);
         //auto.turn(-80, 3, this);
 
-        auto.driveOdom(24.5, 1.5, this);//tgis
+        auto.driveOdom(22.875, 1.5, this);//tgis
         //robot.manip.setPosition(-650);
-        sleep(50);
+        sleep(75);
         robot.manip.clawGrab();
-        sleep(150);
+        sleep(250);
         robot.manip.setPosition(1000);
         sleep(100);
         auto.toHeading(-90,.3,this);
         sleep(100);
-        auto.driveOdom(-25,1.5,this);
+        auto.driveOdom(-24,1.5,this);
         sleep(50);
         //second delivery
         auto.toHeading(130, 1.75, this);//this
@@ -209,16 +209,17 @@ public class RightAutoOdom extends LinearOpMode {
         robot.manip.clawRelease();
         sleep(100);
         auto.driveOdom(-8,.5,this);
-        robot.manip.setPosition(300);
+        robot.manip.setPosition(320);
 
         //TODO: 2nd cycle
         auto.toHeading(-90,1.75,this);
-        auto.driveOdom(24.5,1.25,this);
+        auto.driveOdom(22.875,1.25,this);
+        sleep(75);
         robot.manip.clawGrab();
-        sleep(100);
+        sleep(250);
         robot.manip.setPosition(1000);
         auto.toHeading(-90,.3,this);
-        auto.driveOdom(-28,1.5,this);
+        auto.driveOdom(-27.5,1.5,this);
         auto.toHeading(140,1.5,this);
         robot.manip.setPosition(1500);
         auto.driveOdom(6,.35,this);
@@ -256,7 +257,9 @@ public class RightAutoOdom extends LinearOpMode {
         telemetry.update();
         switch(pos) {
             case 'L':
-                auto.toHeading(90, .5, this);
+                auto.toHeading(0,.75,this);
+                auto.driveOdom(5,.5,this);
+                auto.toHeading(90, 1.35, this);
                 auto.driveOdom(18, 1.25,this);
                 break;
             case 'C':
