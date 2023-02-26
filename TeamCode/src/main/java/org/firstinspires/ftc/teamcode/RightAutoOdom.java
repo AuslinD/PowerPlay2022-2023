@@ -152,10 +152,11 @@ public class RightAutoOdom extends LinearOpMode {
         telemetry.addData("pos", pos);
         telemetry.update();
         robot.manip.setPosition(900);
+        robot.getDrivetrain().setAllMotors(0);
         sleep(100);
         auto.driveOdom(46,1.5,this);//2.5
         robot.manip.setPosition(1500);
-        auto.toHeading(137, 1.75, this);
+        auto.toHeading(140, 1.75, this);
 
         //start to score//
         auto.driveOdom(6,.25,this);
@@ -174,7 +175,7 @@ public class RightAutoOdom extends LinearOpMode {
         //robot.manip.setPosition(2100);
         //sleep(100);
         auto.driveOdom(-9,.45,this);
-        int cyclepos = 375;
+        int cyclepos = 380;
         robot.manip.setPosition(cyclepos);
         auto.toHeading(-90,1.85,this);
 
@@ -209,7 +210,7 @@ public class RightAutoOdom extends LinearOpMode {
         robot.manip.clawRelease();
         sleep(100);
         auto.driveOdom(-9,.8,this);
-        robot.manip.setPosition(315);
+        robot.manip.setPosition(320);
 
         //TODO: 2nd cycle
         auto.toHeading(-90,1.85,this);
@@ -260,7 +261,7 @@ public class RightAutoOdom extends LinearOpMode {
                 auto.toHeading(0,.75,this);
                 auto.driveOdom(4,.5,this);
                 auto.toHeading(100, 1.45, this);
-                auto.driveOdom(20, 1.25,this);
+                auto.driveOdom(22, 1.25,this);
                 break;
             case 'C':
                 auto.toHeading(90, .5,this);

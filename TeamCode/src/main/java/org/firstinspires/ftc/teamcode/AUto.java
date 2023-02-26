@@ -123,7 +123,7 @@ import com.acmerobotics.dashboard.config.Config;
             opMode.telemetry.addData("target", initPos + distance);
             opMode.telemetry.addData("distance til: ", Math.abs((drive.getWheelPositions().get(0)) - initPos) - Math.abs(distance));
             double newPower = pid.loop(drive.getWheelPositions().get(0) - initPos, runtime.seconds());
-            newPower = newPower * 0.4;
+            newPower = newPower * 0.35;
             drive.setMotorPowers(-newPower,newPower, newPower,-newPower);
             opMode.telemetry.addData("newpower ",newPower);
             opMode.telemetry.update();
