@@ -183,7 +183,7 @@ public class RightAutoOdom extends LinearOpMode {
         //auto.drive(1250,3,this);
         //auto.turn(-80, 3, this);
 
-        auto.driveOdom(22.25, 1.6, this);//tgis
+        auto.driveOdom(25.25, 1.6, this);//tgis
         //robot.manip.setPosition(-650);
         sleep(75);
         robot.manip.clawGrab();
@@ -192,7 +192,7 @@ public class RightAutoOdom extends LinearOpMode {
         sleep(150);
         auto.toHeading(-90,.3,this);
         sleep(100);
-        auto.driveOdom(-23.75,1.5,this);
+        auto.driveOdom(-26.75,1.5,this);
         sleep(50);
         //second delivery
         auto.toHeading(130, 1.75, this);//this
@@ -200,7 +200,7 @@ public class RightAutoOdom extends LinearOpMode {
         //release was here before
         //auto.turn(180,2,this);
         robot.manip.setPosition(1500);
-        auto.driveOdom(7.5,.5,this);
+        auto.driveOdom(6,.5,this);
         //auto.toHeading(43.8, 1, this);
         //auto.drive(100,2,this);
         sleep(50);
