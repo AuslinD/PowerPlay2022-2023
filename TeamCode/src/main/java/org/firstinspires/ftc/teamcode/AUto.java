@@ -12,11 +12,11 @@ import com.acmerobotics.dashboard.config.Config;
     Robot robot;
     double initHeading;
 
-    public static double forward_kp = 0.14;
+    public static double forward_kp = 0.162;
 
-    public static double forward_ki = 0.006;
+    public static double forward_ki = 0.0058;//.006
 
-    public static double forward_kd = 0.01;
+    public static double forward_kd = 0.05;
 
     public static double turn_kp = 0.007;
     public static double turn_ki = 0.00065;
@@ -103,7 +103,7 @@ import com.acmerobotics.dashboard.config.Config;
             //opMode.telemetry.addData("newPower", newPower);
             opMode.telemetry.addData("target", initHeading + angle);
             opMode.telemetry.update();
-            newPower *= .9;
+            //newPower *= .9;
             drive.setMotorPowers(newPower,newPower,-newPower,-newPower);
             opMode.telemetry.addData("Motor power", newPower);
             opMode.telemetry.addData("angle", robot.imu.getAngularOrientation().firstAngle);
@@ -123,7 +123,7 @@ import com.acmerobotics.dashboard.config.Config;
             opMode.telemetry.addData("target", initPos + distance);
             opMode.telemetry.addData("distance til: ", Math.abs((drive.getWheelPositions().get(0)) - initPos) - Math.abs(distance));
             double newPower = pid.loop(drive.getWheelPositions().get(0) - initPos, runtime.seconds());
-            newPower = newPower * 0.4;
+            //newPower = newPower * 0.45;
             drive.setMotorPowers(-newPower,newPower, newPower,-newPower);
             opMode.telemetry.addData("newpower ",newPower);
             opMode.telemetry.update();
