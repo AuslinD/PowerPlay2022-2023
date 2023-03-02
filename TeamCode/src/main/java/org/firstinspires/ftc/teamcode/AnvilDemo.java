@@ -15,16 +15,18 @@ public class AnvilDemo extends AnvilTest{
     protected Anvil mainTraj(Pose2d startPose) {
         return Anvil.forgeTrajectory(drive, startPose)
                 .addTemporalMarker(() -> manipulator.setPosition(900))
-                .lineToSplineHeading(-35.5, 12, -45)
-                .forward(2.5)
+                .lineTo(-35.5, 12)
+                .turn(45)
+                .forward(5)
                 .addTemporalMarker(() -> manipulator.setPosition(2000))
                 .waitTime(1)
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
                     manipulator.setPosition(380);
                 })
-                .back(2.5)
-                .lineToLinearHeading(-59, 12, -180)
+                .back(5)
+                .lineTo(-59, 12)
+                .turn(-180)
                 .addTemporalMarker(() -> manipulator.clawGrab())
                 .waitTime(.4)
                 .addTemporalMarker(() -> manipulator.setPosition(900))

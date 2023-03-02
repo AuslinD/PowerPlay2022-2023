@@ -57,8 +57,8 @@ import ftc.rogue.blacksmith.util.kalman.KalmanTwoWheelLocalizer;
  */
 @Config
 public class SampleMecanumDrive extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(8, 0, .01);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(8, 0, .01);
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(.3, 0, .01);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(.37, 0, .01);
 
     public static double LATERAL_MULTIPLIER = 1;//1.24
 
