@@ -14,7 +14,11 @@ public class Manipulator {
     private OpMode iterative_OpMode;
 
     double GRAB = .8;
-    double UNGRAB = 0.63;
+    double UNGRAB = 0.68;
+
+
+    double GRAB1 = 0.83;
+    double UNGRAB1 = 0.95;
     double LIFT_POWER = 1;// TODO: change this=?
     double LIFT_HOLD_CONSTANT = 0.15;
     double TOP_BOUND = -2100; // because motors are reversed lol
@@ -31,6 +35,7 @@ public class Manipulator {
     Servo claw;
     private ElapsedTime clawTimer = new ElapsedTime();
     double clawPrevTime;
+    Servo claw1;
 
     public Manipulator(LinearOpMode opMode) {
         this.linear_OpMode = opMode;
@@ -41,6 +46,7 @@ public class Manipulator {
         leftLift = opMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
         rightLift = opMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
         claw = opMode.hardwareMap.get(Servo.class, "claw");
+        claw1 = opMode.hardwareMap.get(Servo.class, "claw1");
 
 
         leftLift.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -80,6 +86,8 @@ public class Manipulator {
         leftLift = this.iterative_OpMode.hardwareMap.get(DcMotorEx.class,  "liftLeft");
         rightLift = this.iterative_OpMode.hardwareMap.get(DcMotorEx.class,  "liftRight");
         claw = opMode.hardwareMap.get(Servo.class, "claw");
+        claw1 = opMode.hardwareMap.get(Servo.class, "claw1");
+
 
         leftLift.setDirection(DcMotorSimple.Direction.REVERSE);
         rightLift.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -109,13 +117,16 @@ public class Manipulator {
     // GRABBY STUFF
     public void clawGrab(){
         claw.setPosition(GRAB);
+        claw1.setPosition(GRAB1);
         grabEnabled = true;
     }
 
     public void clawRelease(){
         claw.setPosition(UNGRAB);
+        claw1.setPosition(UNGRAB1);
         grabEnabled = false;
     }
+
 
     /*public void toggleGrabber(){
         if (grabEnabled) {
