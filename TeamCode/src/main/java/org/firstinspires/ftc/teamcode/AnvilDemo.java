@@ -15,21 +15,34 @@ public class AnvilDemo extends AnvilTest{
     protected Anvil mainTraj(Pose2d startPose) {
         return Anvil.forgeTrajectory(drive, startPose)
                 .addTemporalMarker(() -> manipulator.setPosition(900))
-                .lineTo(-35.5, 12)
-                .turn(45)
-                .forward(5)
+                .lineTo(-34.5, 12)
+                .turn(55)
+                .lineTo(-30, 3)
                 .addTemporalMarker(() -> manipulator.setPosition(2000))
                 .waitTime(1)
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
                     manipulator.setPosition(380);
                 })
-                .back(5)
-                .lineTo(-59, 12)
-                .turn(-180)
+                .lineTo(-35.5, 20)
+                .turn(-170)
+                .lineTo(-71.5, 20)
+
                 .addTemporalMarker(() -> manipulator.clawGrab())
-                .waitTime(.4)
-                .addTemporalMarker(() -> manipulator.setPosition(900))
+                .waitTime(.5)
+                .addTemporalMarker(() -> manipulator.setPosition(850))
+
+                .lineTo(-43.5, 20)
+                .turn(185)
+                .lineTo(-30, 5.5)
+                .addTemporalMarker(() -> manipulator.setPosition(2000))
+                .waitTime(1)
+                .addTemporalMarker(() -> {
+                    manipulator.clawRelease();
+                    manipulator.setPosition(380);
+
+                })
+                .lineTo(-43.5, 20)
                 .thenRun(this::parkTraj);
     }
     private Anvil parkTraj(Pose2d startPose){
