@@ -52,12 +52,12 @@ public abstract class AnvilTest extends LinearOpMode {
         manipulator.clawGrab();
         drive = new SampleMecanumDrive(hardwareMap);
         drive.update();
-        visionStuff();
         Anvil startTraj = mainTraj(startPose);
 
         Anvil
                 .startAutoWith(startTraj)
                 .onSchedulerLaunch();
+        visionStuff();
         waitForStart();
 
         //could cause not initializing problems
@@ -106,7 +106,7 @@ public abstract class AnvilTest extends LinearOpMode {
          * The INIT-loop:
          * This REPLACES waitForStart!
          */
-        while (!isStarted() && !isStopRequested())
+        while (!isStarted() && !isStopRequested() && !opModeIsActive())
         {
             ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
 

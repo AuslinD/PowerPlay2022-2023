@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import ftc.rogue.blacksmith.Anvil;
@@ -15,26 +16,25 @@ public class AnvilDemo extends AnvilTest{
     protected Anvil mainTraj(Pose2d startPose) {
         return Anvil.forgeTrajectory(drive, startPose)
                 .addTemporalMarker(() -> manipulator.setPosition(900))
-                .lineTo(-34.5, 12)
-                .turn(55)
-                .lineTo(-30, 3)
+                .splineTo(-35.5, 25, -90)
+
+                .splineTo(-29, 8, -45)
                 .addTemporalMarker(() -> manipulator.setPosition(2000))
                 .waitTime(1)
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
                     manipulator.setPosition(380);
                 })
-                .lineTo(-35.5, 20)
-                .turn(-170)
-                .lineTo(-71.5, 20)
+                .splineToConstantHeading(-35.5, 20, 0)
+
+                .splineToSplineHeading(-67.5, 20, 180, 0)
 
                 .addTemporalMarker(() -> manipulator.clawGrab())
                 .waitTime(.5)
                 .addTemporalMarker(() -> manipulator.setPosition(850))
 
-                .lineTo(-43.5, 20)
-                .turn(185)
-                .lineTo(-30, 5.5)
+                .splineToConstantHeading(-50, 20, -180)
+                .splineTo(-29, 8,-45)
                 .addTemporalMarker(() -> manipulator.setPosition(2000))
                 .waitTime(1)
                 .addTemporalMarker(() -> {
