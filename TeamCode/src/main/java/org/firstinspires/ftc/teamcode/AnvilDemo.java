@@ -16,9 +16,9 @@ public class AnvilDemo extends AnvilTest{
     protected Anvil mainTraj(Pose2d startPose) {
         return Anvil.forgeTrajectory(drive, startPose)
                 .addTemporalMarker(() -> manipulator.setPosition(900))
-                .lineTo(-35.5, 12)
-                .turn(45)
-                .forward(5)
+                .splineTo(-35.5, 25, -90)
+
+                .splineTo(-29, 8, -45)
                 .addTemporalMarker(() -> manipulator.setPosition(2000))
                 .waitTime(1)
                 .addTemporalMarker(() -> {
@@ -43,14 +43,6 @@ public class AnvilDemo extends AnvilTest{
 
                 })
                 .lineTo(-43.5, 20)
-=======
-                .back(5)
-                .lineTo(-59, 12)
-                .turn(-180)
-                .addTemporalMarker(() -> manipulator.clawGrab())
-                .waitTime(.4)
-                .addTemporalMarker(() -> manipulator.setPosition(900))
->>>>>>> parent of 87c3c84 (some RR stuff)
                 .thenRun(this::parkTraj);
     }
     private Anvil parkTraj(Pose2d startPose){
