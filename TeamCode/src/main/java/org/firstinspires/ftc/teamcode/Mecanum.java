@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @TeleOp(name = "TeleOp", group = "actual")
@@ -21,6 +22,9 @@ public class Mecanum extends OpMode {
     @Override
     public void loop() {
         robot.drivetrain.teleOpControls(gamepad1);
+        if(gamepad1.options){
+            robot.initIMU(this);
+        }
         robot.manip.teleOpControls(gamepad2);
         /*robot.manip.distanceSensor(gamepad2, distance.getDistance(DistanceUnit.CM));
         telemetry.addData("distance", distance.getDistance(DistanceUnit.CM));
