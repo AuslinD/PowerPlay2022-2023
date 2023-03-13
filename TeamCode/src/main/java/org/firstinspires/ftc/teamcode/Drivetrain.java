@@ -127,26 +127,6 @@ public class Drivetrain {
             BRP += gamepad1.right_stick_x;
             BLP += gamepad1.right_stick_x;
 
-            /*
-            double y = -gamepad1.left_stick_y; // Remember, this is reversed!
-            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
-            double rx = gamepad1.right_stick_x;
-
-            double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
-            double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
-
-
-            // Denominator is the largest motor power (absolute value) or 1
-            // This ensures all the powers maintain the same ratio, but only when
-            // at least one is out of the range [-1, 1]
-            double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
-            double frontLeftPower = (-rotY - rotX - rx) / denominator;
-            double backLeftPower = (-rotY + rotX - rx) / denominator;
-            double frontRightPower = (rotY - rotX - rx) / denominator;
-            double backRightPower = (rotY + rotX - rx) / denominator;
-
-             */
-
             double max = Math.max(Math.max(Math.abs(FRP), Math.abs(FLP)), Math.max(Math.abs(BRP), Math.abs(BLP)));
 
             if(Math.abs(max) > 1) {
