@@ -9,24 +9,27 @@ import ftc.rogue.blacksmith.units.GlobalUnits;
 @Autonomous(name = "Anvil Auto", group = "auto")
 public class AnvilDemo extends AnvilTest{
     public AnvilDemo(){
-        startPose = GlobalUnits.pos(-35.5, 67.75, -90);
+        startPose = GlobalUnits.pos(-35.5, 65.5, -90);
     }
     @Override
     protected Anvil mainTraj(Pose2d startPose) {
         return Anvil.forgeTrajectory(drive, startPose)
                 .addTemporalMarker(() -> manipulator.setPosition(900))
-                .lineTo(-34.5, 12)
-                .turn(55)
-                .lineTo(-29, 6.5)
+                .lineTo(-35.5, 34)
                 .addTemporalMarker(() -> manipulator.setPosition(2000))
-                .waitTime(1)
+                .lineToLinearHeading(-28, 13.5, -45)
+                .waitTime(.5)
+                .addTemporalMarker(() -> {
+                    manipulator.setPosition(850);
+                })
+                .waitTime(.1)
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
-                    manipulator.setPosition(380);
                 })
-                .lineTo(-35.5, 20)
-                .turn(-145)
-                .lineTo(-72, 20)
+                .lineTo(-35.5, 21)
+                .addTemporalMarker(() ->manipulator.setPosition(400))
+                .turn(-150)
+                .lineTo(-67, 22)
 
                 .addTemporalMarker(() -> manipulator.clawGrab())
                 .waitTime(.5)
@@ -40,9 +43,8 @@ public class AnvilDemo extends AnvilTest{
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
                     manipulator.setPosition(380);
-
                 })
-                .lineTo(-35.5, 20)
+                .lineTo(-35.5, 23)
                 .thenRun(this::parkTraj);
     }
     private Anvil parkTraj(Pose2d startPose){
