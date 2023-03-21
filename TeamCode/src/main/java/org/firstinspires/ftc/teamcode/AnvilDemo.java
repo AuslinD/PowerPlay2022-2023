@@ -17,7 +17,8 @@ public class AnvilDemo extends AnvilTest{
                 .addTemporalMarker(() -> manipulator.setPosition(900))
                 .lineTo(-33.5, 34)
                 .addTemporalMarker(() -> manipulator.setPosition(2000))
-                .lineToLinearHeading(-29, 12.5, -45)
+                .lineToLinearHeading(-29, 19, -45)
+                .lineTo(-28, 10.5)
                 .waitTime(.5)
                 .addTemporalMarker(() -> {
                     manipulator.setPosition(850);
@@ -26,10 +27,10 @@ public class AnvilDemo extends AnvilTest{
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
                 })
-                .lineTo(-35.5, 23)
+                .lineTo(-35.5, 18)
                 .addTemporalMarker(() ->manipulator.setPosition(275))
-                .turn(-150)
-                .lineTo(-62, 21)
+                .turn(-145)
+                .lineTo(-62.5, 15)
 
                 .addTemporalMarker(() -> manipulator.clawGrab())
                 .waitTime(.5)
@@ -37,8 +38,9 @@ public class AnvilDemo extends AnvilTest{
 
                 .lineTo(-35.5, 22)
                 .turn(170)
-                .lineTo(-29.75, 12.5)
+                .lineTo(-32, 12)
                 .addTemporalMarker(() -> manipulator.setPosition(1900))
+                .lineTo(-33, 10.6)
                 .waitTime(1)
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
