@@ -40,7 +40,7 @@ public class AnvilDemo extends AnvilTest{
                 .turn(170)
                 .lineTo(-32, 12)
                 .addTemporalMarker(() -> manipulator.setPosition(1900))
-                .lineTo(-33, 10.6)
+                .lineTo(-31, 10.6)
                 .waitTime(1)
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
