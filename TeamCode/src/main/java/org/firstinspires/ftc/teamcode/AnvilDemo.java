@@ -17,7 +17,7 @@ public class AnvilDemo extends AnvilTest{
                 .addTemporalMarker(() -> manipulator.setPosition(900))
                 .lineTo(-33.5, 34)
                 .addTemporalMarker(() -> manipulator.setPosition(2000))
-                .lineToLinearHeading(-27.5, 11.5, -45)
+                .lineToLinearHeading(-29, 12.5, -45)
                 .waitTime(.5)
                 .addTemporalMarker(() -> {
                     manipulator.setPosition(850);
@@ -27,9 +27,9 @@ public class AnvilDemo extends AnvilTest{
                     manipulator.clawRelease();
                 })
                 .lineTo(-35.5, 23)
-                .addTemporalMarker(() ->manipulator.setPosition(250))
+                .addTemporalMarker(() ->manipulator.setPosition(275))
                 .turn(-150)
-                .lineTo(-65, 19.5)
+                .lineTo(-62, 21)
 
                 .addTemporalMarker(() -> manipulator.clawGrab())
                 .waitTime(.5)
@@ -37,8 +37,8 @@ public class AnvilDemo extends AnvilTest{
 
                 .lineTo(-35.5, 22)
                 .turn(170)
-                .lineTo(-28.5, 8)
-                .addTemporalMarker(() -> manipulator.setPosition(2000))
+                .lineTo(-29.75, 12.5)
+                .addTemporalMarker(() -> manipulator.setPosition(1900))
                 .waitTime(1)
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
@@ -56,7 +56,7 @@ public class AnvilDemo extends AnvilTest{
                 instance.lineToSplineHeading(-15.5, 22, 0);
             }
             else if(pos == 'C'){
-                instance.lineToSplineHeading(-35.5, 22, 0);
+                instance.lineToSplineHeading(-35.5, 24, 0);
             }
             else{
                 instance.lineToLinearHeading(-57, 26, 0);

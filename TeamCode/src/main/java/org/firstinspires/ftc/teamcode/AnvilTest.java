@@ -178,7 +178,7 @@ public abstract class AnvilTest extends LinearOpMode {
         }
         telemetry.update();
         if(pos == ' '){
-            pos = 'R';
+            pos = 'C';
         }
         telemetry.addData("pos", pos);
         telemetry.update();
