@@ -16,9 +16,9 @@ public class AnvilDemo extends AnvilTest{
         return Anvil.forgeTrajectory(drive, startPose)
                 .addTemporalMarker(() -> manipulator.setPosition(900))
                 .lineTo(-33.5, 34)
-                .addTemporalMarker(() -> manipulator.setPosition(2000))
+                .addTemporalMarker(() -> manipulator.setPosition(2050))
                 .lineToLinearHeading(-29, 19, -45)
-                .lineTo(-28, 10.5)
+                .lineTo(-28, 10.25)
                 .waitTime(.5)
                 .addTemporalMarker(() -> {
                     manipulator.setPosition(850);
@@ -27,10 +27,10 @@ public class AnvilDemo extends AnvilTest{
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
                 })
-                .lineTo(-35.5, 18)
-                .addTemporalMarker(() ->manipulator.setPosition(275))
-                .turn(-145)
-                .lineTo(-62.5, 15)
+                .lineTo(-35.5, 20)
+                .addTemporalMarker(() ->manipulator.setPosition(315))
+                .turn(-150)
+                .lineTo(-62.5, 16.8)
 
                 .addTemporalMarker(() -> manipulator.clawGrab())
                 .waitTime(.5)
@@ -38,9 +38,9 @@ public class AnvilDemo extends AnvilTest{
 
                 .lineTo(-35.5, 22)
                 .turn(170)
-                .lineTo(-32, 12)
-                .addTemporalMarker(() -> manipulator.setPosition(1900))
-                .lineTo(-31, 10.6)
+                .lineTo(-32, 11.9)
+                .addTemporalMarker(() -> manipulator.setPosition(1950))
+                .lineTo(-30.5, 10.4)
                 .waitTime(1)
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
@@ -55,7 +55,7 @@ public class AnvilDemo extends AnvilTest{
 
         return Anvil.forgeTrajectory(drive, startPose, (instance) -> {
             if(pos == 'L'){
-                instance.lineToSplineHeading(-15.5, 22, 0);
+                instance.lineToSplineHeading(-13.5, 22, 0);
             }
             else if(pos == 'C'){
                 instance.lineToSplineHeading(-35.5, 24, 0);

@@ -203,7 +203,7 @@ public class LeftPark extends LinearOpMode{
         switch(pos) {
             case 'L':
                 auto.toHeading(86.5, 5, this);
-                auto.driveOdom(18.5, 3,this);
+                auto.driveOdom(19.5, 3,this);
                 break;
             case 'C':
                 //auto.drive(1200, 3, this);
