@@ -169,7 +169,7 @@ public class LeftPark extends LinearOpMode{
         robot.manip.clawRelease();
         //robot releases//
         sleep(500);
-        auto.drive(-300,3,this);
+        auto.drive(-290,3,this);
         auto.turn(0,2,this);
 //        //beginning of cycle//
 //        auto.drive(1240,5,this);
