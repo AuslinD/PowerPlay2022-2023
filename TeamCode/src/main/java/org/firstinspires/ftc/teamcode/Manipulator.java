@@ -26,6 +26,7 @@ public class Manipulator {
     private double goalEncoder = 0;
 
     private boolean grabEnabled = false;
+    private boolean adjusting = false;
 
     private DcMotor leftLift;
     private DcMotor rightLift;
@@ -167,6 +168,12 @@ public class Manipulator {
 
         }
          */
+        if(gamepad2.dpad_left){
+            LOW_BOUND += 20;
+        }
+        if(gamepad2.left_bumper){
+            TOP_BOUND -= 20;
+        }
         if(Math.abs(gamepad2.right_trigger) > 0.1){
             leftLiftTarget += 15 * gamepad2.left_stick_y;
         }
