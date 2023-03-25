@@ -153,12 +153,12 @@ public class RightPark extends LinearOpMode{
         telemetry.update();
         robot.manip.setPosition(450);
         sleep(300);
-        auto.drive(1400,5,this);
+        auto.drive(800,5,this);
         auto.turn(45, 3, this);
         //start to score//
         auto.PIDDrive(290,0.03,0, 0.001,5,this);
         robot.manip.setPosition(1500);
-        auto.drive(125, 2, this);
+        auto.drive(65, 2, this);
         sleep(750);
 
         robot.manip.setPower(0.5);
@@ -201,8 +201,8 @@ public class RightPark extends LinearOpMode{
 //        telemetry.update();
         switch(pos) {
             case 'L':
-                auto.toHeading(89, 5, this);
-                auto.drive(1350, 3,this);
+                auto.toHeading(90, 5, this);
+                auto.drive(800, 3,this);
                 break;
             case 'C':
                 //auto.drive(1200, 3, this);
@@ -210,8 +210,8 @@ public class RightPark extends LinearOpMode{
                 auto.drive(70,3,this);
                 break;
             default:
-                auto.turn(-85, 3, this);
-                auto.drive(1300, 3,this);
+                auto.toHeading(-90, 3, this);
+                auto.drive(850, 3,this);
         }
         robot.manip.setPower(0.5);
         robot.manip.setPosition(0);

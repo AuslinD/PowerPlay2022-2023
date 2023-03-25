@@ -17,8 +17,8 @@ public class AnvilDemo extends AnvilTest{
                 .addTemporalMarker(() -> manipulator.setPosition(900))
                 .lineTo(-33.5, 34)
                 .addTemporalMarker(() -> manipulator.setPosition(2050))
-                .lineToLinearHeading(-29, 19, -45)
-                .lineTo(-28, 10.25)
+                .lineToLinearHeading(-29, 20, -45)
+                .lineTo(-28.11, 11.1)
                 .waitTime(.5)
                 .addTemporalMarker(() -> {
                     manipulator.setPosition(850);
@@ -30,7 +30,7 @@ public class AnvilDemo extends AnvilTest{
                 .lineTo(-35.5, 20)
                 .addTemporalMarker(() ->manipulator.setPosition(315))
                 .turn(-150)
-                .lineTo(-62.5, 16.8)
+                .lineTo(-60.35, 16.8)
 
                 .addTemporalMarker(() -> manipulator.clawGrab())
                 .waitTime(.5)
@@ -40,14 +40,15 @@ public class AnvilDemo extends AnvilTest{
                 .turn(170)
                 .lineTo(-32, 11.9)
                 .addTemporalMarker(() -> manipulator.setPosition(1950))
-                .lineTo(-30.5, 10.4)
+                .lineTo(-29.95, 10.2)
                 .waitTime(1)
                 .addTemporalMarker(() -> {
                     manipulator.clawRelease();
                     manipulator.setPosition(380);
                 })
                 .waitTime(0.5)
-                .lineTo(-35.5, 27)
+                .lineTo(-35.5, 27.2)
+                .addTemporalMarker(()-> manipulator.setPosition(0))
                 .thenRun(this::parkTraj);
     }
     private Anvil parkTraj(Pose2d startPose){
@@ -61,7 +62,7 @@ public class AnvilDemo extends AnvilTest{
                 instance.lineToSplineHeading(-35.5, 24, 0);
             }
             else{
-                instance.lineToLinearHeading(-57, 26, 0);
+                instance.lineToLinearHeading(-56, 26, 0);
             }
             return instance;
         });
