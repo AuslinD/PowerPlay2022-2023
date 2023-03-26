@@ -153,14 +153,14 @@ public class LeftPark extends LinearOpMode{
         telemetry.update();
         robot.manip.setPosition(400);
         sleep(300);
-        auto.driveOdom(23,5,this);
-        auto.turn(-41, 3, this);
+        auto.drive(800,5,this);
+        auto.toHeading(-43.8, 3, this);
         //start to score//
         auto.PIDDrive(235,0.03,0, 0.001,3,this);
         sleep(500);
         robot.manip.setPosition(1500);
         sleep(1000);
-        auto.drive(200, 2, this);
+        auto.PIDDrive(115,0.03,0, 0.001,3,this);
         sleep(750);
 
         robot.manip.setPower(0.5);
@@ -202,20 +202,20 @@ public class LeftPark extends LinearOpMode{
 //        telemetry.update();
         switch(pos) {
             case 'L':
-                auto.toHeading(86.5, 5, this);
-                auto.driveOdom(19.5, 3,this);
+                auto.toHeading(90, 5, this);
+                auto.drive(815, 3,this);
                 break;
             case 'C':
                 //auto.drive(1200, 3, this);
                 auto.turn(0,5,this);
-                auto.driveOdom(0,3,this);
+                auto.drive(0,3,this);
                 break;
             default:
-                auto.toHeading(-86.5, 3, this);
-                auto.driveOdom(17.5, 3,this);
+                auto.toHeading(-90, 3, this);
+                auto.drive(740, 3,this);
         }
         robot.manip.setPower(0.5);
-        robot.manip.setPosition(0);
+        robot.manip.setPosition(100);
         sleep(3000);
 
         telemetry.update();

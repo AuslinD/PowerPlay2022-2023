@@ -28,7 +28,7 @@ import com.acmerobotics.dashboard.config.Config;
         drive = robot.getDrivetrain();
     }
 
-    public void drive(double distance, int timeout, LinearOpMode opMode){
+    public void drive(double distance, double timeout, LinearOpMode opMode){
 
         double initPos = drive.br.getCurrentPosition();
         ElapsedTime runtime = new ElapsedTime();
@@ -49,7 +49,7 @@ import com.acmerobotics.dashboard.config.Config;
         drive.setAllMotors(0);
     }
 
-     public void PIDDrive(double distance, double p, double i, double d, int timeout, LinearOpMode opMode){
+     public void PIDDrive(double distance, double p, double i, double d, double timeout, LinearOpMode opMode){
 
          double initPos = drive.br.getCurrentPosition();
          ElapsedTime runtime = new ElapsedTime();

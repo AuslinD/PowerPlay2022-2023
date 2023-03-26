@@ -214,7 +214,7 @@ public class RightPark extends LinearOpMode{
                 auto.drive(850, 3,this);
         }
         robot.manip.setPower(0.5);
-        robot.manip.setPosition(0);
+        robot.manip.setPosition(100);
         sleep(3000);
 
         telemetry.update();

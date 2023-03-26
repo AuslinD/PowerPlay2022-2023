@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -10,9 +11,8 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
-
-@Autonomous(name = "Right Encoder", group = "Auto")
-public class RightAutoOdom extends LinearOpMode {
+@Autonomous(name = "Right 1+1", group = "Auto")
+public class Right2 extends LinearOpMode{
     Robot robot;
     Drivetrain drivetrain;
 
@@ -43,9 +43,9 @@ public class RightAutoOdom extends LinearOpMode {
         robot = new Robot(this);
         robot.manip.clawGrab();
         AUto auto = new AUto(robot);
-        auto.initHeading = robot.imu.getAngularOrientation().firstAngle;
         Drivetrain drivetrain = auto.robot.getDrivetrain();
         robot.manip.clawGrab();
+
         char pos = ' ';
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -147,147 +147,102 @@ public class RightAutoOdom extends LinearOpMode {
         if(pos == ' '){
             pos = 'R';
         }
-
-
         telemetry.addData("pos", pos);
         telemetry.update();
-        robot.manip.setPosition(900);
-
-        sleep(100);
-        auto.driveOdom(44,5,this);//2.5
-        robot.getDrivetrain().setAllMotors(0);
-        robot.getDrivetrain().fl.setPower(0);
-        robot.getDrivetrain().bl.setPower(0);
-        robot.getDrivetrain().fr.setPower(0);
-        robot.getDrivetrain().br.setPower(0);
-        robot.manip.setPosition(1500);
-        robot.getDrivetrain().setAllMotors(0);
-        auto.toHeading(120, 5, this);
-
+        robot.manip.setPosition(450);
+        sleep(300);
+        auto.drive(1650,5,this);
+        auto.toHeading(128, 2, this);
         //start to score//
-        auto.driveOdom(7.5,5,this);
-        sleep(50);
+        auto.PIDDrive(290,0.03,0, 0.001,5,this);
+        robot.manip.setPosition(1500);
+        auto.drive(65, 2, this);
+        sleep(750);
 
-
-        //auto.PIDDrive(225, 0.007, 0, 0.001, 3, this);
-
-        robot.manip.setPower(1);
-        sleep(50);
-        robot.manip.setPosition(800);
-        sleep(100);
+        robot.manip.setPower(0.5);
+        robot.manip.setPosition(1000);
+        sleep(300);
         robot.manip.clawRelease();
-        sleep(50);
         //robot releases//
-        //robot.manip.setPosition(2100);
-        //sleep(100);
-        auto.driveOdom(-10,5,this);
-        int cyclepos = 380;
-        robot.manip.setPosition(cyclepos);
-        auto.toHeading(-90,5,this);
-
-        //beginning of cycle//
-        //auto.drive(1250,3,this);
-        //auto.turn(-80, 3, this);
-
-        auto.driveOdom(20, 5, this);//tgis
-        //robot.manip.setPosition(-650);
-        sleep(75);
-        robot.manip.clawGrab();
         sleep(300);
-        robot.manip.setPosition(1000);
+        auto.drive(-400,3,this);
+        auto.toHeading(-90, 2, this);
+
+        //        //beginning of cycle//
+        robot.manip.setPosition(325);
+        auto.drive(880, 3,this);
+        sleep(300);
+        robot.manip.clawGrab();
         sleep(150);
-        auto.toHeading(-90,5,this);
-        sleep(100);
-        auto.driveOdom(-26,5,this);
-        sleep(50);
-        //second delivery
-        auto.toHeading(130, 5, this);//this
-        sleep(200);
-        //release was here before
-        //auto.turn(180,2,this);
-        robot.manip.setPosition(1500);
-        auto.driveOdom(6,5,this);
-        //auto.toHeading(43.8, 1, this);
-        //auto.drive(100,2,this);
-        sleep(50);
-
-        robot.manip.setPosition(800);
-        sleep(50);
-        robot.manip.clawRelease();
-        sleep(100);
-        auto.driveOdom(-9,5,this);
-        robot.manip.setPosition(320);
-
-        //TODO: 2nd cycle
-        auto.toHeading(-90,5,this);
-        auto.driveOdom(22.25,5,this);
-        sleep(25);
-        robot.manip.clawGrab();
-        sleep(300);
         robot.manip.setPosition(1000);
-        auto.toHeading(-90,5,this);
-        auto.driveOdom(-24.5,5,this);
-        auto.toHeading(140,5,this);
+        sleep(200);
+        auto.drive(-900, 3, this);
+
+
+
+
+
+        auto.toHeading(128, 3, this);
+        //start to score//
+        auto.PIDDrive(290,0.03,0, 0.001,5,this);
         robot.manip.setPosition(1500);
-        auto.driveOdom(9,5,this);
-        robot.manip.setPosition(800);
+        auto.drive(65, 2, this);
+        sleep(750);
+
+        robot.manip.setPower(0.5);
+        robot.manip.setPosition(1000);
+        sleep(300);
         robot.manip.clawRelease();
-        //sleep(150);
-        auto.driveOdom(-13,5,this);
-        robot.manip.setPosition(0);
-
-
-        /*
-//not an easter egg and deffinitly not matthew
-        robot.manip.setPosition(-1500);
-        auto.driveOdom(-23.5,5,this);
-        sleep(50);
-        auto.toHeading(45,3,this);
-        auto.drive(380,2,this);
-        robot.manip.setPosition(-1800);
-        auto.PIDDrive(250,0.007,0,0.001,3,this);
-        robot.manip.setPosition(-1000);
-        robot.manip.setPosition(0);
-        */
-
-
-
-        sleep(100);
-        //auto.drive(200,2,this);
-        /*cyclepos =- 20;
-        robot.manip.setPosition(cyclepos);*/
-
-
-
-
-        telemetry.addData("position", pos);
-        telemetry.update();
+        sleep(150);
+        auto.PIDDrive(-300,0.03,0, 0.001,5,this);
+//        auto.drive(1240,5,this);
+//        auto.turn(90, 4, this);
+//        int cyclepos = 220;
+//        robot.manip.setPosition(cyclepos);
+//        auto.drive(1500, 5, this);//tgis
+//        sleep(100);
+//        robot.manip.clawGrab();
+//        sleep(700);
+//        robot.manip.setPosition(500);
+//        sleep(200);
+//        auto.drive(-360,5,this);
+//        auto.turn(-145, 5, this);//this
+//        sleep(500);
+//        auto.drive(200,2,this);
+//        //release was here before
+//        //auto.turn(180,2,this);
+//        robot.manip.setPosition(200);
+//        sleep(100);
+//        robot.manip.clawRelease();
+//        sleep(200);
+//        auto.drive(-150,3,this);
+//        robot.manip.setPosition(0);
+//        //auto.drive(200,2,this);
+//        /*cyclepos =- 20;
+//        robot.manip.setPosition(cyclepos);*/
+//
+//        telemetry.addData("position", pos);
+//        telemetry.update();
         switch(pos) {
             case 'L':
-                auto.toHeading(0,.75,this);
-                auto.driveOdom(4,.5,this);
-                auto.toHeading(100, 1.45, this);
-                auto.driveOdom(22, 1.25,this);
+                auto.toHeading(90, 5, this);
+                auto.drive(800, 3,this);
                 break;
             case 'C':
-                auto.toHeading(90, .5,this);
-                //auto.drive(0, 3, this);
-                break;
-            case 'R':
-                auto.toHeading(-93,1.5,this);
-                auto.driveOdom(20,1.25,this);
+                //auto.drive(1200, 3, this);
+                auto.turn(0,5,this);
+                auto.drive(70,3,this);
                 break;
             default:
-                auto.toHeading(90, 5, this);
-                auto.driveOdom(0, 1,this);
-                sleep(0);
+                auto.toHeading(-90, 3, this);
+                auto.drive(850, 3,this);
         }
-        robot.manip.setPosition(0);
+        robot.manip.setPower(0.5);
+        robot.manip.setPosition(100);
+        sleep(3000);
 
-
-
+        telemetry.update();
     }
-
     void tagToTelemetry(AprilTagDetection detection)
     {
         telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
