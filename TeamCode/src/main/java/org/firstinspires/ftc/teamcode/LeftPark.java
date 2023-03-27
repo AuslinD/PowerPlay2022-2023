@@ -156,11 +156,11 @@ public class LeftPark extends LinearOpMode{
         auto.drive(800,5,this);
         auto.toHeading(-43.8, 3, this);
         //start to score//
-        auto.PIDDrive(235,0.03,0, 0.001,3,this);
+        auto.PIDDrive(295,0.03,0, 0.001,3,this);
         sleep(500);
         robot.manip.setPosition(1500);
         sleep(1000);
-        auto.PIDDrive(115,0.03,0, 0.001,3,this);
+        auto.PIDDrive(145,0.03,0, 0.001,3,this);
         sleep(750);
 
         robot.manip.setPower(0.5);
@@ -169,7 +169,7 @@ public class LeftPark extends LinearOpMode{
         robot.manip.clawRelease();
         //robot releases//
         sleep(500);
-        auto.drive(-290,3,this);
+        auto.drive(-340,3,this);
         auto.turn(0,2,this);
 //        //beginning of cycle//
 //        auto.drive(1240,5,this);
@@ -203,7 +203,7 @@ public class LeftPark extends LinearOpMode{
         switch(pos) {
             case 'L':
                 auto.toHeading(90, 5, this);
-                auto.drive(815, 3,this);
+                auto.drive(885, 3,this);
                 break;
             case 'C':
                 //auto.drive(1200, 3, this);
